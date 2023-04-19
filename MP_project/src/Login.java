@@ -1,11 +1,10 @@
-import java.awt.*;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
 
     private DatabaseManager databaseManager;
-    private Map<String, User> databaseU = DatabaseManager.obtainDatabaseU;
+    private Map<String, User> databaseU = DatabaseManager.obtainDatabaseU();
 
 
     public void Login(){
@@ -33,10 +32,10 @@ public class Login {
                 valid = true;
 
                 if (user.getUsertype() == tipouser ){
-                    menuAdmin(user);
+                    menuAdmin((User) user);
                 }
                 else {
-                    menu(user);
+                    menu((User) user);
                 }
             }
 

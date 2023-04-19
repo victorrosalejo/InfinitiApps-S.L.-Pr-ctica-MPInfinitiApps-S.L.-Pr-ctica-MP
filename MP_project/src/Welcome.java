@@ -6,6 +6,7 @@ public class Welcome {
         int choice;
 
         do {
+            System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
             System.out.println("\n[-------------------------------------]\n");
             System.out.println("Welcome to the Login/Register menu!");
             System.out.println("1. Login");

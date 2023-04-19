@@ -5,10 +5,6 @@ public class Fight {
     private Combat combat;
 
     // Implementar luego
-    private Fight(Combat combat, Round round){
-
-    }
-
     private void nextFight(Round roundFight, Combat combat) {
 
     }
@@ -30,5 +26,9 @@ public class Fight {
 
     public void setCombat(Combat combat) {
         this.combat = combat;
+    }
+
+    public void Fight(Fighter defiant, Fighter defied, Integer gold) {
+
     }
 }

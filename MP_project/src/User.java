@@ -4,7 +4,7 @@ public class User {
     private  String nick;
     private  String password;
     private TUser usertype;
-
+    private  String registerNumber;
 
     public String getName() {return name;}
 
@@ -24,5 +24,13 @@ public class User {
 
     public void setUsertype(TUser usertype) {
         this.usertype = usertype;
+    }
+
+    public String getRegisterNumber() {
+        return registerNumber;
+    }
+
+    public void setRegisterNumber(String registerNumber) {
+        this.registerNumber = registerNumber;
     }
 }

@@ -1,9 +1,10 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AddWeapon {
     private DatabaseManager databaseManager;
-    private Map<String, List<Weapon>> databaseW = DatabaseManager.obtainDatabaseW();
+    private Map<String, List<Weapon>> databaseW = new  HashMap<>();
     private Weapon w;
 
 

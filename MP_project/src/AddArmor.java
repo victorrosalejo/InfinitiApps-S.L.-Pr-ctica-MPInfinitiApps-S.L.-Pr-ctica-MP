@@ -1,10 +1,11 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AddArmor {
 
     private DatabaseManager databaseManager;
-    private Map<String, List<Armor>> databaseA = DatabaseManager.obtainDatabaseA();
+    private Map<String, List<Armor>> databaseA = new HashMap<>();
     private Armor a = new Armor();
 
 
@@ -33,9 +34,9 @@ public class AddArmor {
         this.a = a;
     }
 
-    public Character AddArmor(Character a){
-
-        return a;
+    public Character AddArmor(Character c){
+        this.databaseA = this.databaseManager.obtainDatabaseA();
+        return c;
     }
 
     private Character appendArmor(Character c){

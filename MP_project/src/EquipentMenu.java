@@ -1,15 +1,14 @@
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class EquipentMenu {
-
-    private Map<String, List<Armor>> databaseA = DatabaseManager.obtainDatabaseA;
-    private Map<String, List<Weapon>> databaseW = DatabaseManager.obtainDatabaseW;
-    private Map<String,Character> databaseC = DatabaseManager.obtainDatabaseC;
-    private Boolean duel;
     private DatabaseManager databaseManager;
+    private Map<String, List<Armor>> databaseA = new HashMap<>();
+    private Map<String, List<Weapon>> databaseW = new HashMap<>();
+    private Map<String,Character> databaseC = new HashMap<>();
+    private boolean duel = false;
+
 
     public Map<String, List<Armor>> getDatabaseA() {
         return databaseA;
@@ -49,6 +48,21 @@ public class EquipentMenu {
 
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+    }
+
+    public void EquipmentMenu(User u, boolean duel){
+
+        System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
+        System.out.println("\n[-------------------------------------]\n");
+        System.out.println("Welcome to the Login/Register menu!");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Exit");
+        System.out.println("\n[-------------------------------------]\n");
+
+
+
+
     }
 
 // Constructor

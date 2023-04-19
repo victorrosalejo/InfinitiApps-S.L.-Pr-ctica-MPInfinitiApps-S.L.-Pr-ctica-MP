@@ -1,8 +1,5 @@
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Scanner;
-import java.util.List;
-import java.util.Map;
 
 public class Menu {
     private DatabaseManager databaseManager;
@@ -11,7 +8,7 @@ public class Menu {
     private Map<String, Character> databaseC = DatabaseManager.obtainDatabaseC();
 
 
-
+    // comprobar que tiene personaje, challenges por hacer, result, menu
 
 
 
@@ -26,6 +23,7 @@ public class Menu {
         Fighter defiant = new Fighter();
         Fighter defied = new Fighter();
         int gold = 0;
+
 
 
 
@@ -44,41 +42,14 @@ public class Menu {
             System.out.println("0. Salir");
 
             int option = scanner.nextInt();
-
+            // personaje, challenge, result
             switch (option) {
                 case 1:
-                    System.out.println("Introduce el nombre  que quieres eliminar: ");
-                    Scanner io = new Scanner(System.in);
-
-                    // Pedir al usuario que ingrese el nombre de usuario a buscar
-                    System.out.print("Ingrese el nombre de usuario a buscar: ");
-                    String nombreUsuario = io.nextLine();
-
-                    // Buscar el usuario en la base de datos
-                    Map<String, List<User>> databaseU = DatabaseManager.obtainDatabaseU();
-                    List<User> usuarios = databaseU.get(nombreUsuario.substring(0, 1));
-                    User usuarioEncontrado = null;
-                    for (User us : usuarios) {
-                        if (u.getName().equals(nombreUsuario)) {
-                            usuarioEncontrado = us;
-                            break;
-                        }
-                    }
-
-                    // Imprimir la información del usuario encontrado
-                    if (usuarioEncontrado != null) {
-                        System.out.println("Nombre de usuario: " + usuarioEncontrado.getName());
-
-                    } else {
-                        System.out.println("No se encontró ningún usuario con el nombre " + nombreUsuario);
-                    }
-
-                    // Cerrar el objeto Scanner
-                    io.close();
-                    deleteAccount(us);
+                    deleteAccount(u);
                     break;
                 case 2:
-                    equipmentMenu(u,d);
+
+                    equipentMenu(u,d);
                     break;
                 case 3:
                     challengeMenu(u);
@@ -115,9 +86,9 @@ public class Menu {
 
 
 
-    private void deleteAccount(User u){
+    private void deleteAccount(User cl){
         DeleteAccount deleteAccount = new DeleteAccount();
-        deleteAccount.DeleteAccount(u);
+        deleteAccount.DeleteAccount(cl);
 
     }
     private void equipmentMenu(User u, Boolean d){
@@ -133,12 +104,12 @@ public class Menu {
     }
     private void history(User u){
         History history = new History();
-        history.History();
+        history.History(u);
 
     }
     private void characterMenu(User u){
         CharacterMenu characterMenu = new CharacterMenu();
-        characterMenu.CharacterMenu;
+        characterMenu.CharacterMenu(u);
 
     }
     private void ranking(){
@@ -159,8 +130,7 @@ public class Menu {
 
     private void fight(Fighter defiant, Fighter defied, Integer gold ){
         Fight fight = new Fight();
-        fight.Fight();                      // error en fight
-
+        fight.Fight(defiant,defied,gold);                      // error en fight
     }
 
     public DatabaseManager getDatabaseManager() {
@@ -183,9 +153,7 @@ public class Menu {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    //public void setUser(User user) {this.user = user;}
 
     public Map<String, Character> getDatabaseC() {
         return databaseC;

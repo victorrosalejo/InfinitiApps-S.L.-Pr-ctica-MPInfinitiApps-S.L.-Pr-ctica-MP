@@ -9,7 +9,6 @@ public class History {
     private DatabaseManager dataBaseManager;
 
 
-        // getter setter de database U
     public void appendMatch(Match match, User user){
         // Implementar despues
     }

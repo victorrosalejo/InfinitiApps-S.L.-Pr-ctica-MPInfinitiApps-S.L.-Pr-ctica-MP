@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
         // Press Alt+Intro with your caret at the highlighted text to see how
         // IntelliJ IDEA suggests fixing it.
-        Rules rules = new Rules();
-        rules.ShowRules();
-
+        Welcome wel = new Welcome();
+        wel.Welcome();
 }}

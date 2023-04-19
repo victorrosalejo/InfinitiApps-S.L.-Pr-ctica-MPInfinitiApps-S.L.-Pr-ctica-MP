@@ -4,7 +4,7 @@ public class Fight {
     private Round roundFight;
     private Combat combat;
 
-    // Implementar luego + getter setter
+    // Implementar luego
     private Fight(Combat combat, Round round){
 
     }
@@ -16,4 +16,19 @@ public class Fight {
 
     }
 
+    public Round getRoundFight() {
+        return roundFight;
+    }
+
+    public void setRoundFight(Round roundFight) {
+        this.roundFight = roundFight;
+    }
+
+    public Combat getCombat() {
+        return combat;
+    }
+
+    public void setCombat(Combat combat) {
+        this.combat = combat;
+    }
 }

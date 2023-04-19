@@ -1,28 +1,29 @@
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EquipentMenu {
 
-    private Map<String, Armor> databaseA = new HashMap<>();
-    private Map<String, Weapon> databaseW = new HashMap<>();
-    private Map<String,Character> databaseC = new HashMap<>();
+    private Map<String, List<Armor>> databaseA = DatabaseManager.obtainDatabaseA;
+    private Map<String, List<Weapon>> databaseW = DatabaseManager.obtainDatabaseW;
+    private Map<String,Character> databaseC = DatabaseManager.obtainDatabaseC;
     private Boolean duel;
     private DatabaseManager databaseManager;
 
-    public Map<String, Armor> getDatabaseA() {
+    public Map<String, List<Armor>> getDatabaseA() {
         return databaseA;
     }
 
-    public void setDatabaseA(Map<String, Armor> databaseA) {
+    public void setDatabaseA(Map<String, List<Armor>> databaseA) {
         this.databaseA = databaseA;
     }
 
-    public Map<String, Weapon> getDatabaseW() {
+    public Map<String, List<Weapon>> getDatabaseW() {
         return databaseW;
     }
 
-    public void setDatabaseW(Map<String, Weapon> databaseW) {
+    public void setDatabaseW(Map<String, List<Weapon>> databaseW) {
         this.databaseW = databaseW;
     }
 

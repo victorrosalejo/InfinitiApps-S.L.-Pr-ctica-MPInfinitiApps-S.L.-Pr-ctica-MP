@@ -1,7 +1,7 @@
 import java.util.Map;
 
 public class NewCharacter {
-    private Map<String,Character> databaseC;
+    private Map<String,Character> databaseC = DatabaseManager.obtainDatabaseC;
     private DatabaseManager databaseManager;
 
 

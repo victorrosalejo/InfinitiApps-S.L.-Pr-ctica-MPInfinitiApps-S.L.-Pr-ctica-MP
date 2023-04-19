@@ -2,7 +2,20 @@ public class SpecialAbility {
 
     private Ability specialAbility;
 
-    // getters setters constructor
+    //constructor
 
 
+    public Character SpecialAbility(Character c){
+
+        return c;
+    }
+
+
+    public Ability getSpecialAbility() {
+        return specialAbility;
+    }
+
+    public void setSpecialAbility(Ability specialAbility) {
+        this.specialAbility = specialAbility;
+    }
 }

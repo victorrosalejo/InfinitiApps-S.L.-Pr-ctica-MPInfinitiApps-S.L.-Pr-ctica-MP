@@ -27,4 +27,5 @@ public class Minion {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

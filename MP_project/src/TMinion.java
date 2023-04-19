@@ -1,4 +1,3 @@
 public enum TMinion {
-    HUMAN, DEMON, GHOUL
-
+    HUMAN,DEMON,GHOUL
 }

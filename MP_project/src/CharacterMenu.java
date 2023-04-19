@@ -6,9 +6,9 @@ public class CharacterMenu {
         //implement later
     }
 
-    private Character createCharacter(){
-        //implement later
-    }
+ //   private Character createCharacter(){    }
+
+    //Constructor implementado luego
 
     public User getUser() {
         return user;
@@ -17,5 +17,4 @@ public class CharacterMenu {
     public void setUser(User user) {
         this.user = user;
     }
-//Constructor implementado luego
 }

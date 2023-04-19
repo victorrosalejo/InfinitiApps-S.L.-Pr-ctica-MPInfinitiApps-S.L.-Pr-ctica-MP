@@ -2,6 +2,20 @@ public class Power {
 
     private  int power;
 
-    // getters setters constructor
+    //constructor
 
+    public Character Power(Character c){
+
+
+        return  c;
+    }
+
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
 }

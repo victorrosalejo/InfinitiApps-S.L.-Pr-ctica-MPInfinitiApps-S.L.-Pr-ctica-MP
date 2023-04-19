@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Ranking {
-    private Map<String,Character> databaseR = new HashMap<>();
+    private Map<String,Character> databaseR = DatabaseManager.obtainDatabaseR;
     private DatabaseManager dataBaseManager;
 
     public void UpdateRanking (User user){

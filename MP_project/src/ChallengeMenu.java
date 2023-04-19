@@ -1,8 +1,9 @@
+import java.util.List;
 import java.util.Map;
 
 public class ChallengeMenu {
     private DatabaseManager databaseManager;
-    private Map<String,Challenge> databaseP;
+    private Map<String, List<Challenge>> databaseP = DatabaseManager.obtainDatabaseP ;
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
@@ -12,11 +13,11 @@ public class ChallengeMenu {
         this.databaseManager = databaseManager;
     }
 
-    public Map<String, Challenge> getDatabaseP() {
+    public Map<String, List<Challenge>> getDatabaseP() {
         return databaseP;
     }
 
-    public void setDatabaseP(Map<String,Challenge> databaseP) {
+    public void setDatabaseP(Map<String,List<Challenge>> databaseP) {
         this.databaseP = databaseP;
     }
 

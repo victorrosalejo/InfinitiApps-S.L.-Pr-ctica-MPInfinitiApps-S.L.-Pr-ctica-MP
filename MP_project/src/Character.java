@@ -1,23 +1,23 @@
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-public abstract class Character {
+public class Character {
     private String name;
     private String description;
     private TCharacter type;
-    private Map<String,Weapon> weaponSet = new HashMap<>();
-    private Map<String,Armor> armorSet = new HashMap<>();
-    private final int hP = 5;
+    private List<Weapon> weaponSet = new ArrayList<>();
+    private List<Armor> armorSet = new ArrayList<>();
+    private int hP = 5;
     private int power;
-    private Map<String,Minion> minionMap = new HashMap<>();
-    private Ability specialAbility;
+    private List<Minion> minionMap = new ArrayList<>();
+    private Ability specialAbility = new Ability();
     private  int goldValue;
     private List<Modifiers> modifierList = new ArrayList<>();
-    private Set<Weapon> activeWeapons = new HashSet<>();
-    private int activeArmor;
     private int wins;
     private int typeAttack;
     private boolean fighting;
+
+
 
     public String getName() {
         return name;
@@ -39,28 +39,47 @@ public abstract class Character {
         return type;
     }
 
-    public void setType(TCharacter type) {
-        this.type = type;
+    public void setType(String type) {
+
+        if (type =="Vampiro"){
+            this.type = TCharacter.VAMPIRE;
+        } else if (type == "Licántropo") {
+            this.type = TCharacter.WEREWOLF;
+        }else {
+            this.type = TCharacter.HUNTER;
+        }
     }
 
-    public Map<String, Weapon> getWeaponSet() {
+    public List<Weapon> getWeaponSet() {
         return weaponSet;
     }
 
-    public void setWeaponSet(Map<String, Weapon> weaponSet) {
+    public void setWeaponSet(List<Weapon> weaponSet) {
         this.weaponSet = weaponSet;
     }
 
-    public Map<String, Armor> getArmorSet() {
+    public List<Armor> getArmorSet() {
         return armorSet;
     }
 
-    public void setArmorSet(Map<String, Armor> armorSet) {
+    public void setArmorSet(List<Armor> armorSet) {
         this.armorSet = armorSet;
+    }
+
+    public List<Minion> getMinionMap() {
+        return minionMap;
+    }
+
+    public void setMinionMap(List<Minion> minionMap) {
+        this.minionMap = minionMap;
     }
 
     public int gethP() {
         return hP;
+    }
+
+    public void sethP(int hP) {
+        this.hP = hP;
     }
 
     public int getPower() {
@@ -71,20 +90,12 @@ public abstract class Character {
         this.power = power;
     }
 
-    public Map<String, Minion> getMinionMap() {
-        return minionMap;
-    }
-
-    public void setMinionMap(Map<String, Minion> minionMap) {
-        this.minionMap = minionMap;
-    }
-
     public Ability getSpecialAbility() {
         return specialAbility;
     }
 
-    public void setSpecialAbility(Ability specialAbility) {
-        this.specialAbility = specialAbility;
+    public void setSpecialAbility(Ability ability) {
+            this.specialAbility = ability;
     }
 
     public int getGoldValue() {
@@ -101,22 +112,6 @@ public abstract class Character {
 
     public void setModifierList(List<Modifiers> modifierList) {
         this.modifierList = modifierList;
-    }
-
-    public Set<Weapon> getActiveWeapons() {
-        return activeWeapons;
-    }
-
-    public void setActiveWeapons(Set<Weapon> activeWeapons) {
-        this.activeWeapons = activeWeapons;
-    }
-
-    public int getActiveArmor() {
-        return activeArmor;
-    }
-
-    public void setActiveArmor(int activeArmor) {
-        this.activeArmor = activeArmor;
     }
 
     public int getWins() {
@@ -141,6 +136,10 @@ public abstract class Character {
 
     public void setFighting(boolean fighting) {
         this.fighting = fighting;
+    }
+
+    public void setType(TCharacter type) {
+        this.type = type;
     }
 }
 

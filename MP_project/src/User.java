@@ -3,6 +3,8 @@ public class User {
     private  String name;
     private  String nick;
     private  String password;
+    private TUser usertype;
+
 
     public String getName() {return name;}
 
@@ -15,4 +17,12 @@ public class User {
     public String getPassword() {return password;}
 
     public void setPassword(String password) {this.password = password;}
+
+    public TUser getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(TUser usertype) {
+        this.usertype = usertype;
+    }
 }

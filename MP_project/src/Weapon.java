@@ -4,6 +4,7 @@ public class Weapon {
     private int defence;
     private String name;
     private int hands;
+    private boolean active;
 
     public int getAttack() {
         return attack;
@@ -35,5 +36,13 @@ public class Weapon {
 
     public void setHands(int hands) {
         this.hands = hands;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

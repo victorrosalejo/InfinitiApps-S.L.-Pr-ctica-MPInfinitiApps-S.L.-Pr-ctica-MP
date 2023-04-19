@@ -8,8 +8,18 @@ public class Ability {
         return type;
     }
 
-    public void setType(TAbility type) {
-        this.type = type;
+    public void setType(TCharacter type) {
+
+        if (type == TCharacter.VAMPIRE){
+            this.type = TAbility.DISCIPLINE;
+            setSpecialValue(3);
+        } else if (type == TCharacter.WEREWOLF) {
+            this.type = TAbility.GIFT;
+            setSpecialValue(3);
+        }else{
+            this.type = TAbility.TALENT;
+            setSpecialValue(0);
+        }
     }
 
     public int getDefense() {

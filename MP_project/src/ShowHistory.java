@@ -11,6 +11,21 @@ public class ShowHistory {
 
 
 
-    // Constructor y  getter setters
+    // Constructor
 
+    public Map<String, History> getDatabaseH() {
+        return databaseH;
+    }
+
+    public void setDatabaseH(Map<String, History> databaseH) {
+        this.databaseH = databaseH;
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public void setDatabaseManager(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
+    }
 }

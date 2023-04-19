@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class History {
 
     private List<Match> matches = new ArrayList<>();
+    private Map<String, User> databaseU = DatabaseManager.obtainDatabaseU;
     private DatabaseManager dataBaseManager;
 
+
+        // getter setter de database U
     public void appendMatch(Match match, User user){
         // Implementar despues
     }
@@ -25,4 +29,13 @@ public class History {
     public void setDataBaseManager(DatabaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
+
+    public Map<String, User> getDatabaseU() {
+        return databaseU;
+    }
+
+    public void setDatabaseU(Map<String, User> databaseU) {
+        this.databaseU = databaseU;
+    }
 }
+

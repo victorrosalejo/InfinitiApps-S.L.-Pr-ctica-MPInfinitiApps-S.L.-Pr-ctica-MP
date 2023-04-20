@@ -1,34 +1,68 @@
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 public class ArmorSet {
-    private Map<String , List<Armor>> armorSet = new HashMap<>();
-    private DatabaseManager databaseManager;
+        public Character ArmorSet(Character c){
+            for(int i = 0; i<c.getArmorSet().size();i++)
 
-
-
-    public Character ArmorSet(Character c){
-
-        return c;
+    {
+        Armor armor = c.getArmorSet().get(i);
+        System.out.println("----------------[Conjunto de armaduras]-----------------");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        System.out.println("----------------[ " + (i + 1) + " ]-----------------");
+        System.out.println((i + 1) + ". " + armor.getName());
+        System.out.println(("Ataque") + " - " + armor.getAttack());
+        System.out.println(("Defensa") + " - " + armor.getDefense());
     }
 
-    public Map<String, List<Armor>> getArmorSet() {
-        return armorSet;
+    Scanner scanner = new Scanner(System.in);
+            System.out.print("Seleccione el número de arma que desea modificar: ");
+    int armorIndex = scanner.nextInt() - 1;
+    Armor armor = c.getArmorSet().remove(armorIndex);
+            System.out.println("Modificando arma: "+armor.getName());
+            System.out.println("Seleccione la característica que desea modificar: ");
+            System.out.println("1. Nombre");
+            System.out.println("2. Ataque");
+            System.out.println("3. Defensa");
+    int option = scanner.nextInt();
+           switch(option)
+
+    {
+        case 1:
+            System.out.print("Ingrese el nuevo nombre: ");
+            scanner.nextLine();
+            String newName = scanner.nextLine();
+            armor.setName(newName);
+            break;
+        case 2:
+            int newAttack = 0;
+            while (newAttack < 1 || newAttack > 3) {
+                System.out.print("Ingrese el nuevo valor de ataque (entre 1 y 3): ");
+                newAttack = scanner.nextInt();
+            }
+
+            armor.setAttack(newAttack);
+            break;
+        case 3:
+            int newDefense = 0;
+            while (newDefense < 1 || newDefense > 3) {
+                System.out.print("Ingrese el nuevo valor de defensa (entre 1 y 3): ");
+                newDefense = scanner.nextInt();
+            }
+            armor.setDefense(newDefense);
+            break;
+        default:
+            System.out.println("Opción inválida. Intente nuevamente.");
+            break;
     }
+           System.out.println("Característica modificada correctamente.");
+        List<Armor> armorList = c.getArmorSet();
+           armorList.set(armorIndex-1,armor);
+           c.setArmorSet(armorList);
+    return c;
 
-    public void setArmorSet(Map<String, List<Armor>> armorSet) {
-        this.armorSet = armorSet;
-    }
-
-    //constuctor
-
-
-    public DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
-
-    public void setDatabaseManager(DatabaseManager databaseManager) {
-        this.databaseManager = databaseManager;
-    }
 }
+}
+
+

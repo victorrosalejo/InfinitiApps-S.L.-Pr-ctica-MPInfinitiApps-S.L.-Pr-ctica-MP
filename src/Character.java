@@ -65,6 +65,9 @@ public class Character {
     public void setArmorSet(List<Armor> armorSet) {
         this.armorSet = armorSet;
     }
+    public void getArmorSet(List<Armor> armorSet) {
+        return armorSet;
+    }
 
     public List<Minion> getMinionMap() {
         return minionMap;

@@ -1,10 +1,13 @@
 public class Power {
-
-    private  int power;
-
-    //constructor
-
     public Character Power(Character c){
+
+
+        System.out.println("----------------[Vida del persoanje]-----------------");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        System.out.println("----------------[ " + (i + 1) + " ]-----------------");
+
+
 
 
         return  c;

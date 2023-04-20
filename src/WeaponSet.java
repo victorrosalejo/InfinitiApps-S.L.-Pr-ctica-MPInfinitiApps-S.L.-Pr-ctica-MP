@@ -8,7 +8,7 @@ public class WeaponSet {
     public Character WeaponSet(Character c) {
                 for (int i = 0; i < c.getWeaponSet().size(); i++) {
                 Weapon weapon = c.getWeaponSet().get(i);
-                System.out.println("----------------[Conjunto de armas]-----------------");
+                System.out.println("----------------[Conjunto de armaduras]-----------------");
                 System.out.println("----------------------------------------------------");
                 System.out.println("");
                 System.out.println("----------------[ " + (i + 1) + " ]-----------------");
@@ -18,7 +18,7 @@ public class WeaponSet {
                 System.out.println(("Manos") + " - " + weapon.getHands());
             }
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Seleccione el número de arma que desea modificar: ");
+            System.out.print("Seleccione el número de armadura que desea modificar: ");
             int weaponIndex = scanner.nextInt()-1;
             Weapon weapon = c.getWeaponSet().remove(weaponIndex);
             System.out.println("Modificando arma: " + weapon.getName());

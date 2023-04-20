@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class AddMinion {
 
-    private DatabaseManager databaseManager;
+    private DatabaseManager  databaseManager;
     private Map<String, List<Minion>> databaseM = new HashMap<>();
     private Minion m;
 

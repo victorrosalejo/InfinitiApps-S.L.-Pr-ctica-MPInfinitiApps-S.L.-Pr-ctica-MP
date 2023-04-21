@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class DeleteAccount {
 
@@ -12,34 +13,37 @@ public class DeleteAccount {
 
     public void DeleteAccount(User u){
 
-
+        System.out.println("Seguro que quiere eliminar la cuenta?");
+        System.out.println("Si es así introduzca 'sí'. En caso contrario introduzca cualquier otra cosa");
+        Scanner scan = new Scanner(System.in);
+        String sure = scan.nextLine();
+        scan.close();
+        if (sure =="si" || sure == "sí"){
 
         // Obtener el nombre de usuario del usuario que se va a eliminar
-        String username = u.getName();
-        String regnum = u.getRegisterNumber();
-
-
+            String username = u.getName();
+            String regnum = u.getRegisterNumber();
         // Eliminar el usuario de la base de datos U
 
-        databaseU.remove(username);
+            databaseU.remove(username);
+        // Eliminar el historial del usuario de la base de datos H
 
+            databaseH.remove(regnum);
+        // Guardar las bases de datos actualizadas
 
+            this.databaseManager.saveDatabaseU(databaseU);
+            this.databaseManager.saveDatabaseH(databaseH);
         // Eliminar los personajes asociados al usuario de la base de datos C
 
+            DeleteCharacter delCh = new DeleteCharacter();
+            delCh.DeleteCharacter(u);
+        // Volver al principio
 
-        databaseC.remove(regnum);
-
-        // Eliminar el historial del usuario de la base de datos H
-        databaseH.remove(regnum);
-
-
-        this.databaseManager.saveDatabaseU(databaseU);
-        this.databaseManager.saveDatabaseC(databaseC);
-        this.databaseManager.saveDatabaseH(databaseH);
-
-
-        Welcome();
-
+            this.welcome();
+        } else{
+            Menu menu = new Menu();
+            menu.Menu(u);
+        }
 
 
     }
@@ -80,7 +84,7 @@ public class DeleteAccount {
         this.databaseH = databaseH;
     }
 
-    private  void Welcome(){
+    private  void welcome(){
         Welcome welcome = new Welcome();
         welcome.Welcome();
     }

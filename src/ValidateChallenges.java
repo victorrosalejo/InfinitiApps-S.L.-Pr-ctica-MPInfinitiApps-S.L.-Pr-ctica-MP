@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +11,13 @@ public class ValidateChallenges {
     databaseManager = new DatabaseManager();
     databaseP = databaseManager.obtainDatabaseP();
     List<Challenge> challenges =new ArrayList<>();
+    for (Map.Entry<String, List<Challenge>> entry : databaseP.entrySet()) {
+        List<Challenge> valor = entry.getValue();
+        challenges.addAll(valor);
+        }
+    Set<Challenge> setCh = new HashSet(challenges);
+    challenges = new ArrayList<>(setCh);
+
     }
 
     public DatabaseManager getDatabaseManager() {

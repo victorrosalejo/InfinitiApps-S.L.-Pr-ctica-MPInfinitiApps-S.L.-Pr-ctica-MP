@@ -1,21 +1,22 @@
+import java.util.Scanner;
+
 public class Description {
 
-    private String description;
+    public Character Description(Character c) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\nEditar descripción:");
+            System.out.println("La descripción actual es: " + c.getDescription());
+            System.out.print("\nIngrese la nueva descipción (Introduce 'salir' para regresar al menu)");
+            String option = scanner.nextLine();
 
-    //constructor
-
-    public Character Description(Character c){
-
-
-        return  c;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+            //verificamos si se quiere salir del programa
+            if (option.equals("salir")) {
+                break;  // no hace falta else por el break
+            }
+            c.setDescription(option);
+            break;
+        }
+        return c;
     }
 }

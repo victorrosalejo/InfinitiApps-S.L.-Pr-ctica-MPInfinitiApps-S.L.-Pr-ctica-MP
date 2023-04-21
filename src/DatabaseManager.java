@@ -140,12 +140,25 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Character.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseC(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveDatabaseH(Map<String,History> m ) {
+    public void saveDatabaseH(Map<String,History> m ){
         try {
             FileOutputStream fos = new FileOutputStream("History.bin");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -153,6 +166,19 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("History.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseH(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,6 +191,19 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("User.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseU(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,6 +216,19 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Challenge.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseP(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -189,6 +241,19 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Armor.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseA(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,11 +266,24 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Weapon.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseW(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void saveDatabaseM(Map<String,Minion> m ) {
+    public void saveDatabaseM(Map<String,List<Minion>> m ) {
         try {
             FileOutputStream fos = new FileOutputStream("Minion.bin");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -213,11 +291,24 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Minion.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseM(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void saveDatabaseMo(Map<String,Modifiers> m ) {
+    public void saveDatabaseMo(Map<String,List<Modifiers>> m ) {
         try {
             FileOutputStream fos = new FileOutputStream("Modifier.bin");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -225,12 +316,21 @@ public class DatabaseManager implements Serializable{
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
+        } catch (IOException e) {
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream("Modifier.bin");
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                saveDatabaseMo(m);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            FileOutputStream fos = new FileOutputStream("Modifier.bin");
-            fos.close();
-            return saveDatabaseMo(m);
         }
     }
 }

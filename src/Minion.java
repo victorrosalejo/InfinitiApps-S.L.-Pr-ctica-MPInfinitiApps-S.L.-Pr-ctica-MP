@@ -3,6 +3,7 @@ public class Minion {
     private String name;
     private int hitPoints;
     private String description;
+    private TMinion tipominion;
 
     public String getName() {
         return name;
@@ -28,4 +29,11 @@ public class Minion {
         this.description = description;
     }
 
+    public TMinion getTipominion() {
+        return tipominion;
+    }
+
+    public void setTipominion(TMinion tipominion) {
+        this.tipominion = tipominion;
+    }
 }

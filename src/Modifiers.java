@@ -2,6 +2,7 @@ public class Modifiers {
     private String name;
     private int value;
     private boolean buff;
+    private boolean active;
 
     public String getName() {
         return name;
@@ -25,5 +26,13 @@ public class Modifiers {
 
     public void setBuff(boolean buff) {
         this.buff = buff;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

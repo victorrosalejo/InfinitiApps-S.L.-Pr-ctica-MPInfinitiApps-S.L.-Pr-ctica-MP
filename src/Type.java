@@ -13,6 +13,10 @@ public class Type {
 
         if (nuevoTipo.equalsIgnoreCase("Vampiro") || nuevoTipo.equalsIgnoreCase("Licántropo") || nuevoTipo.equalsIgnoreCase("Cazador")) {
             c.setType(nuevoTipo);
+            Ability ab = c.getSpecialAbility();
+            TCharacter tc = c.getType();
+            ab.setType(tc);
+            c.setSpecialAbility(ab);
             System.out.println("\nTipo actualizado del persoanje actualizado a "+ c.getType());
         } else {
             System.out.println("\nTipo inválido. El tipo debe ser Vampiro, Licántropo o Cazador.");

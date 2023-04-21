@@ -7,7 +7,7 @@ public class DeleteCharacter {
     private Map<String, Character> databaseC = new HashMap<>();
     private DatabaseManager databaseManager;
 
-    public void DeleteCharacter(User u, Character c) {
+    public void DeleteCharacter(User u) {
         Scanner input = new Scanner(System.in);
         int option;
         databaseManager = new DatabaseManager();
@@ -18,14 +18,13 @@ public class DeleteCharacter {
         option = input.nextInt();
         switch (option) {
             case 1:
-                databaseC.remove(u.getRegisterNumber());
-
-                newcharacter(u);
-
+                Character c = databaseC.remove(u.getRegisterNumber());
+                DeleteEquipment delEquip = new DeleteEquipment();
+                delEquip.DeleteEquipment(c);
                 break;
             case 2:
-
-                charactermenu(u);
+                Menu menu = new Menu();
+                menu.Menu(u);
                 break;
         }
     }
@@ -45,18 +44,5 @@ public class DeleteCharacter {
             this.databaseManager = databaseManager;
         }
 
-
-        private void newcharacter (User u){
-            NewCharacter newCharacter = new NewCharacter();
-            newCharacter.NewCharacter(u);
-        }
-
-        private void charactermenu(User u){
-            CharacterMenu characterMenu = new CharacterMenu();
-            characterMenu.CharacterMenu(u);
-
-        }
-
-        //delete equipment
 
 }

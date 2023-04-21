@@ -8,8 +8,9 @@ public class DeleteEquipment {
     private Map<String,Armor> databaseA = new HashMap<>();
     private Map<String,Armor> databaseM = new HashMap<>();
 
-    //Constructor
+    public  void DeleteEquipment(Character c){
 
+    }
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;

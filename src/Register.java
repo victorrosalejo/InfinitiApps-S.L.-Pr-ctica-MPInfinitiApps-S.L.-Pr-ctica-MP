@@ -10,6 +10,7 @@ public class Register {
 
 
     public void Register(){
+            databaseManager = new DatabaseManager();
             databaseU = databaseManager.obtainDatabaseU();
             Scanner input = new Scanner(System.in);
             String username, password, nickname = null;

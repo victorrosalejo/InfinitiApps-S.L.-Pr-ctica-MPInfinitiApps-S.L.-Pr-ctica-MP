@@ -9,6 +9,7 @@ public class Character {
     private List<Armor> armorSet = new ArrayList<>();
     private int hP = 5;
     private int power;
+    private int age;
     private List<Minion> minionMap = new ArrayList<>();
     private Ability specialAbility = new Ability();
     private  int goldValue;
@@ -43,10 +44,13 @@ public class Character {
 
         if (type =="Vampiro"){
             this.type = TCharacter.VAMPIRE;
+            this.typeAttack = 10;
         } else if (type == "Licántropo") {
             this.type = TCharacter.WEREWOLF;
+            this.typeAttack = 3;
         }else {
             this.type = TCharacter.HUNTER;
+            this.typeAttack = 3;
         }
     }
 
@@ -65,7 +69,7 @@ public class Character {
     public void setArmorSet(List<Armor> armorSet) {
         this.armorSet = armorSet;
     }
-    public void getArmorSet(List<Armor> armorSet) {
+    public List<Armor> getArmorSet(List<Armor> armorSet) {
         return armorSet;
     }
 
@@ -143,6 +147,14 @@ public class Character {
 
     public void setType(TCharacter type) {
         this.type = type;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
 

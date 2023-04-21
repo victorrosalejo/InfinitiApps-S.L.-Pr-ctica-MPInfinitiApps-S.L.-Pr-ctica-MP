@@ -17,10 +17,10 @@ public class ArmorSet {
     }
 
     Scanner scanner = new Scanner(System.in);
-            System.out.print("Seleccione el número de arma que desea modificar: ");
+            System.out.print("Seleccione el número de armadura que desea modificar: ");
     int armorIndex = scanner.nextInt() - 1;
     Armor armor = c.getArmorSet().remove(armorIndex);
-            System.out.println("Modificando arma: "+armor.getName());
+            System.out.println("Modificando armadura: "+armor.getName());
             System.out.println("Seleccione la característica que desea modificar: ");
             System.out.println("1. Nombre");
             System.out.println("2. Ataque");

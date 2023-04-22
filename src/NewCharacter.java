@@ -2,10 +2,6 @@ import java.util.*;
 
 public class NewCharacter {
     private Map<String,Character> databaseC = new HashMap<>();
-    private Map<String,List<Armor>> databaseA = new HashMap<>();// string = Character name
-    private Map<String,List<Weapon>> databaseW = new HashMap<>();//string = Character name
-    private Map<String,List<Minion>> databaseM = new HashMap<>();//string = Character name
-    private Map<String,List<Modifiers>> databaseMo = new HashMap<>();//string = Character name
     private DatabaseManager databaseManager;
 
 
@@ -147,7 +143,6 @@ public class NewCharacter {
             nombre = nombresNombres[(randInt.nextInt(0, 6))];
 
             minion.setName(nombre);
-            minion.setDescription("Un nuevo minion listo para pelear");
             minion.setHitPoints(randInt.nextInt(1, 4));
 
             minion.setTipominion(nombresTm.get((randInt.nextInt(0, 3))));
@@ -160,7 +155,6 @@ public class NewCharacter {
                     Minion nuevominion = new Minion();
 
                     nuevominion.setName(nombre);
-                    nuevominion.setDescription("Un nuevo minion listo para pelear");
                     nuevominion.setHitPoints(randInt.nextInt(1, 4));
                     nuevalista.add(nuevominion);
 

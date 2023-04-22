@@ -6,6 +6,8 @@ public class Round {
     private Fighter defiedInfo;
     private List<Integer> damageDealt = new ArrayList<>(2);
 
+
+
     public Fighter getDefiantInfo() {
         return defiantInfo;
     }

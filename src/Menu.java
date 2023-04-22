@@ -1,4 +1,3 @@
-import javax.lang.model.type.NullType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -6,7 +5,7 @@ import java.util.*;
 
 public class Menu {
     private DatabaseManager databaseManager = new DatabaseManager();
-    private Map<String, Challenge> databaseP = new HashMap<>();
+    private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private User user;
     private Map<String, Character> databaseC = new HashMap<>();
 
@@ -19,13 +18,16 @@ public class Menu {
     public void Menu(User u){
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
-        Boolean d = false;
+        boolean d;
         Challenge ch = new Challenge();
+        List<Challenge> challengeList = new ArrayList<>();
         Character c = new Character();
         Fighter defiant = new Fighter();
         Fighter defied = new Fighter();
-        int forcedoption;
-        int gold = 0;
+        int forcedoption, select;
+        int gold;
+        boolean pendingResult;
+
         databaseC = databaseManager.obtainDatabaseC();
 
         if (databaseC.get(u.getRegisterNumber()) == null ){
@@ -40,8 +42,17 @@ public class Menu {
                 forcedoption = scanner.nextInt();
                 switch (forcedoption) {
                     case 1:
+                        databaseP = databaseManager.obtainDatabaseP();
+                        challengeList = databaseP.get(user.getRegisterNumber());
 
-                        fight(defiant, defied, gold); // como se identifica el desafiado
+                        for (Challenge challenge : challengeList) {
+
+                            defiant = (Fighter) databaseC.get(user.getRegisterNumber());
+                            defied = (Fighter) databaseC.get(user.getRegisterNumber());
+
+
+                            fight(defiant, defied, gold); //esto esta a medias xd
+                        }
                         break;
                     case 2:
                         float f = (float) 0.1;
@@ -57,13 +68,13 @@ public class Menu {
                     System.out.println("========== MENU PRINCIPAL ==========");
                     System.out.println("1. Borrar cuenta");
                     System.out.println("2. Menu de equipamiento");
-                    System.out.println("3. Menu de challenges");
+                    System.out.println("3. Menu de desafíos");
                     System.out.println("4. Historial");
                     System.out.println("5. Menu de personajes");
                     System.out.println("6. Rankin");
                     System.out.println("7. Actializar el oro");
                     System.out.println("8. Normas");
-                    System.out.println("9. Pelea");
+
                     System.out.println("0. Salir");
 
                     int option = scanner.nextInt();
@@ -79,6 +90,7 @@ public class Menu {
                             break;
                         case 3:
                             challengeMenu(u); // ok
+
                             break;
                         case 4:
                             showhistory(u); // ok
@@ -94,9 +106,6 @@ public class Menu {
                             break;
                         case 8:
                             rules();
-                            break;
-                        case 9:
-                            fight(defiant, defied, gold);
                             break;
                         case 0:
                             exit = true;
@@ -153,7 +162,7 @@ public class Menu {
     }
 
 
-    private void fight(Fighter defiant, Fighter defied, Integer gold ){
+    private void fight(Fighter defiant, Fighter defied, Integer gold){
         Fight fight = new Fight();
         fight.Fight(defiant,defied,gold);                      // error en fight
     }

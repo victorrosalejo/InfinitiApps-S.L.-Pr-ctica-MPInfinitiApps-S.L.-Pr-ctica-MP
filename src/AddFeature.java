@@ -1,17 +1,54 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class AddFeature {
 
-    private DatabaseManager databaseManager;
-    private Map<String, User> databaseC = new HashMap<>();
+    private DatabaseManager databaseManager = new DatabaseManager();
+    private Map<String, Character> databaseC = new HashMap<>();
 
 
     public void AddFeature(User u){
-        databaseManager = new DatabaseManager();
+    Scanner scanner = new Scanner(System.in);
+    int option = 0;
+    boolean exit = false;
+    databaseC = databaseManager.obtainDatabaseC();
+    Character c = databaseC.remove(u.getRegisterNumber());
 
-        //constructor
+    while(!exit){
+        System.out.println("Seleccione una opción:");
+        System.out.println("1. Agregar modificador");
+        System.out.println("2. Agregar arma");
+        System.out.println("3. Agregar armadura");
+        System.out.println("4. Agregar minions");
+        System.out.println("5. Salir");
+
+        option = scanner.nextInt();
+
+        switch(option){
+            case 1:
+                c = addModifier(c);
+                break;
+            case 2:
+                c = addWeapon(c);
+                break;
+            case 3:
+                c = addArmor(c);
+                break;
+            case 4:
+                c = addMinions(c);
+                break;
+            case 5:
+                exit = true;
+                break;
+            default:
+                System.out.println("Opción inválida. Intente de nuevo.");
+                break;
+        }
     }
+    databaseC.put(u.getRegisterNumber(),c);
+}
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
@@ -19,14 +56,6 @@ public class AddFeature {
 
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
-    }
-
-    public Map<String, User> getDatabaseC() {
-        return databaseC;
-    }
-
-    public void setDatabaseC(Map<String, User> databaseC) {
-        this.databaseC = databaseC;
     }
 
     private Character addModifier(Character c){
@@ -38,7 +67,6 @@ public class AddFeature {
     private Character addWeapon(Character c){
         AddWeapon addWeapon = new AddWeapon();
         c = addWeapon.AddWeapon(c);
-
         return c;
     }
 
@@ -50,7 +78,7 @@ public class AddFeature {
 
     private Character addMinions(Character c){
         AddMinion addMinion = new AddMinion();
-        c = addMinion.AddMinion(c);
+        c.setMinionMap(addMinion.AddMinion(c.getMinionMap()));
         return c;
 
     }

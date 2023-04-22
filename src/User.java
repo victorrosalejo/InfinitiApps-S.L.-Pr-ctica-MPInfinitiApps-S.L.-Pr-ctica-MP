@@ -6,6 +6,7 @@ public class User {
     private TUser usertype;
     private  String registerNumber;
 
+
     public String getName() {return name;}
 
     public void setName(String name) {this.name = name;}

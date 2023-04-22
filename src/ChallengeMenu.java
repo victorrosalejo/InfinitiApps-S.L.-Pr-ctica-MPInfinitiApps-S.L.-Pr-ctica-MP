@@ -41,11 +41,8 @@ public class ChallengeMenu {
         challenge.setGold(gold);
         challenge.setValid(false);
         List<Challenge> challengeList = databaseP.remove(aux1);
-        List<Challenge> challengeList2 = databaseP.remove(aux2);
         challengeList.add(challenge);
-        challengeList2.add(challenge);
         databaseP.put(aux1, challengeList);
-        databaseP.put(aux2, challengeList2);
         databaseManager.saveDatabaseP(databaseP);
         scanner.close();
     }

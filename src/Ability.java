@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Ability {
     private  TAbility type;
     private int defense;
@@ -9,13 +11,13 @@ public class Ability {
     }
 
     public void setType(TCharacter type) {
-
+        Random rand =new Random();
         if (type == TCharacter.VAMPIRE){
             this.type = TAbility.DISCIPLINE;
-            setSpecialValue(3);
+            setSpecialValue(rand.nextInt(0,4));
         } else if (type == TCharacter.WEREWOLF) {
             this.type = TAbility.GIFT;
-            setSpecialValue(3);
+            setSpecialValue(rand.nextInt(0,4));
         }else{
             this.type = TAbility.TALENT;
             setSpecialValue(0);

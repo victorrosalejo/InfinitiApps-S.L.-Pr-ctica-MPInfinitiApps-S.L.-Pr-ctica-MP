@@ -58,7 +58,7 @@ public class CharacterMenu {
         databaseM.put(c.getName(),c.getMinionMap());
         databaseManager.saveDatabaseM(databaseM);
         databaseMo = databaseManager.obtainDatabaseMo();
-        databaseMo.put(c.getName(),c.getModifierList());
+        databaseMo.put(c.getName(),c.getWeaponSet());
         databaseManager.saveDatabaseMo(databaseMo);
     }
     public User getUser() {

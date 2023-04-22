@@ -29,7 +29,7 @@ public class Challenge {
     }
 
     public boolean isValid() {
-        return valid;
+        return this.valid;
     }
 
     public void setValid(boolean valid) {

@@ -6,6 +6,18 @@ public class Combat {
     private State state;
     private int goldBet;
 
+
+
+    public Combat(){
+        
+
+
+
+
+    }
+
+
+
     public int getRounds() {
         return rounds;
     }

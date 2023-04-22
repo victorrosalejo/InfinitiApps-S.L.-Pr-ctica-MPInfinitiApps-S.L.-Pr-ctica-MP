@@ -1,4 +1,3 @@
-import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class Character {
@@ -17,8 +16,7 @@ public class Character {
     private int wins;
     private int typeAttack;
     private boolean fighting;
-
-
+    Random rand = new Random();
 
     public String getName() {
         return name;
@@ -44,13 +42,13 @@ public class Character {
 
         if (type =="Vampiro"){
             this.type = TCharacter.VAMPIRE;
-            this.typeAttack = 10;
+            this.typeAttack = rand.nextInt(0, 11);
         } else if (type == "Licántropo") {
             this.type = TCharacter.WEREWOLF;
-            this.typeAttack = 3;
+            this.typeAttack = rand.nextInt(0, 4);
         }else {
             this.type = TCharacter.HUNTER;
-            this.typeAttack = 3;
+            this.typeAttack = rand.nextInt(0, 4);
         }
     }
 
@@ -113,7 +111,7 @@ public class Character {
         this.goldValue = goldValue;
     }
 
-    public List<Modifiers> getModifierList() {
+    public List<Modifiers> getModifiersList() {
         return modifierList;
     }
 

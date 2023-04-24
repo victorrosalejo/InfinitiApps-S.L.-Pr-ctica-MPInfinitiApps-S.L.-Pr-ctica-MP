@@ -2,6 +2,7 @@ import java.util.*;
 
 public class AddMinion {
 
+
     public List<Minion> AddMinion(List<Minion> m){
         Minion newMinion = new Minion();
         Scanner scanner = new Scanner(System.in);
@@ -72,8 +73,10 @@ public class AddMinion {
                     System.out.println("Tipo erróneo");
                 }
             }
+            scanner.close();
         }
         System.out.print("Esbirro añadido correctamente");
         return m;
+
     }
 }

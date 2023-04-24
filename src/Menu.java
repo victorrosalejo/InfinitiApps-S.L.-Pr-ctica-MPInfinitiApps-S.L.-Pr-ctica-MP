@@ -6,7 +6,6 @@ import java.util.*;
 public class Menu {
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
-    private User user;
     private Map<String, Character> databaseC = new HashMap<>();
 
 
@@ -20,98 +19,86 @@ public class Menu {
         boolean exit = false;
         boolean d;
         Challenge ch = new Challenge();
-        List<Challenge> challengeList = new ArrayList<>();
-        Character c = new Character();
-        Fighter defiant = new Fighter();
-        Fighter defied = new Fighter();
-        int forcedoption, select;
+        List<Challenge> challengeList ;
+        Character c;
+
+
+        int forcedoption;
         int gold;
-        boolean pendingResult;
+        List<Combat> combats = u.getResultados();
+        boolean pendingResult = !combats.isEmpty();
+
 
         databaseC = databaseManager.obtainDatabaseC();
+        databaseP = databaseManager.obtainDatabaseP();
+        challengeList = databaseP.get(u.getRegisterNumber());
+        gold = databaseC.get(u.getRegisterNumber()).getGoldValue();
+        c = databaseC.get(u.getRegisterNumber());
+
+
 
         if (databaseC.get(u.getRegisterNumber()) == null ){
             characterMenu(u);
-        }else{
-            // esto no esta implementado
-            if (d == true) {//challenge lugo a equipent fight y te vuelve al menu
-
+        }
+        else{
+            d = !challengeList.isEmpty(); // si esta vacia True = False
+            if (d) {
                 System.out.println("========== Tienes un duelo pendiente ==========");
                 System.out.println("1. Aceptar");
                 System.out.println("2. Rechazar " + "(pierdes:" + String.format("%.2f", (gold * 0.1)) + ")");
                 forcedoption = scanner.nextInt();
                 switch (forcedoption) {
-                    case 1:
+                    case 1 -> {
                         databaseP = databaseManager.obtainDatabaseP();
-                        challengeList = databaseP.get(user.getRegisterNumber());
-
-                        for (Challenge challenge : challengeList) {
-
-                            defiant = (Fighter) databaseC.get(user.getRegisterNumber());
-                            defied = (Fighter) databaseC.get(user.getRegisterNumber());
-
-
-                            fight(defiant, defied, gold); //esto esta a medias xd
-                        }
-                        break;
-                    case 2:
+                        challengeList = databaseP.remove(u.getRegisterNumber());
+                        Challenge challenge = challengeList.remove(0);
+                        databaseP.put(u.getRegisterNumber(), challengeList);
+                        databaseManager.saveDatabaseP(databaseP);
+                        User udefiant = challenge.getDefiant();
+                        User udefied = challenge.getDefied();
+                        equipentMenu(u);
+                        fight(udefiant, udefied, gold); //esto esta a medias xd
+                    }
+                    case 2 -> {
                         float f = (float) 0.1;
                         gold = gold - Math.round(gold * f);
-
+                        updateGold(c, ch);
+                    }
                 }
-                // comprobar resultados por mostrar
-            } else if () {
+            } else if (pendingResult) {
+                while (pendingResult){
+                    Combat c2 = combats.remove(0);
+                    showresult(c2, u);
+                    pendingResult = !combats.isEmpty();
+                }
 
             }else {
                 while (!exit) {
 
                     System.out.println("========== MENU PRINCIPAL ==========");
+                    System.out.println("0. Salir");
                     System.out.println("1. Borrar cuenta");
                     System.out.println("2. Menu de equipamiento");
                     System.out.println("3. Menu de desafíos");
                     System.out.println("4. Historial");
                     System.out.println("5. Menu de personajes");
                     System.out.println("6. Rankin");
-                    System.out.println("7. Actializar el oro");
-                    System.out.println("8. Normas");
+                    System.out.println("7. Normas");
 
-                    System.out.println("0. Salir");
 
                     int option = scanner.nextInt();
                     // personaje, challenge, result
 
                     switch (option) {
-
-                        case 1:
-                            deleteAccount(u); // ok
-                            break;
-                        case 2:
-                            equipentMenu(u, d); // ok
-                            break;
-                        case 3:
-                            challengeMenu(u); // ok
-
-                            break;
-                        case 4:
-                            showhistory(u); // ok
-                            break;
-                        case 5:
-                            characterMenu(u); // ok
-                            break;
-                        case 6:
-                            ranking();
-                            break;
-                        case 7:
-                            updateGold(c, ch);
-                            break;
-                        case 8:
-                            rules();
-                            break;
-                        case 0:
-                            exit = true;
-                            break;
-                        default:
-                            System.out.println("Opción no válida, por favor intenta de nuevo.");
+                        case 1 -> deleteAccount(u); // ok
+                        case 2 -> equipentMenu(u); // ok
+                        case 3 -> challengeMenu(u); // ok
+                        case 4 -> showhistory(u); // ok
+                        case 5 -> characterMenu(u); // ok
+                        case 6 -> ranking(); //ok
+                        case 7 -> rules(); //ok
+                        case 0 -> exit = true;
+                        default -> System.out.println("Opción no válida, por favor intenta de nuevo.");
                     }
                 }
             }
@@ -125,9 +112,10 @@ public class Menu {
         deleteAccount.DeleteAccount(cl);
 
     }
-    private void equipentMenu(User u, Boolean d){
+
+    private void equipentMenu(User u){
         EquipmentMenu equipmentMenu = new EquipmentMenu();
-        equipmentMenu.EquipentMenu(u,d);
+        equipmentMenu.EquipentMenu(u);
 
     }
 
@@ -153,16 +141,19 @@ public class Menu {
 
     }
     private void updateGold(Character c, Challenge ch){
-        c.setGoldValue(c.getGoldValue()- ch.getGold());
+        c.setGoldValue((int) (c.getGoldValue() - (ch.getGold() * 0.1 )));
 
     }
+
+
+
     private void rules(){
         Rules rules = new Rules();
         rules.ShowRules();
     }
 
 
-    private void fight(Fighter defiant, Fighter defied, Integer gold){
+    private void fight(User defiant, User defied, Integer gold){
         Fight fight = new Fight();
         fight.Fight(defiant,defied,gold);                      // error en fight
     }
@@ -175,19 +166,6 @@ public class Menu {
         this.databaseManager = databaseManager;
     }
 
-    public Map<String, Challenge> getDatabaseP() {
-        return databaseP;
-    }
-
-    public void setDatabaseP(Map<String, Challenge> databaseP) {
-        this.databaseP = databaseP;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    //public void setUser(User user) {this.user = user;}
 
     public Map<String, Character> getDatabaseC() {
         return databaseC;
@@ -195,5 +173,13 @@ public class Menu {
 
     public void setDatabaseC(Map<String, Character> databaseC) {
         this.databaseC = databaseC;
+    }
+
+
+    public void showresult(Combat c2, User user){
+        Result result = new Result();
+        result.showResult(c2,user);
+
+
     }
 }

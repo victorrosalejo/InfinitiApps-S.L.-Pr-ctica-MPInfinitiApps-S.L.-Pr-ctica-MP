@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Match {
@@ -7,7 +8,7 @@ public class Match {
     private boolean minionsLeft;
     private Character defied;
     private Character winner;
-    private Date date;
+    private LocalDateTime date;
 
     public Character getDefiant() {
         return defiant;
@@ -57,13 +58,11 @@ public class Match {
         this.winner = winner;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
-    /* Falta constructor */
-
 }

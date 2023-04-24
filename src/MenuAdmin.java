@@ -19,19 +19,19 @@ public class MenuAdmin {
             int opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
-                    deleteAdmin(u);
+                    deleteAdmin(u);//ok
                     break;
                 case 2:
-                    editCharacter();
+                    editCharacter();//ok
                     break;
                 case 3:
                     validateChallenges();
                     break;
                 case 4:
-                    addFeature(u);
+                    addFeature(u);//ok
                     break;
                 case 5:
-                    banUser(u);
+                    banUser();
                     break;
                 case 6:
                     continuar = false;  //WARNING LINE
@@ -62,7 +62,7 @@ public class MenuAdmin {
         AddFeature addFeature = new AddFeature();
         addFeature.AddFeature(u);
     }
-    private void banUser(User u){
+    private void banUser(){
         UserManager userManager = new UserManager();
         userManager.UserManager();
     }

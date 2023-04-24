@@ -19,34 +19,38 @@ public class Login {
 
         System.out.println("========= Login ========\n");
         do {
-
-            System.out.print("Introduce tu nombre: ");
-            username = input.next();
-            System.out.print("Introduce tu contraseña: ");
-            password = input.next();
-
+            do {
+                System.out.print("Introduce tu nombre: ");
+                username = input.next();
+                if(databaseU.get(username) == null){
+                    System.out.println("Nombre no existente");
+                }
+            }while(databaseU.get(username) == null);
 
             user = databaseU.get(username);
-
             truepassword = user.getPassword();
-
-            if (truepassword == password) {
+            do {
+                System.out.print("Introduce tu contraseña: ");
+                password = input.next();
+                if(!truepassword.equals(password)){
+                    System.out.println("Contraseña incorrecta");
+                }
+            }while(!truepassword.equals(password));
+            if (!user.isBanned()) {
                 System.out.print("Login correcto");
                 valid = true;
 
-                if (user.getUsertype() == tipouser ){
+                if (user.getUsertype() == tipouser) {
                     menuAdmin(user);
 
-                }
-                else {
+                } else {
                     menu(user);
 
                 }
+            } else {
+                System.out.print("Usuario baneado");
             }
-
-        } while (valid == false);
-
-
+        } while (!valid);
     }
 
     private void menuAdmin(User u){

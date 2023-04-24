@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class User {
 
     private  String name;
@@ -5,6 +7,8 @@ public class User {
     private  String password;
     private TUser usertype;
     private  String registerNumber;
+    private List<Combat> resultados;
+    private boolean banned = false;
 
 
     public String getName() {return name;}
@@ -33,5 +37,22 @@ public class User {
 
     public void setRegisterNumber(String registerNumber) {
         this.registerNumber = registerNumber;
+    }
+
+    public List<Combat> getResultados() {
+        return resultados;
+    }
+
+    public void setResultados(List<Combat> resultados) {
+        this.resultados = resultados;
+    }
+
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
     }
 }

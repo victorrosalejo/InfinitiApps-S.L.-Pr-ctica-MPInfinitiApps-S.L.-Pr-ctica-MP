@@ -7,6 +7,7 @@ public class AddFeature {
 
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, Character> databaseC = new HashMap<>();
+    private Map<String,List<Minion>> databaseM = new HashMap<>();
 
 
     public void AddFeature(User u){
@@ -48,6 +49,7 @@ public class AddFeature {
         }
     }
     databaseC.put(u.getRegisterNumber(),c);
+    scanner.close();
 }
 
     public DatabaseManager getDatabaseManager() {
@@ -79,6 +81,9 @@ public class AddFeature {
     private Character addMinions(Character c){
         AddMinion addMinion = new AddMinion();
         c.setMinionMap(addMinion.AddMinion(c.getMinionMap()));
+        databaseM.remove(c.getName());
+        databaseM.put(c.getName(),c.getMinionMap());
+        databaseManager.saveDatabaseM(databaseM);
         return c;
 
     }

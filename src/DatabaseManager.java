@@ -16,8 +16,16 @@ public class DatabaseManager implements Serializable{
 
     }
     public Map<String,Character> obtainDatabaseC() {
+        File file = new File("Character.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Character.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,Character> m = (Map<String,Character>) ois.readObject();
             ois.close();
@@ -31,8 +39,16 @@ public class DatabaseManager implements Serializable{
     }
 
     public Map<String,History> obtainDatabaseH() {
+        File file = new File("History.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("History.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,History> m = (Map<String,History>) ois.readObject();
             ois.close();
@@ -48,8 +64,16 @@ public class DatabaseManager implements Serializable{
 
 
     public Map<String, User> obtainDatabaseU() {
+        File file = new File("User.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("User.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String, User> m = (Map<String, User>) ois.readObject();
             ois.close();
@@ -58,12 +82,29 @@ public class DatabaseManager implements Serializable{
             return m;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            Map<String, User> aux = new HashMap<>();
+            User u = new User();
+            u.setName("¬Juan");
+            u.setBanned(false);
+            u.setNick("notienexd");
+            u.setPassword("1234");
+            u.setUsertype(TUser.ADMIN);
+            u.setRegisterNumber("0");
+            aux.put(u.getName(),u);
+            return aux;
         }
     }
     public Map<String,List<Challenge>> obtainDatabaseP() {
+        File file = new File("Challenge.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Challenge.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,List<Challenge>> m = (Map<String,List<Challenge>>) ois.readObject();
             ois.close();
@@ -77,8 +118,16 @@ public class DatabaseManager implements Serializable{
     }
 
     public Map<String,List<Armor>> obtainDatabaseA() {
+        File file = new File("Armor.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Armor.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,List<Armor>> m = (Map<String,List<Armor>>) ois.readObject();
             ois.close();
@@ -91,8 +140,16 @@ public class DatabaseManager implements Serializable{
         }
     }
     public Map<String,List<Weapon>> obtainDatabaseW() {
+        File file = new File("Weapon.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Weapon.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,List<Weapon>> m = (Map<String,List<Weapon>>) ois.readObject();
             ois.close();
@@ -105,8 +162,16 @@ public class DatabaseManager implements Serializable{
         }
     }
     public Map<String,List<Minion>> obtainDatabaseM() {
+        File file = new File("Minion.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Minion.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,List<Minion>> m = (Map<String,List<Minion>>) ois.readObject();
             ois.close();
@@ -119,8 +184,16 @@ public class DatabaseManager implements Serializable{
         }
     }
     public Map<String,List<Modifiers>> obtainDatabaseMo() {
+        File file = new File("Modifier.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileInputStream fis = new FileInputStream("Modifier.bin");
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String,List<Modifiers>> m = (Map<String,List<Modifiers>>) ois.readObject();
             ois.close();
@@ -133,202 +206,162 @@ public class DatabaseManager implements Serializable{
         }
     }
     public void saveDatabaseC(Map<String,Character> m ) {
+        File file = new File("Character.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Character.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Character.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseC(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void saveDatabaseH(Map<String,History> m ){
+        File file = new File("History.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("History.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("History.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseH(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void saveDatabaseU(Map<String, User> m ) {
+        File file = new File("User.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("User.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("User.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseU(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void saveDatabaseP(Map<String,List<Challenge>> m ) {
+        File file = new File("Challenge.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Challenge.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Challenge.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseP(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void saveDatabaseA(Map<String,List<Armor>> m ) {
+        File file = new File("Armor.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Armor.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Armor.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseA(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void saveDatabaseW(Map<String,List<Weapon>> m ) {  // cambie weapon a lista de weapons
+    public void saveDatabaseW(Map<String,List<Weapon>> m ) {
+        File file = new File("Weapon.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Weapon.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Weapon.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseW(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void saveDatabaseM(Map<String,List<Minion>> m ) {
+        File file = new File("Minion.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Minion.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Minion.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseM(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void saveDatabaseMo(Map<String,List<Modifiers>> m ) {
+        File file = new File("Modifier.bin");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
-            FileOutputStream fos = new FileOutputStream("Modifier.bin");
+            FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(m);
             oos.close();
             fos.close();
             System.out.println("Estructura escrita en el archivo binario con éxito.");
-        } catch (IOException e) {
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream("Modifier.bin");
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                saveDatabaseMo(m);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

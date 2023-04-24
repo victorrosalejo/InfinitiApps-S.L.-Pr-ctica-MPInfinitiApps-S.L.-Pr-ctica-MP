@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Combat {
-    private int rounds;
+    private int rounds = 0;
     private List<Round> roundList = new ArrayList<>();
     private State state;
     private int goldBet;

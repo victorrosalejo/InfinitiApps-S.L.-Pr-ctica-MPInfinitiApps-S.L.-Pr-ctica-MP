@@ -51,7 +51,7 @@ public class EquipmentMenu {
         this.databaseManager = databaseManager;
     }
 
-    public void EquipentMenu(User u, boolean duel){
+    public void EquipentMenu(User u){
         Scanner input = new Scanner(System.in);
         String selectedA, selectedW;
 

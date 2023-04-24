@@ -44,6 +44,7 @@ public class AddWeapon {
             databaseW.put(c.getName(), weaponList);
             databaseManager.saveDatabaseW(databaseW);
             System.out.print("Arma añadida correctamente");
+            scanner.close();
             return c;
     }
 

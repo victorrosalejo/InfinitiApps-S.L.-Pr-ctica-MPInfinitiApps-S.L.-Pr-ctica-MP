@@ -2,8 +2,8 @@ import java.util.Scanner;
 public class Welcome {
 
     public void Welcome() {
-        Scanner input = new Scanner(System.in);
-        int choice;
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
 
         do {
             System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
@@ -15,9 +15,15 @@ public class Welcome {
             System.out.println("\n[-------------------------------------]\n");
 
             System.out.print("Escriba el número de la opción deseada: ");
-            choice = input.nextInt();
-
-            switch (choice) {
+            String input = scanner.nextLine();
+            int numero = 0;
+            try {
+                numero = Integer.parseInt(input);
+                System.out.println("Has introducido el número " + numero);
+            } catch (NumberFormatException e) {
+                System.out.println("No has introducido un número entero válido.");
+            }
+            switch (numero) {
                 case 1:
                     login();
                     break;
@@ -32,7 +38,7 @@ public class Welcome {
             }
             System.out.println();
         } while (choice != 3);  //condiciona hasta que se meta un input valido
-        input.close();
+        scanner.close();
     }
     private void login(){
         Login login = new Login();

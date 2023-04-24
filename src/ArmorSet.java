@@ -64,6 +64,7 @@ public class ArmorSet {
         c.setArmorSet(armorList);
         return c;
     }
+    scanner.close();
     System.out.println("Armadura no encontrada");
     return c;
 }

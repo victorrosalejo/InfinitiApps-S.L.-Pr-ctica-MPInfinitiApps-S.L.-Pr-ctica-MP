@@ -40,6 +40,7 @@ public class AddArmor {
         databaseManager.saveDatabaseA(databaseA);
         System.out.print("Armadura añadida correctamente");
         return c;
+
     }
 
 

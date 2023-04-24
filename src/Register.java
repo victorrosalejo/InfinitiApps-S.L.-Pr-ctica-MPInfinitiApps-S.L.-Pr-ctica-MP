@@ -26,18 +26,33 @@ public class Register {
                 username = input.nextLine();
                 if (username == "1"){
                     Welcome();
-                }else if (databaseU.get(username) != null){
+                    break;
+                }else if(databaseU == null){
+                    System.out.print("\n--> Introduce tu contraseña: ");
+                    password = input.nextLine();
+                    if(!username.startsWith("¬")) {
+                        System.out.print("\n--> Introduce tu apodo en juego: ");
+                        nickname = input.nextLine();
+                    }
+                    user.setName(username);
+                    user.setPassword(password);
+                    user.setNick(nickname);
+                } else if (databaseU.get(username) != null){
                     System.out.println("Nombre de usuario ya usado");
                 }else {
                     System.out.print("\n--> Introduce tu contraseña: ");
                     password = input.nextLine();
+                    if(!username.startsWith("¬")) {
+                        System.out.print("\n--> Introduce tu apodo en juego: ");
+                        nickname = input.nextLine();
 
-                    System.out.print("\n--> Introduce tu apodo en juego: ");
-                    nickname = input.nextLine();
+                    }
                     user.setName(username);
                     user.setPassword(password);
                     user.setNick(nickname);
+                break;
                 }
+
             }while (databaseU.get(username) != null);
 
             // Implement your logic to save the user information

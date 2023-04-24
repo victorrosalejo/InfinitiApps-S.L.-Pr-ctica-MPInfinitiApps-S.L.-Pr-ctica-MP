@@ -11,12 +11,6 @@ public class History {
 
     public void History(){
         databaseU = databaseManager.obtainDatabaseU();
-
-
-
-
-
-
     }
     public void appendMatch(Match match, User user){
         // Implementar despues

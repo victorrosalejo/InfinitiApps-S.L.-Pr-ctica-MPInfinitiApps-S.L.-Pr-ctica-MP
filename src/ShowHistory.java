@@ -2,6 +2,7 @@ import javax.xml.crypto.Data;
 import java.awt.dnd.DropTarget;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ShowHistory {
 
@@ -17,8 +18,17 @@ public class ShowHistory {
 
         for (Match element: listaH.getMatches()){
             System.out.println("\n[----------------------------------------------------------------]\n");
-            System.out.println("Desifiante: "+element.getDefiant() +"Desafiado: "+ element.getDefied()+"Oro apostado: "+ element.getGoldBet());
-            System.out.println("Numero de rondas: "+element.getRounds() +"Ganador: "+ element.getWinner()+"Hay miniomns supervivientes: "+ element.isMinionsLeft());
+            System.out.println("Desifiante: "+element.getDefiant() +" Desafiado: "+ element.getDefied()+" Oro apostado: "+ element.getGoldBet());
+            System.out.print("Numero de rondas: "+element.getRounds());
+            if (element.getWinner() == null){
+                System.out.println("Ganador: Empate Le quedan esbirros supervivientes: No");
+            }else if (element.isMinionsLeft()){
+                System.out.println("Ganador: "+ element.getWinner().getName()+" Con esbirros supervivientes: Sí");
+            }
+            else {
+                System.out.println("Ganador: "+ element.getWinner().getName()+" Con esbirros supervivientes: No");
+            }
+
             System.out.println("\n[----------------------------------------------------------------]\n");
         }
     }

@@ -157,11 +157,6 @@ public class Fighter extends Character{
     }
 
     public void setAttackPower(int attackPower) {
-
-
-
-
-
         this.attackPower = attackPower;
     }
 

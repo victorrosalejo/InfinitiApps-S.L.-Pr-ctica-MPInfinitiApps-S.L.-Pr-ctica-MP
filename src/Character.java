@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Character {
+public class Character implements Serializable {
     private String name;
     private String description;
     private TCharacter type;

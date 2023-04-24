@@ -1,10 +1,11 @@
 import java.awt.dnd.DropTarget;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.*;
 
-public class ShowRanking {
+public class ShowRanking implements Serializable {
     private Map<String, Character> databaseR = new HashMap<>();
     private DatabaseManager databaseManager = new DatabaseManager();
 

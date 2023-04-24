@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Fight {
+public class Fight implements Serializable {
 
 
     private Round roundFight = new Round();

@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class EditCharacter {
+public class EditCharacter implements Serializable {
 
     private DatabaseManager databaseManager;
     private Map<String, Character> databaseC = new HashMap<>();

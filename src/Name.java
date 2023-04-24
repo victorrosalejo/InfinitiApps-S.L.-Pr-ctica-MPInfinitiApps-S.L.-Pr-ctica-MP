@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Name {
+public class Name implements Serializable {
 private String  name;
 
 

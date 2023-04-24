@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class HitPoints {
+public class HitPoints implements Serializable {
 
     public Character HitPoints(Character c) {
         Scanner scanner = new Scanner(System.in);

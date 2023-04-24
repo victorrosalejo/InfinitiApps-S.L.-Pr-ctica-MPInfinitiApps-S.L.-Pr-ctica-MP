@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class DeleteAccount {
+public class DeleteAccount  implements Serializable {
 
     private DatabaseManager databaseManager;
     private Map<String, User> databaseU = new HashMap<>();

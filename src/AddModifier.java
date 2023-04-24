@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-public class AddModifier {
+public class AddModifier  implements Serializable {
 
     private DatabaseManager databaseManager;
     private Map<String, List<Modifiers>> databaseMo = new HashMap<>();

@@ -3,18 +3,7 @@ import java.util.*;
 
 
 public class DatabaseManager implements Serializable{
-    private Map<String,Character> databaseC = new HashMap<>();//String = num register
-    private Map<String,History> databaseH = new HashMap<>();//string = num register
-    private Map<String, User> databaseU = new HashMap<>();// string = user name
-    private Map<String,List<Challenge>> databaseP = new HashMap<>();// string = num register
-    private Map<String,List<Armor>> databaseA = new HashMap<>();// string = Character name
-    private Map<String,List<Weapon>> databaseW = new HashMap<>();//string = Character name
-    private Map<String,List<Minion>> databaseM = new HashMap<>();//string = Character name
-    private Map<String,List<Modifiers>> databaseMo = new HashMap<>();//string = Character name
 
-    public void DatabaseManager(){
-
-    }
     public Map<String,Character> obtainDatabaseC() {
         File file = new File("Character.bin");
         if (!file.exists()) {
@@ -30,7 +19,6 @@ public class DatabaseManager implements Serializable{
             Map<String,Character> m = (Map<String,Character>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +41,6 @@ public class DatabaseManager implements Serializable{
             Map<String,History> m = (Map<String,History>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,20 +65,10 @@ public class DatabaseManager implements Serializable{
             Map<String, User> m = (Map<String, User>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
-            Map<String, User> aux = new HashMap<>();
-            User u = new User();
-            u.setName("¬Juan");
-            u.setBanned(false);
-            u.setNick("notienexd");
-            u.setPassword("1234");
-            u.setUsertype(TUser.ADMIN);
-            u.setRegisterNumber("0");
-            aux.put(u.getName(),u);
-            return aux;
+            return null;
         }
     }
     public Map<String,List<Challenge>> obtainDatabaseP() {
@@ -109,11 +86,15 @@ public class DatabaseManager implements Serializable{
             Map<String,List<Challenge>> m = (Map<String,List<Challenge>>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            Map<String, List<Challenge>> aux = new HashMap<>();
+            Challenge c = new Challenge();
+            List<Challenge> ch = new ArrayList<>();
+            ch.add(c);
+            aux.put("C59DA",ch);
+            this.saveDatabaseP(aux);
+            return obtainDatabaseP();
         }
     }
 
@@ -132,7 +113,6 @@ public class DatabaseManager implements Serializable{
             Map<String,List<Armor>> m = (Map<String,List<Armor>>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,7 +134,6 @@ public class DatabaseManager implements Serializable{
             Map<String,List<Weapon>> m = (Map<String,List<Weapon>>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +155,6 @@ public class DatabaseManager implements Serializable{
             Map<String,List<Minion>> m = (Map<String,List<Minion>>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +176,6 @@ public class DatabaseManager implements Serializable{
             Map<String,List<Modifiers>> m = (Map<String,List<Modifiers>>) ois.readObject();
             ois.close();
             fis.close();
-            System.out.println("Estructura leída del archivo binario con éxito.");
             return m;
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,7 +197,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,7 +217,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,7 +236,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -281,7 +255,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -301,7 +274,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -321,7 +293,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -341,7 +312,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -361,7 +331,6 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-            System.out.println("Estructura escrita en el archivo binario con éxito.");
         } catch (Exception e) {
             e.printStackTrace();
         }

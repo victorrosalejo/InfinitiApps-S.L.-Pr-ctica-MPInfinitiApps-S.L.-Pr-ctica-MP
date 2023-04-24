@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class CharacterMenu {
+public class CharacterMenu  implements Serializable {
 
     private User user;
     private DatabaseManager databaseManager;

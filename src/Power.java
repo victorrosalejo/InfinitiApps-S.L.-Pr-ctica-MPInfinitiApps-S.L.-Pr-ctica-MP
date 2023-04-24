@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Power {
+public class Power implements Serializable {
     public Character Power(Character c) {
         Scanner scanner = new Scanner(System.in);
         int i = c.getPower();

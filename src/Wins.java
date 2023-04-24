@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Wins {
+public class Wins implements Serializable{
 
     public Character Wins(Character c) {
         Scanner scanner = new Scanner(System.in);

@@ -1,10 +1,11 @@
 import javax.xml.crypto.Data;
 import java.awt.dnd.DropTarget;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ShowHistory {
+public class ShowHistory implements Serializable {
 
 
     private Map<String, History> databaseH = new HashMap<>();

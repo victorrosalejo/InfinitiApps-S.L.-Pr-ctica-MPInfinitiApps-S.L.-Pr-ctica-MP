@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Random;
 
-public class Ability {
+public class Ability implements Serializable {
     private  TAbility type;
     private int defense;
     private int attack;

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Description {
+public class Description implements Serializable {
 
     public Character Description(Character c) {
         Scanner scanner = new Scanner(System.in);

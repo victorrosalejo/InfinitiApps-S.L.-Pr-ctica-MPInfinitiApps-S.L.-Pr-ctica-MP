@@ -1,4 +1,6 @@
-public class Modifiers {
+import java.io.Serializable;
+
+public class Modifiers implements Serializable {
     private String name;
     private int value;
     private boolean buff;

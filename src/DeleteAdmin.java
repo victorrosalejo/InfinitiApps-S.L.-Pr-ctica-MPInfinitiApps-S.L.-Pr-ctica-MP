@@ -1,14 +1,15 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class DeleteAdmin {
-    private DatabaseManager databaseMnager = new DatabaseManager();
+public class DeleteAdmin  implements Serializable {
+    private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, User> databaseU = new HashMap<>();
 
         public void DeleteAdmin(User u) {
 
-            this.databaseU = databaseMnager.obtainDatabaseU();
+            this.databaseU = databaseManager.obtainDatabaseU();
 
             String ADMIN_USERNAME = u.getName();
             String ADMIN_PASSWORD = u.getPassword();
@@ -41,7 +42,7 @@ public class DeleteAdmin {
                         if (confirm.equalsIgnoreCase("S")) {
                             databaseU.remove(username); //Elimina del mapa principal el usuario de adminsitrador.
                             System.out.println("La cuenta de administrador ha sido eliminada. Saliendo...");
-                            this.databaseMnager.saveDatabaseU(databaseU);
+                            this.databaseManager.saveDatabaseU(databaseU);
                             Welcome welcome = new Welcome();
                             welcome.Welcome();
                         } else if (confirm.equalsIgnoreCase("N")) {

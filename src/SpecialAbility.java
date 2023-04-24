@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class SpecialAbility {
+public class SpecialAbility implements Serializable {
 
     public Character SpecialAbility(Character c) {
 

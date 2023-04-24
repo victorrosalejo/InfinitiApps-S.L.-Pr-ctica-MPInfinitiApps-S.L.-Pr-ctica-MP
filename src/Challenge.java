@@ -1,4 +1,6 @@
-public class Challenge {
+import java.io.Serializable;
+
+public class Challenge implements Serializable {
     private int gold;
     private User defiant;
     private User defied;

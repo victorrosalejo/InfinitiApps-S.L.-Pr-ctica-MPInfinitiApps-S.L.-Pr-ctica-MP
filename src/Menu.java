@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.*;
 
-public class Menu {
+public class Menu implements Serializable {
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
@@ -26,8 +27,12 @@ public class Menu {
         int forcedoption;
         int gold;
         List<Combat> combats = u.getResultados();
-        boolean pendingResult = !combats.isEmpty();
-
+        boolean pendingResult;
+        if (combats == null){
+            pendingResult =false;
+        }else {
+            pendingResult = !combats.isEmpty();
+        }
 
         databaseC = databaseManager.obtainDatabaseC();
         databaseP = databaseManager.obtainDatabaseP();
@@ -57,7 +62,7 @@ public class Menu {
                         User udefiant = challenge.getDefiant();
                         User udefied = challenge.getDefied();
                         equipentMenu(u);
-                        fight(udefiant, udefied, gold); //esto esta a medias xd
+                        fight(udefiant, udefied, gold);
                     }
                     case 2 -> {
                         float f = (float) 0.1;

@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class AddFeature {
+public class AddFeature  implements Serializable {
 
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, Character> databaseC = new HashMap<>();

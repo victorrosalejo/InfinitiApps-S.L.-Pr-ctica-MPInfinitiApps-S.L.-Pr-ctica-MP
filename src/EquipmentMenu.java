@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class EquipmentMenu {
+public class EquipmentMenu implements Serializable {
     private DatabaseManager databaseManager;
     private Map<String, List<Armor>> databaseA = new HashMap<>();
     private Map<String, List<Weapon>> databaseW = new HashMap<>();

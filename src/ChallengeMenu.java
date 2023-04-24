@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ChallengeMenu {
+public class ChallengeMenu  implements Serializable {
     private DatabaseManager databaseManager;
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();

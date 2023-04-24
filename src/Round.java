@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Round {
+public class Round implements Serializable {
     private Fighter defiantInfo;
     private Fighter defiedInfo;
     private List<Integer> damageDealt = new ArrayList<>(2);

@@ -1,20 +1,12 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Combat {
+public class Combat implements Serializable {
     private int rounds = 0;
     private List<Round> roundList = new ArrayList<>();
     private State state;
     private int goldBet;
 
-
-
-    public Combat(){
-        
-
-
-
-
-    }
 
 
 

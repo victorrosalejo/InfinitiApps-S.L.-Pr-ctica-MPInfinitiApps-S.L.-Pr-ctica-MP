@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class NewCharacter {
+public class NewCharacter implements Serializable {
     private Map<String,Character> databaseC = new HashMap<>();
     private DatabaseManager databaseManager;
 
@@ -8,62 +9,68 @@ public class NewCharacter {
     public Character NewCharacter(User u){
         Scanner input = new Scanner(System.in);
         Character nuevoChar = new Character();
-        String nombre, desc;
-        int tiponuevo;
+        String nombre;
+        int tiponuevo ;
+        int numero = 0;
 
         System.out.println("========== Menu de Creacion de personaje ==========");
 
         System.out.println("1. Introduce tu nombre de personaje");
         nombre = input.nextLine();
         nuevoChar.setName(nombre);
-        System.out.println("2. Elije tu raza:");
+
+        System.out.println("2. Introduce la historia de tu personaje");
+        String desc = input.nextLine();
+
+        System.out.println("3. Elije el número de la raza a escoger:");
 
         System.out.println("1: Cazador");
         System.out.println("2: Licantropo");
         System.out.println("3: Vampiro");
 
-        tiponuevo = input.nextInt();
 
+        tiponuevo = input.nextInt();
         Random rand = new Random();
         boolean isVamp = false;
+        boolean b = true;
 
-        switch (tiponuevo) {
-            case 1:
-                nuevoChar.setType("Vampiro");
-                nuevoChar.setAge(rand.nextInt(20, 101));
-                isVamp = true;
-                break;
-            case 2:
-                nuevoChar.setType("Licántropo");
+        do {
+            try {
+                numero = Integer.parseInt(String.valueOf(tiponuevo));
+            }
+            catch (NumberFormatException e){
+                System.out.println("No has introducido un número entero válido.");
 
-                break;
-            case 3:
-                nuevoChar.setType("Cazador");
+            }
+            switch (tiponuevo) {
+                case 1:
+                    nuevoChar.setType("Vampiro");
+                    nuevoChar.setAge(rand.nextInt(20, 101));
+                    isVamp = true;
+                    b = true;
+                    break;
+                case 2:
+                    nuevoChar.setType("Licántropo");
 
-                break;
-            default:
-                System.out.println("Ese número es erróneo");
-                break;
-        }
-
-        System.out.println("3. Introduce la historia de tu personaje");
-        desc = input.nextLine();
+                    break;
+                case 3:
+                    nuevoChar.setType("Cazador");
+                    b = true;
+                    break;
+                default:
+                    System.out.println("Ese número es erróneo");
+                    break;
+            }
+        } while (b);
+        input.close();
         nuevoChar.setDescription(desc);
-
-
-
-
         nuevoChar.setGoldValue(300);
         nuevoChar.sethP(5);
         nuevoChar.setPower(rand.nextInt(0,5));
         nuevoChar.setWins(0);
-        //Armas y aramduras
         nuevoChar.setWeaponSet(newWeapon());
         nuevoChar.setArmorSet(newArmor());
         nuevoChar.setFighting(false);
-
-        //Minions
-
         nuevoChar.setMinionMap(newMinions(isVamp));
 
 
@@ -133,23 +140,31 @@ public class NewCharacter {
         TMinion tipo = null;
 
 
-        String[] nombresNombres = {"Kaneki", "Nishiki", "Touka", "Shuu", "Hinami", "McMenú"};
+        String[] nombresNombres = {"Kaneki", "Nishiki", "Touka", "Shuu", "Hinami", "MacMenú"};
         ArrayList<TMinion> nombresTm = new ArrayList<>();
-        nombresTm.add(tipo.GHOUL);
-        nombresTm.add(tipo.HUMAN);
-        nombresTm.add(tipo.DEMON);
+        nombresTm.add(TMinion.GHOUL);
+        if (!vamp) {
+            nombresTm.add(TMinion.HUMAN);
+        }
+        nombresTm.add(TMinion.DEMON);
 
         for (int a = 0 ; a < 3; a++) {
             nombre = nombresNombres[(randInt.nextInt(0, 6))];
 
             minion.setName(nombre);
             minion.setHitPoints(randInt.nextInt(1, 4));
-
-            minion.setTipominion(nombresTm.get((randInt.nextInt(0, 3))));
-            if (minion.getTipominion() == tipo.DEMON) {
-                Demon demon = (Demon) minion;
+            if(vamp) {
+                minion.setTipominion(nombresTm.get((randInt.nextInt(0, 2))));
+            } else{
+                minion.setTipominion(nombresTm.get((randInt.nextInt(0, 3))));
+            }
+            if (minion.getTipominion() == TMinion.DEMON) {
+                Demon demon = new Demon();
+                demon.setName(minion.getName());
+                demon.setHitPoints(minion.getHitPoints());
+                demon.setTipominion(TMinion.DEMON);
                 List<Minion> nuevalista = new ArrayList<>();
-                demon.setPact("Este es un demonio peculiar, su madre se llama (Nihao ZhongWhuo wo Bing chilling)");
+                demon.setPact("Este es un demonio peculiar :)");
                 for (int b = 0; b < 3; b++) {
 
                     Minion nuevominion = new Minion();
@@ -165,15 +180,20 @@ public class NewCharacter {
                 }
                 minionList.add(demon);
             }
-            else if(minion.getTipominion() == tipo.GHOUL) {
-                Ghoul ghoul = (Ghoul) minion;
+            else if(minion.getTipominion() == TMinion.GHOUL) {
+                Ghoul ghoul = new Ghoul();
+                ghoul.setName(minion.getName());
+                ghoul.setHitPoints(minion.getHitPoints());
+                ghoul.setTipominion(TMinion.GHOUL);
                 ghoul.setDependency(randInt.nextInt(1,6));
 
                 minionList.add(ghoul);
             }
-            else if (minion.getTipominion() == tipo.HUMAN && vamp == false) {
-
-                Human human = (Human) minion;
+            else if (minion.getTipominion() == TMinion.HUMAN) {
+                Human human = new Human();
+                human.setName(minion.getName());
+                human.setHitPoints(minion.getHitPoints());
+                human.setTipominion(TMinion.HUMAN);
                 TLoyalty[] loy = TLoyalty.values();
                 int randomIndex = randInt.nextInt(loy.length);
                 human.setLoyalty(loy[randomIndex]);

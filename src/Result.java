@@ -1,10 +1,11 @@
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Result {
+public class Result implements Serializable {
 
     private Map<String, History> databaseH = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();

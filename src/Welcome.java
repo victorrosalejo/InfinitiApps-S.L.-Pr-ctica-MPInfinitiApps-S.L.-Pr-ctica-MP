@@ -3,7 +3,9 @@ public class Welcome {
 
     public void Welcome() {
         Scanner scanner = new Scanner(System.in);
+        String aux;
         int choice = 0;
+        boolean b = true;
 
         do {
             System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
@@ -19,9 +21,9 @@ public class Welcome {
             int numero = 0;
             try {
                 numero = Integer.parseInt(input);
-                System.out.println("Has introducido el número " + numero);
             } catch (NumberFormatException e) {
                 System.out.println("No has introducido un número entero válido.");
+
             }
             switch (numero) {
                 case 1:
@@ -32,13 +34,16 @@ public class Welcome {
                     break;
                 case 3:
                     System.out.println("\nSaliendo...");
+                    b = false;
                     break;
                 default:
                     System.out.println("Opción inválida");
+                    aux = scanner.nextLine();
+                    break;
             }
-            System.out.println();
-        } while (choice != 3);  //condiciona hasta que se meta un input valido
+        } while (b);  //condiciona hasta que se meta un input valido
         scanner.close();
+        System.exit(03);
     }
     private void login(){
         Login login = new Login();

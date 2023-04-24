@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArmorSet {
+public class ArmorSet implements Serializable {
         public Character ArmorSet(Character c){
             for(int i = 0; i<c.getArmorSet().size();i++)
 

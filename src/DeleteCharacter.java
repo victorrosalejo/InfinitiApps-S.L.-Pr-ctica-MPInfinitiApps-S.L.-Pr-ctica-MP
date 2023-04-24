@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class DeleteCharacter {
+public class DeleteCharacter  implements Serializable {
 
     private Map<String, Character> databaseC = new HashMap<>();
     private DatabaseManager databaseManager;

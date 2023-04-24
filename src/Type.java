@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Type {
+public class Type implements Serializable {
     public Character Type(Character c){
         System.out.println("El tipo actual de personaje es" + c.getType() );
         System.out.print("\n");

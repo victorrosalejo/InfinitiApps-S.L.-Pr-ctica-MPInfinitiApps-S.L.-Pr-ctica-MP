@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Match {
+public class Match implements Serializable {
     private Character defiant;
     private int goldBet;
     private int rounds;

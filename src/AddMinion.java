@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class AddMinion {
+public class AddMinion implements Serializable {
 
 
     public List<Minion> AddMinion(List<Minion> m){

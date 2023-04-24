@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DeleteEquipment {
+public class DeleteEquipment implements Serializable {
 
     private DatabaseManager databaseManager;
     private Map<String, List<Weapon>> databaseW = new HashMap<>();

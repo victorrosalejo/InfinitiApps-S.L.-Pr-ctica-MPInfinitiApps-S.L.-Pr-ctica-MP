@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.*;
 
 
-public class UserManager {
+public class UserManager implements Serializable {
 private DatabaseManager databaseManager = new DatabaseManager();
 private Map<String, User> databaseU = new HashMap<>();
 

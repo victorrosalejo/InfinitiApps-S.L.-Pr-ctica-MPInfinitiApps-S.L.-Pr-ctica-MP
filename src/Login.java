@@ -1,8 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.io.Serializable;
 
-public class Login {
+public class Login implements Serializable {
 
     private DatabaseManager databaseManager;
     private Map<String, User> databaseU = new HashMap<>();
@@ -21,7 +22,7 @@ public class Login {
         do {
             do {
                 System.out.print("Introduce tu nombre: ");
-                username = input.next();
+                username = input.nextLine();
                 if(databaseU.get(username) == null){
                     System.out.println("Nombre no existente");
                 }
@@ -31,13 +32,14 @@ public class Login {
             truepassword = user.getPassword();
             do {
                 System.out.print("Introduce tu contraseña: ");
-                password = input.next();
+                password = input.nextLine();
                 if(!truepassword.equals(password)){
                     System.out.println("Contraseña incorrecta");
                 }
             }while(!truepassword.equals(password));
             if (!user.isBanned()) {
                 System.out.print("Login correcto");
+                System.out.println();
                 valid = true;
 
                 if (user.getUsertype() == tipouser) {

@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class ValidateChallenges {
+public class ValidateChallenges implements Serializable {
     private DatabaseManager databaseManager;
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private Map<String,List<Modifiers>> databaseMo = new HashMap<>();

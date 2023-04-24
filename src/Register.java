@@ -1,12 +1,13 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 
-public class Register {
+public class Register implements Serializable {
     private DatabaseManager databaseManager;
-    private Map<String, User> databaseU = new HashMap<>();
+    private static Map<String, User> databaseU = new HashMap<>();
 
 
     public void Register(){
@@ -20,23 +21,13 @@ public class Register {
             System.out.println("\n[-------------------------------------]");
             System.out.println("[-------------- REGISTRO -------------]");
             System.out.println("[-------------------------------------]\n");
-            System.out.println("Si desea salir escriba 1 en el campo del nombre");
+            System.out.println("Si desea salir escriba 'salir' en el campo del nombre");
             do {
                 System.out.print("\n--> Introduce tu nombre: ");
                 username = input.nextLine();
-                if (username == "1"){
+                if (username.equalsIgnoreCase("salir")){
                     Welcome();
                     break;
-                }else if(databaseU == null){
-                    System.out.print("\n--> Introduce tu contraseña: ");
-                    password = input.nextLine();
-                    if(!username.startsWith("¬")) {
-                        System.out.print("\n--> Introduce tu apodo en juego: ");
-                        nickname = input.nextLine();
-                    }
-                    user.setName(username);
-                    user.setPassword(password);
-                    user.setNick(nickname);
                 } else if (databaseU.get(username) != null){
                     System.out.println("Nombre de usuario ya usado");
                 }else {

@@ -1,4 +1,6 @@
-public class Armor {
+import java.io.Serializable;
+
+public class Armor implements Serializable {
 
     private int attack;
     private int defense;

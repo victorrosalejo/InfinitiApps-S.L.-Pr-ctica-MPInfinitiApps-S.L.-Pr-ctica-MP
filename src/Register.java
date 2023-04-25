@@ -31,8 +31,13 @@ public class Register implements Serializable {
                 } else if (databaseU.get(username) != null){
                     System.out.println("Nombre de usuario ya usado");
                 }else {
-                    System.out.print("\n--> Introduce tu contraseña: ");
-                    password = input.nextLine();
+                    do {
+                        System.out.print("\n--> Introduce tu contraseña (entre 8 y 12 caracteres): ");
+                        password = input.nextLine();
+                        if(password.length() < 7 || password.length() > 13){
+                            System.out.println("Longitud incorrecta");
+                        }
+                    }while (password.length() < 7 || password.length() > 13);
                     if(!username.startsWith("¬")) {
                         System.out.print("\n--> Introduce tu apodo en juego: ");
                         nickname = input.nextLine();
@@ -72,7 +77,6 @@ public class Register implements Serializable {
             System.out.println("\nNombre de usuario: " + username);
             System.out.println("\nApodo: " + nickname);
 
-            input.close();
             databaseManager.saveDatabaseU(databaseU);
             Welcome();
 

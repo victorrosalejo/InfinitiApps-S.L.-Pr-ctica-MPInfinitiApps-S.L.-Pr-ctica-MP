@@ -104,7 +104,6 @@ public class EditCharacter implements Serializable {
             EditCharacter(); //volver a llamar al menu 
         }
 
-        scanner.close();
     }
     }
     private Character editName(Character c){

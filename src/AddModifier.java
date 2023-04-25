@@ -55,7 +55,7 @@ public class AddModifier  implements Serializable {
             databaseMo.put(c.getName(), modifiersList);
             databaseManager.saveDatabaseMo(databaseMo);
             System.out.print("Modificación añadida correctamente");
-            scanner.close();
+
             return c;
 }
 

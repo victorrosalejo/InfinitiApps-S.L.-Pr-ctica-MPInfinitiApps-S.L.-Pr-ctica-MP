@@ -74,7 +74,7 @@ public class AddMinion implements Serializable {
                     System.out.println("Tipo erróneo");
                 }
             }
-            scanner.close();
+
         }
         System.out.print("Esbirro añadido correctamente");
         return m;

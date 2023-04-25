@@ -50,7 +50,7 @@ public class AddFeature  implements Serializable {
         }
     }
     databaseC.put(u.getRegisterNumber(),c);
-    scanner.close();
+
 }
 
     public DatabaseManager getDatabaseManager() {

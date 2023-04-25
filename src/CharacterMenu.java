@@ -1,8 +1,5 @@
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class CharacterMenu  implements Serializable {
 
@@ -14,14 +11,15 @@ public class CharacterMenu  implements Serializable {
     private Map<String, List<Minion>> databaseM = new HashMap<>();
     private Map<String, List<Modifiers>> databaseMo = new HashMap<>();
 
+
     public  void CharacterMenu (User u) {
         Scanner input = new Scanner(System.in);
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
         System.out.println("========== Menu del Personaje ==========");
         System.out.println("(Se te redigira a la opcion optima)");
-        System.out.println("1. Borrar Personaje ");
-        System.out.println("2. Crear Personaje");
+        System.out.println(" ");
+
 
         if (databaseC.get(u.getRegisterNumber()) == null){
             NewCharacter newCharacter = new NewCharacter();
@@ -29,9 +27,6 @@ public class CharacterMenu  implements Serializable {
             databaseC.put(u.getRegisterNumber(), c);
             databaseManager.saveDatabaseC(databaseC);
             this.appenndInfo(c);
-
-
-
         }
         else{
             DeleteCharacter deleteCharacter = new DeleteCharacter();
@@ -49,15 +44,22 @@ public class CharacterMenu  implements Serializable {
 
     }
     private void appenndInfo(Character c) {
+
         databaseA = databaseManager.obtainDatabaseA();
         databaseA.put(c.getName(),c.getArmorSet());
         databaseManager.saveDatabaseA(databaseA);
+
+
         databaseW = databaseManager.obtainDatabaseW();
         databaseW.put(c.getName(),c.getWeaponSet());
         databaseManager.saveDatabaseW(databaseW);
+
+
         databaseM = databaseManager.obtainDatabaseM();
         databaseM.put(c.getName(),c.getMinionMap());
         databaseManager.saveDatabaseM(databaseM);
+
+
         databaseMo = databaseManager.obtainDatabaseMo();
         databaseMo.put(c.getName(),c.getModifiersList());
         databaseManager.saveDatabaseMo(databaseMo);
@@ -86,36 +88,5 @@ public class CharacterMenu  implements Serializable {
         this.databaseC = databaseC;
     }
 
-    public Map<String, List<Armor>> getDatabaseA() {
-        return databaseA;
-    }
-
-    public void setDatabaseA(Map<String, List<Armor>> databaseA) {
-        this.databaseA = databaseA;
-    }
-
-    public Map<String, List<Weapon>> getDatabaseW() {
-        return databaseW;
-    }
-
-    public void setDatabaseW(Map<String, List<Weapon>> databaseW) {
-        this.databaseW = databaseW;
-    }
-
-    public Map<String, List<Minion>> getDatabaseM() {
-        return databaseM;
-    }
-
-    public void setDatabaseM(Map<String, List<Minion>> databaseM) {
-        this.databaseM = databaseM;
-    }
-
-    public Map<String, List<Modifiers>> getDatabaseMo() {
-        return databaseMo;
-    }
-
-    public void setDatabaseMo(Map<String, List<Modifiers>> databaseMo) {
-        this.databaseMo = databaseMo;
-    }
 }
 

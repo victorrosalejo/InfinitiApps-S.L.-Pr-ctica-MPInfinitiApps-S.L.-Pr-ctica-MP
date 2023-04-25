@@ -18,7 +18,7 @@ public class DeleteAccount  implements Serializable {
         System.out.println("Si es así introduzca 'sí'. En caso contrario introduzca cualquier otra cosa");
         Scanner scan = new Scanner(System.in);
         String sure = scan.nextLine();
-        scan.close();
+
         if (sure =="si" || sure == "sí"){
 
         // Obtener el nombre de usuario del usuario que se va a eliminar

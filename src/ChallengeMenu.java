@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ChallengeMenu  implements Serializable {
-    private DatabaseManager databaseManager;
+    private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String, User> databaseU = new HashMap<>();
@@ -45,7 +45,6 @@ public class ChallengeMenu  implements Serializable {
         challengeList.add(challenge);
         databaseP.put(aux1, challengeList);
         databaseManager.saveDatabaseP(databaseP);
-        scanner.close();
     }
 
     public DatabaseManager getDatabaseManager() {

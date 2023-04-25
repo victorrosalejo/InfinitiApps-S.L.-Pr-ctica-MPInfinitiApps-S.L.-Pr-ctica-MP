@@ -103,7 +103,6 @@ public class MinionMap {
                 default -> System.out.println("Opción inválida. Intente nuevamente.");
             }
 
-            scanner.close();
             if (option == 1 || option == 2 || option == 3 || option == 4) {
                 System.out.println("Característica modificada correctamente.");
             }

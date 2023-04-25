@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class EquipmentMenu implements Serializable {
-    private DatabaseManager databaseManager;
+    private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, List<Armor>> databaseA = new HashMap<>();
     private Map<String, List<Weapon>> databaseW = new HashMap<>();
     private Map<String,Character> databaseC = new HashMap<>();
@@ -119,7 +119,6 @@ public class EquipmentMenu implements Serializable {
 
             }
         }while(validoA == true && validoW == true);
-        input.close();
         System.out.println("\n[-------------------------------------]\n");
 
         databaseManager.saveDatabaseW(databaseW);

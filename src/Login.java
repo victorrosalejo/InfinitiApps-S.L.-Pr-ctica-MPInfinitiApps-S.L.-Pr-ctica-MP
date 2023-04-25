@@ -21,8 +21,12 @@ public class Login implements Serializable {
         System.out.println("========= Login ========\n");
         do {
             do {
-                System.out.print("Introduce tu nombre: ");
+                System.out.print("Introduce tu nombre (escribe 'salir' para salir): ");
                 username = input.nextLine();
+                if (username.equalsIgnoreCase("salir")){
+                    this.welcome();
+                    break;
+                }
                 if(databaseU.get(username) == null){
                     System.out.println("Nombre no existente");
                 }
@@ -73,13 +77,12 @@ public class Login implements Serializable {
 
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+
     }
 
-    public Map<String, User> getDatabaseU() {
-        return databaseU;
-    }
+    public void welcome(){
+        Welcome welcome = new Welcome();
+        welcome.Welcome();
 
-    public void setDatabaseU(Map<String, User> databaseU) {
-        this.databaseU = databaseU;
     }
 }

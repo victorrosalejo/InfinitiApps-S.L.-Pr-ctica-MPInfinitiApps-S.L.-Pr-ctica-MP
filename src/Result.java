@@ -64,7 +64,6 @@ public class Result implements Serializable {
 
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
-        scanner.close();
         menu(user);
 
 

@@ -22,7 +22,6 @@ private String  name;
         } else {
             System.out.println("Los nombres no coinciden. No se ha cambiado el nombre del personaje.");
         }
-        scanner.close();
     return c;
 
     }

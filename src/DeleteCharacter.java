@@ -20,6 +20,7 @@ public class DeleteCharacter  implements Serializable {
         switch (option) {
             case 1:
                 Character c = databaseC.remove(u.getRegisterNumber());
+                databaseManager.saveDatabaseC(databaseC);
                 DeleteEquipment delEquip = new DeleteEquipment();
                 delEquip.DeleteEquipment(c);
                 break;

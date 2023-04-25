@@ -65,7 +65,6 @@ public class ArmorSet implements Serializable {
         c.setArmorSet(armorList);
         return c;
     }
-    scanner.close();
     System.out.println("Armadura no encontrada");
     return c;
 }

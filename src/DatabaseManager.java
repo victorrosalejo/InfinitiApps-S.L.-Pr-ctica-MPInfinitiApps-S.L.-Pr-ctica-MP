@@ -88,13 +88,8 @@ public class DatabaseManager implements Serializable{
             fis.close();
             return m;
         } catch (Exception e) {
-            Map<String, List<Challenge>> aux = new HashMap<>();
-            Challenge c = new Challenge();
-            List<Challenge> ch = new ArrayList<>();
-            ch.add(c);
-            aux.put("C59DA",ch);
-            this.saveDatabaseP(aux);
-            return obtainDatabaseP();
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -217,8 +212,15 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
+
+
         } catch (Exception e) {
+
+
             e.printStackTrace();
+            History historial = new History();
+            m.put("C59DA", historial );
+
         }
     }
     public void saveDatabaseU(Map<String, User> m ) {

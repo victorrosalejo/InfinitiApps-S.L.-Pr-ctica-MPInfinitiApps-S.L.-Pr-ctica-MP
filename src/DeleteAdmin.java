@@ -60,7 +60,6 @@ public class DeleteAdmin  implements Serializable {
                         break;
                 }
             }
-            scanner.close();
         }
 }
 

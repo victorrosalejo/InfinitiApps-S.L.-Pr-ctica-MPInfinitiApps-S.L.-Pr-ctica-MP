@@ -10,7 +10,7 @@ public class NewCharacter implements Serializable {
         Scanner input = new Scanner(System.in);
         Character nuevoChar = new Character();
         String nombre;
-        int tiponuevo ;
+        String tiponuevo ;
         int numero = 0;
 
         System.out.println("========== Menu de Creacion de personaje ==========");
@@ -22,6 +22,11 @@ public class NewCharacter implements Serializable {
         System.out.println("2. Introduce la historia de tu personaje");
         String desc = input.nextLine();
 
+        boolean isVamp = false;
+        boolean b = true;
+        Random rand = new Random();
+
+        do {
         System.out.println("3. Elije el número de la raza a escoger:");
 
         System.out.println("1: Cazador");
@@ -29,12 +34,10 @@ public class NewCharacter implements Serializable {
         System.out.println("3: Vampiro");
 
 
-        tiponuevo = input.nextInt();
-        Random rand = new Random();
-        boolean isVamp = false;
-        boolean b = true;
+        tiponuevo = input.nextLine();
 
-        do {
+
+
             try {
                 numero = Integer.parseInt(String.valueOf(tiponuevo));
             }
@@ -43,26 +46,23 @@ public class NewCharacter implements Serializable {
 
             }
             switch (tiponuevo) {
-                case 1:
+                case "1" -> {
+                    nuevoChar.setType("Cazador");
+                    b = false;
+                }
+                case "2" -> {
+                    nuevoChar.setType("Licántropo");
+                    b = false;
+                }
+                case "3" -> {
                     nuevoChar.setType("Vampiro");
                     nuevoChar.setAge(rand.nextInt(20, 101));
                     isVamp = true;
-                    b = true;
-                    break;
-                case 2:
-                    nuevoChar.setType("Licántropo");
-
-                    break;
-                case 3:
-                    nuevoChar.setType("Cazador");
-                    b = true;
-                    break;
-                default:
-                    System.out.println("Ese número es erróneo");
-                    break;
+                    b = false;
+                }
+                default -> System.out.println("Ese caracter es erróneo");
             }
         } while (b);
-        input.close();
         nuevoChar.setDescription(desc);
         nuevoChar.setGoldValue(300);
         nuevoChar.sethP(5);

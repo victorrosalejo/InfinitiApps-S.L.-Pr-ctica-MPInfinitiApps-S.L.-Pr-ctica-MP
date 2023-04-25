@@ -22,7 +22,7 @@ public class Type implements Serializable {
         } else {
             System.out.println("\nTipo inválido. El tipo debe ser Vampiro, Licántropo o Cazador.");
         }
-        scanner.close();
+
         return c;
     }
 }

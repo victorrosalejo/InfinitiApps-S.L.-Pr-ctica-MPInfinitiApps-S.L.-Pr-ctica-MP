@@ -1,8 +1,5 @@
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Register implements Serializable {
@@ -34,10 +31,10 @@ public class Register implements Serializable {
                     do {
                         System.out.print("\n--> Introduce tu contraseña (entre 8 y 12 caracteres): ");
                         password = input.nextLine();
-                        if(password.length() < 7 || password.length() > 13){
+                        if(password.length() < 7 | password.length() > 13){
                             System.out.println("Longitud incorrecta");
                         }
-                    }while (password.length() < 7 || password.length() > 13);
+                    }while (password.length() < 7 | password.length() > 13);
                     if(!username.startsWith("¬")) {
                         System.out.print("\n--> Introduce tu apodo en juego: ");
                         nickname = input.nextLine();
@@ -74,9 +71,12 @@ public class Register implements Serializable {
             }
             databaseU.put(username,user);
             System.out.println("\nRegistro completado!");
-            System.out.println("\nNombre de usuario: " + username);
-            System.out.println("\nApodo: " + nickname);
-
+            System.out.println("Nombre de usuario: " + username);
+            if(!Objects.equals(user.getRegisterNumber(), "0")) {
+                System.out.println("Apodo: " + nickname);
+            }
+            nickname = input.nextLine();
+            System.out.println("\n");
             databaseManager.saveDatabaseU(databaseU);
             Welcome();
 

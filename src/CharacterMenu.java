@@ -27,10 +27,11 @@ public class CharacterMenu  implements Serializable {
             databaseC.put(u.getRegisterNumber(), c);
             databaseManager.saveDatabaseC(databaseC);
             this.appenndInfo(c);
+            menu(u);
         }
         else{
             DeleteCharacter deleteCharacter = new DeleteCharacter();
-            deleteCharacter.DeleteCharacter(u);
+            deleteCharacter.DeleteCharacter(u, true);
             System.out.println("Borrado completo, ahora  deberá crear un nuevo personaje para poder seguir jugando.");
             NewCharacter newCharacter = new NewCharacter();
             Character c = newCharacter.NewCharacter(u);
@@ -86,6 +87,10 @@ public class CharacterMenu  implements Serializable {
 
     public void setDatabaseC(Map<String, Character> databaseC) {
         this.databaseC = databaseC;
+    }
+    public void menu(User u){
+        Menu menu = new Menu();
+        menu.Menu(u);
     }
 
 }

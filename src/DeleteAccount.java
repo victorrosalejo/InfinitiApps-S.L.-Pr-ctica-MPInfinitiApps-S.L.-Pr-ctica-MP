@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class DeleteAccount  implements Serializable {
 
-    private DatabaseManager databaseManager;
+    private DatabaseManager databaseManager =new DatabaseManager();
     private Map<String, User> databaseU = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String, History> databaseH = new HashMap<>();
@@ -19,25 +19,26 @@ public class DeleteAccount  implements Serializable {
         Scanner scan = new Scanner(System.in);
         String sure = scan.nextLine();
 
-        if (sure =="si" || sure == "sí"){
+        if (sure.equalsIgnoreCase("si") || sure.equalsIgnoreCase("sí")){
+            databaseU = databaseManager.obtainDatabaseU();
+        // Eliminar los personajes asociados al usuario de la base de datos C
+            DeleteCharacter delCh = new DeleteCharacter();
+            delCh.DeleteCharacter(u,false);
 
         // Obtener el nombre de usuario del usuario que se va a eliminar
             String username = u.getName();
             String regnum = u.getRegisterNumber();
         // Eliminar el usuario de la base de datos U
 
-            databaseU.remove(username);
+            u = databaseU.remove(username);
         // Eliminar el historial del usuario de la base de datos H
 
-            databaseH.remove(regnum);
+            History h = databaseH.remove(regnum);
         // Guardar las bases de datos actualizadas
 
             this.databaseManager.saveDatabaseU(databaseU);
             this.databaseManager.saveDatabaseH(databaseH);
-        // Eliminar los personajes asociados al usuario de la base de datos C
 
-            DeleteCharacter delCh = new DeleteCharacter();
-            delCh.DeleteCharacter(u);
         // Volver al principio
 
             this.welcome();

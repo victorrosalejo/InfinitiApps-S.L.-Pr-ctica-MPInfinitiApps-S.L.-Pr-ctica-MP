@@ -8,6 +8,7 @@ import java.util.*;
 public class ShowRanking implements Serializable {
     private Map<String, Character> databaseR = new HashMap<>();
     private DatabaseManager databaseManager = new DatabaseManager();
+    private Ranking rank = new Ranking();
 
 
     public void ShowRanking(){
@@ -17,8 +18,7 @@ public class ShowRanking implements Serializable {
         for(int i = 0; i< databaseR.size(); i++){
             characters.add(databaseR.get(i));
         }
-        Comparator<Character> charWin = Comparator.comparingInt(Character::getWins);
-        characters.sort(charWin);
+        characters = rank.Ranking(characters);
         System.out.println("[-----------Ranking-----------]");
         for(int i = 0; i<characters.size();i++){
             Character c = characters.get(i);

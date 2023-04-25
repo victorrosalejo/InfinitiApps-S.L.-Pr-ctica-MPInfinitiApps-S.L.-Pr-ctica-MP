@@ -43,8 +43,11 @@ public class DatabaseManager implements Serializable{
             fis.close();
             return m;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            History historial = new History();
+            Map<String,History> historyMap = new HashMap<>();
+            historyMap.put("C59DA", historial );
+            saveDatabaseH(historyMap);
+            return obtainDatabaseH();
         }
     }
 
@@ -212,15 +215,8 @@ public class DatabaseManager implements Serializable{
             oos.writeObject(m);
             oos.close();
             fos.close();
-
-
         } catch (Exception e) {
-
-
             e.printStackTrace();
-            History historial = new History();
-            m.put("C59DA", historial );
-
         }
     }
     public void saveDatabaseU(Map<String, User> m ) {
@@ -235,7 +231,7 @@ public class DatabaseManager implements Serializable{
         try {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(m);
+        oos.writeObject(m);
             oos.close();
             fos.close();
         } catch (Exception e) {

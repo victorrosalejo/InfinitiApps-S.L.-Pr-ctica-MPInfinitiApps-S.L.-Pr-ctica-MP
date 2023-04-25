@@ -19,8 +19,8 @@ public class ValidateChallenges implements Serializable {
         List<Integer> aux = new ArrayList<>();
         System.out.println("----------------[Lista de Desafíos por validar]-----------------");
         System.out.println("Los desafíos validados no se mostrarán");
-        for (int i = 0; i <= challenges.size(); i++) {
-            for (int j = 0; j <= challenges.get(i).getValue().size(); j++) {
+        for (int i = 0; i <= challenges.size()-1; i++) {
+            for (int j = 0; j < challenges.get(i).getValue().size(); j++) {
                 Challenge ch = challenges.get(i).getValue().get(j);
                 if (!ch.isValid()) {
                     aux.add(j);

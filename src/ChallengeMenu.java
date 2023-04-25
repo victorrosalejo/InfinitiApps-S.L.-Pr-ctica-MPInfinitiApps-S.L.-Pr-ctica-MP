@@ -1,8 +1,5 @@
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ChallengeMenu  implements Serializable {
     private DatabaseManager databaseManager = new DatabaseManager();
@@ -10,7 +7,7 @@ public class ChallengeMenu  implements Serializable {
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String, User> databaseU = new HashMap<>();
 
-    public void ChallengeMenu(User defiant){
+    public void ChallengeMenu(User defiant) {
         Challenge challenge = new Challenge();
         databaseP = databaseManager.obtainDatabaseP();
         databaseU = databaseManager.obtainDatabaseU();
@@ -21,10 +18,10 @@ public class ChallengeMenu  implements Serializable {
         do {
             System.out.println("Escribe el nombre de usuario de la persona que quieras desafiar");
             username = scanner.nextLine();
-            if (databaseU.get(username) == null){
+            if (databaseU.get(username) == null) {
                 System.out.println("Usuario no encontrado");
             }
-        }while (databaseU.get(username) == null);
+        } while (databaseU.get(username) == null);
         User defied = databaseU.get(username);
         String aux1 = defiant.getRegisterNumber();
         String aux2 = defied.getRegisterNumber();
@@ -33,18 +30,25 @@ public class ChallengeMenu  implements Serializable {
         int maxBet = Math.min(c1.getGoldValue(), c2.getGoldValue());
         int gold;
         do {
-            System.out.println("Escribe cuanto oro quieres apostar. Máximo: "+ maxBet);
+            System.out.println("Escribe cuanto oro quieres apostar. Máximo: " + maxBet);
             goldBet = scanner.nextLine();
             gold = Integer.parseInt(goldBet);
-        }while(gold > maxBet);
+        } while (gold > maxBet);
         challenge.setDefiant(defiant);
         challenge.setDefied(defied);
         challenge.setGold(gold);
         challenge.setValid(false);
-        List<Challenge> challengeList = databaseP.remove(aux1);
-        challengeList.add(challenge);
-        databaseP.put(aux1, challengeList);
-        databaseManager.saveDatabaseP(databaseP);
+        List<Challenge> challengeList = new ArrayList<>();
+        if (databaseP.remove(aux2) != null) {
+            challengeList = databaseP.remove(aux2);
+            challengeList.add(challenge);
+            databaseP.put(aux2, challengeList);
+            databaseManager.saveDatabaseP(databaseP);
+        } else{
+            challengeList.add(challenge);
+            databaseP.put(aux2, challengeList);
+            databaseManager.saveDatabaseP(databaseP);
+        }
     }
 
     public DatabaseManager getDatabaseManager() {

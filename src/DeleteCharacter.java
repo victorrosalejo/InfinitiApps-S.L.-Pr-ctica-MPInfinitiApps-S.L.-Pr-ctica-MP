@@ -8,26 +8,33 @@ public class DeleteCharacter  implements Serializable {
     private Map<String, Character> databaseC = new HashMap<>();
     private DatabaseManager databaseManager;
 
-    public void DeleteCharacter(User u) {
+    public void DeleteCharacter(User u,boolean b) {
         Scanner input = new Scanner(System.in);
         int option;
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
-        System.out.println("========== Menu de Borrado de personaje ==========");
-        System.out.println("1. Borrar Personaje ");
-        System.out.println("2. Salir");
-        option = input.nextInt();
-        switch (option) {
-            case 1:
-                Character c = databaseC.remove(u.getRegisterNumber());
-                databaseManager.saveDatabaseC(databaseC);
-                DeleteEquipment delEquip = new DeleteEquipment();
-                delEquip.DeleteEquipment(c);
-                break;
-            case 2:
-                Menu menu = new Menu();
-                menu.Menu(u);
-                break;
+        if(b) {
+            System.out.println("========== Menu de Borrado de personaje ==========");
+            System.out.println("1. Borrar Personaje ");
+            System.out.println("2. Salir");
+            option = input.nextInt();
+            switch (option) {
+                case 1 -> {
+                    Character c = databaseC.remove(u.getRegisterNumber());
+                    databaseManager.saveDatabaseC(databaseC);
+                    DeleteEquipment delEquip = new DeleteEquipment();
+                    delEquip.DeleteEquipment(c);
+                }
+                case 2 -> {
+                    Menu menu = new Menu();
+                    menu.Menu(u);
+                }
+            }
+        }else{
+            Character c = databaseC.remove(u.getRegisterNumber());
+            databaseManager.saveDatabaseC(databaseC);
+            DeleteEquipment delEquip = new DeleteEquipment();
+            delEquip.DeleteEquipment(c);
         }
     }
         public Map<String, Character> getDatabaseC () {

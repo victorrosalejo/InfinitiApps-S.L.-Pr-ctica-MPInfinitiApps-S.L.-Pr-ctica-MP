@@ -21,20 +21,21 @@ public class Login implements Serializable {
         System.out.println("========= Login ========\n");
         do {
             do {
-                System.out.print("Introduce tu nombre (escribe 'salir' para salir): ");
-                username = input.nextLine();
-                if (username.equalsIgnoreCase("salir")){
-                    this.welcome();
-                    break;
-                }
-                if(databaseU.get(username) == null){
-                    System.out.println("Nombre no existente");
-                }
-            }while(databaseU.get(username) == null);
+                do {
+                    System.out.print("Introduce tu nombre (escribe 'salir' para salir): ");
+                    username = input.nextLine();
+                    if (username.equalsIgnoreCase("salir")){
+                        this.welcome();
+                        break;
+                    }
+                    if(databaseU.get(username) == null){
+                        System.out.println("Nombre no existente");
+                    }
+                }while(databaseU.get(username) == null);
 
-            user = databaseU.get(username);
-            truepassword = user.getPassword();
-            do {
+                user = databaseU.get(username);
+                truepassword = user.getPassword();
+
                 System.out.print("Introduce tu contraseña: ");
                 password = input.nextLine();
                 if(!truepassword.equals(password)){

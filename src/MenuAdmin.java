@@ -7,7 +7,9 @@ public class MenuAdmin {
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
         while (continuar) {
-            System.out.println("=== Menú de Administrador ===");
+            System.out.println("\n[-------------------------------------]");
+            System.out.println("           MENU ADMINISTRADOR");
+            System.out.println("[-------------------------------------]\n");
             System.out.println("1. Eliminar Administrador");
             System.out.println("2. Editar Personaje");
             System.out.println("3. Validar Desafío");

@@ -8,22 +8,20 @@ public class Welcome {
         boolean b = true;
 
         do {
-            System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
-            System.out.println("\n[-------------------------------------]\n");
-            System.out.println("Bienvenido al juego");
+            System.out.println("\n[-------------------------------------]");
+            System.out.println("             ¡BIENVENIDO!");
+            System.out.println("[-------------------------------------]\n");
             System.out.println("1. Login");
             System.out.println("2. Registrarse");
             System.out.println("3. Salir");
-            System.out.println("\n[-------------------------------------]\n");
-
-            System.out.print("Escriba el número de la opción deseada: ");
+            System.out.println("[-------------------------------------]\n");
+            System.out.print("--> Escoja una opción: ");
             String input = scanner.nextLine();
             int numero = 0;
             try {
                 numero = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("No has introducido un número entero válido.");
-
+                System.out.println("<<No has introducido un número entero válido>>");
             }
             switch (numero) {
                 case 1:
@@ -36,12 +34,8 @@ public class Welcome {
                     System.out.println("\nSaliendo...");
                     b = false;
                     break;
-                default:
-                    System.out.println("Opción inválida");
-                    aux = scanner.nextLine();
-                    break;
             }
-        } while (b);  //condiciona hasta que se meta un input valido
+        } while (b);  //Condiciona hasta que se meta un input valido
         scanner.close();
         System.exit(03);
     }

@@ -29,6 +29,8 @@ public class Menu implements Serializable {
         }
         databaseC = databaseManager.obtainDatabaseC();
         if (databaseC.get(u.getRegisterNumber()) == null ){
+            System.out.println("\n <<Es obligatorio crear un persoanje si aún no tienes uno>> ");
+
             characterMenu(u);
         }else{
 
@@ -75,8 +77,10 @@ public class Menu implements Serializable {
 
             }else {
                 while (!exit) {
-
-                    System.out.println("========== MENU PRINCIPAL ==========");
+                    System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
+                    System.out.println("\n[-------------------------------------]");
+                    System.out.println("                 MENU");
+                    System.out.println("[-------------------------------------]\n");
                     System.out.println("0. Salir");
                     System.out.println("1. Borrar cuenta");
                     System.out.println("2. Menu de equipamiento");
@@ -85,7 +89,7 @@ public class Menu implements Serializable {
                     System.out.println("5. Crear nuevo personaje (se borrara el actual)");
                     System.out.println("6. Ranking");
                     System.out.println("7. Normas");
-
+                    System.out.print("--> ");
                     Scanner input = new Scanner(System.in);
                     int option = input.nextInt();
                     // personaje, challenge, result
@@ -99,7 +103,7 @@ public class Menu implements Serializable {
                         case 6 -> ranking(); //ok
                         case 7 -> rules(); //ok
                         case 0 -> login();
-                        default -> System.out.println("Opción no válida, por favor intenta de nuevo.");
+                        default -> System.out.println("<<Opción no válida, por favor intenta de nuevo>>");
                     }
                 }
             }

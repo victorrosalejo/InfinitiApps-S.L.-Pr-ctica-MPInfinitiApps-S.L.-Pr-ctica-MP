@@ -17,33 +17,35 @@ public class Login implements Serializable {
         boolean valid = false ;
         User user;
         TUser tipouser = TUser.ADMIN;
-
-        System.out.println("========= Login ========\n");
+        System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
+        System.out.println("\n[-------------------------------------]");
+        System.out.println("                LOGIN");
+        System.out.println("[-------------------------------------]\n");
         do {
             do {
                 do {
-                    System.out.print("Introduce tu nombre (escribe 'salir' para salir): ");
+                    System.out.print("--> Introduce tu nombre (escribe 'salir' para salir): ");
                     username = input.nextLine();
                     if (username.equalsIgnoreCase("salir")){
                         this.welcome();
                         break;
                     }
                     if(databaseU.get(username) == null){
-                        System.out.println("Nombre no existente");
+                        System.out.println("               <<Nombre no existente>>");
                     }
                 }while(databaseU.get(username) == null);
 
                 user = databaseU.get(username);
                 truepassword = user.getPassword();
 
-                System.out.print("Introduce tu contraseña: ");
+                System.out.print("--> Introduce tu contraseña: ");
                 password = input.nextLine();
                 if(!truepassword.equals(password)){
-                    System.out.println("Contraseña incorrecta");
+                    System.out.println("    <<Contraseña incorrecta>>");
                 }
             }while(!truepassword.equals(password));
             if (!user.isBanned()) {
-                System.out.print("Login correcto");
+                System.out.print("    <<Login correcto>>");
                 System.out.println();
                 valid = true;
 

@@ -14,12 +14,11 @@ public class DeleteAccount  implements Serializable {
 
     public void DeleteAccount(User u){
 
-        System.out.println("Seguro que quiere eliminar la cuenta?");
-        System.out.println("Si es así introduzca 'sí'. En caso contrario introduzca cualquier otra cosa");
+        System.out.println("¿Seguro que quiere eliminar la cuenta? (S/N)");
         Scanner scan = new Scanner(System.in);
         String sure = scan.nextLine();
 
-        if (sure.equalsIgnoreCase("si") || sure.equalsIgnoreCase("sí")){
+        if (sure.equalsIgnoreCase("S") || sure.equalsIgnoreCase("s")){
             databaseU = databaseManager.obtainDatabaseU();
         // Eliminar los personajes asociados al usuario de la base de datos C
             DeleteCharacter delCh = new DeleteCharacter();
@@ -40,6 +39,7 @@ public class DeleteAccount  implements Serializable {
             this.databaseManager.saveDatabaseH(databaseH);
 
         // Volver al principio
+            System.out.println("<<Cuenta eliminada correctamente>>");
 
             this.welcome();
         } else{

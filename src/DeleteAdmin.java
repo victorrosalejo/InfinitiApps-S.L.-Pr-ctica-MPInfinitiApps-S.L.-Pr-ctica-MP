@@ -22,9 +22,9 @@ public class DeleteAdmin  implements Serializable {
             String password = scanner.nextLine();
             if (!username.equals(ADMIN_USERNAME) || !password.equals(ADMIN_PASSWORD)) {
                 System.out.println("Nombre de usuario o contraseña incorrectos. Saliendo...");
-                System.exit(0);
-            }
 
+            }
+            else{
             boolean exit = false;
             while (!exit) {
                 System.out.println("\n--- Menú de Administrador ---");
@@ -54,12 +54,13 @@ public class DeleteAdmin  implements Serializable {
                     case 2:
                         System.out.println("Saliendo...");
                         exit = true;
-                        break;
+
                     default:
                         System.out.println("Opción no válida. Vuelva a intentarlo.");
                         break;
                 }
             }
         }
+    }
 }
 

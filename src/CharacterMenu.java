@@ -16,8 +16,11 @@ public class CharacterMenu  implements Serializable {
         Scanner input = new Scanner(System.in);
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
-        System.out.println("========== Menu del Personaje ==========");
-        System.out.println("(Se te redigira a la opcion optima)");
+
+        System.out.println("\n[-------------------------------------]");
+           System.out.println("           Menu de persoanje"          );
+        System.out.println("[-------------------------------------]\n");
+        System.out.println("<<Se te redigira a la opcion optima>>");
         System.out.println(" ");
 
 

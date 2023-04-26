@@ -13,13 +13,14 @@ public class NewCharacter implements Serializable {
         String tiponuevo ;
         int numero = 0;
 
-        System.out.println("========== Menu de Creacion de personaje ==========");
-
-        System.out.println("1. Introduce tu nombre de personaje");
+        System.out.println("\n[-------------------------------------]");
+        System.out.println("          CREACION DE PERSOANJE");
+        System.out.println(  "[-------------------------------------]\n");
+        System.out.print("--> Introduce tu nombre de personaje:");
         nombre = input.nextLine();
         nuevoChar.setName(nombre);
 
-        System.out.println("2. Introduce la historia de tu personaje");
+        System.out.print("--> Introduce la historia de tu personaje:");
         String desc = input.nextLine();
 
         boolean isVamp = false;
@@ -27,40 +28,43 @@ public class NewCharacter implements Serializable {
         Random rand = new Random();
 
         do {
-        System.out.println("3. Elije el número de la raza a escoger:");
+        System.out.println("--> Elije el número de la raza a escoger");
 
-        System.out.println("1: Cazador");
-        System.out.println("2: Licantropo");
-        System.out.println("3: Vampiro");
-
-
-        tiponuevo = input.nextLine();
-
-
+        System.out.println("1: Cazador.");
+        System.out.println("2: Licantropo.");
+        System.out.println("3: Vampiro.");
+            System.out.print("--> ");
+       tiponuevo = input.nextLine();
 
             try {
                 numero = Integer.parseInt(String.valueOf(tiponuevo));
             }
             catch (NumberFormatException e){
-                System.out.println("No has introducido un número entero válido.");
+                System.out.println("<<No has introducido un número entero válido>>");
 
             }
             switch (tiponuevo) {
                 case "1" -> {
                     nuevoChar.setType("Cazador");
+                    System.out.println("<<Persoanje creado correctamente>>");
                     b = false;
+
                 }
                 case "2" -> {
                     nuevoChar.setType("Licántropo");
+                    System.out.println("<<Persoanje creado correctamente>>");
                     b = false;
+
                 }
                 case "3" -> {
                     nuevoChar.setType("Vampiro");
                     nuevoChar.setAge(rand.nextInt(20, 101));
                     isVamp = true;
+                    System.out.println("<<Persoanje creado correctamente>>");
                     b = false;
+
                 }
-                default -> System.out.println("Ese caracter es erróneo");
+                default -> System.out.println("<<Ese caracter es erróneo>>");
             }
         } while (b);
         nuevoChar.setDescription(desc);

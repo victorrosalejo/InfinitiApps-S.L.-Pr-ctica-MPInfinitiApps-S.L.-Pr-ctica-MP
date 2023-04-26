@@ -1,54 +1,44 @@
-import java.util.Comparator;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
-public class Ranking implements Comparator<Character> {
+public class Ranking {
     public List<Character> Ranking(List<Character> characters){
-        Comparator<Character> charWin = Comparator.comparingInt(Character::getWins);
-        characters.sort(charWin);
+        quickSort(characters, 0, characters.size()-1);
         return characters;
     }
 
-    @Override
-    public int compare(Character o1, Character o2) {
-        return 0;
+    public static void quickSort(List<Character> characters, int izq, int der) {
+
+        int pivote=characters.get(izq).getWins();
+        int i=izq +1;
+        int j=der;
+        Character aux;
+
+        while(i < j){
+            while(characters.get(i).getWins() <= pivote && i < j) i++;
+            while(characters.get(j).getWins() > pivote) j--;
+            if (i < j) {
+                aux= characters.get(i);
+                characters.add(i, characters.get(j));
+                characters.add(j,aux);
+            }
+        }
+        aux = characters.remove(izq);
+        characters.add(izq, characters.remove(j-1));
+        characters.add(j,aux);
+
+        if(izq < j-1)
+            quickSort(characters,izq,j-1);
+        if(j+1 < der)
+            quickSort(characters,j+1,der);
+
     }
 
-    @Override
-    public Comparator<Character> reversed() {
-        return Comparator.super.reversed();
-    }
-
-    @Override
-    public Comparator<Character> thenComparing(Comparator<? super Character> other) {
-        return Comparator.super.thenComparing(other);
-    }
-
-    @Override
-    public <U> Comparator<Character> thenComparing(Function<? super Character, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {
-        return Comparator.super.thenComparing(keyExtractor, keyComparator);
-    }
-
-    @Override
-    public <U extends Comparable<? super U>> Comparator<Character> thenComparing(Function<? super Character, ? extends U> keyExtractor) {
-        return Comparator.super.thenComparing(keyExtractor);
-    }
-
-    @Override
-    public Comparator<Character> thenComparingInt(ToIntFunction<? super Character> keyExtractor) {
-        return Comparator.super.thenComparingInt(keyExtractor);
-    }
-
-    @Override
-    public Comparator<Character> thenComparingLong(ToLongFunction<? super Character> keyExtractor) {
-        return Comparator.super.thenComparingLong(keyExtractor);
-    }
-
-    @Override
-    public Comparator<Character> thenComparingDouble(ToDoubleFunction<? super Character> keyExtractor) {
-        return Comparator.super.thenComparingDouble(keyExtractor);
-    }
 }

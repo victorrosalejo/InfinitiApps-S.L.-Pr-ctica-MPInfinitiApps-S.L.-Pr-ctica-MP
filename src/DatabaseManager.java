@@ -21,8 +21,11 @@ public class DatabaseManager implements Serializable{
             fis.close();
             return m;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            Character c = new Character();
+            Map<String,Character> a = new HashMap<>();
+            a.put("H36GD1",c);
+            saveDatabaseC(a);
+            return obtainDatabaseC();
         }
     }
 
@@ -45,7 +48,7 @@ public class DatabaseManager implements Serializable{
         } catch (Exception e) {
             History historial = new History();
             Map<String,History> historyMap = new HashMap<>();
-            historyMap.put("C59DA", historial );
+            historyMap.put("H36GD", historial );
             saveDatabaseH(historyMap);
             return obtainDatabaseH();
         }
@@ -91,8 +94,9 @@ public class DatabaseManager implements Serializable{
             fis.close();
             return m;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            Map<String,List<Challenge>> m = new HashMap<>();
+            saveDatabaseP(m);
+            return obtainDatabaseP();
         }
     }
 

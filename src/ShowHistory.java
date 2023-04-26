@@ -18,10 +18,13 @@ public class ShowHistory implements Serializable {
         databaseH = databaseManager.obtainDatabaseH();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Historial");
-        if (databaseH != null) {
+        if (databaseH.get(u.getRegisterNumber()) != null) {
             History listaH = databaseH.get(u.getRegisterNumber());
-            if (listaH != null) {
-                for (Match element : listaH.getMatches()) {
+            if ((listaH == null) || (listaH.getMatches().size() == 0)) {
+                System.out.println("Historial vacio");
+                String aux1 = scanner.nextLine();
+            }else {
+             for (Match element : listaH.getMatches()) {
                     System.out.println("\n[----------------------------------------------------------------]\n");
                     System.out.println("Desifiante: " + element.getDefiant() + " Desafiado: " + element.getDefied() + " Oro apostado: " + element.getGoldBet());
                     System.out.print("Numero de rondas: " + element.getRounds());
@@ -35,10 +38,12 @@ public class ShowHistory implements Serializable {
                     System.out.println("\n[----------------------------------------------------------------]\n");
                     String aux = scanner.nextLine();
                 }
-            }else {
-                System.out.println("Historial vacio");
-                String aux1 = scanner.nextLine();
             }
+        }else {
+            databaseH = new HashMap<>();
+            databaseManager.saveDatabaseH(databaseH);
+            System.out.println("Historial vaci");
+            String aux1 = scanner.nextLine();
         }
     }
 

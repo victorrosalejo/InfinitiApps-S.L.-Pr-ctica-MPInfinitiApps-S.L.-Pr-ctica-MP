@@ -10,22 +10,22 @@ public class DeleteCharacter  implements Serializable {
 
     public void DeleteCharacter(User u,boolean b) {
         Scanner input = new Scanner(System.in);
-        int option;
+        String  option;
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
         if(b) {
             System.out.println("========== Menu de Borrado de personaje ==========");
             System.out.println("1. Borrar Personaje ");
-            System.out.println("2. Salir");
-            option = input.nextInt();
+            System.out.println("2. Salir (cualquier entrada)");
+            option = input.nextLine();
             switch (option) {
-                case 1 -> {
+                case "1" -> {
                     Character c = databaseC.remove(u.getRegisterNumber());
                     databaseManager.saveDatabaseC(databaseC);
                     DeleteEquipment delEquip = new DeleteEquipment();
                     delEquip.DeleteEquipment(c);
                 }
-                case 2 -> {
+                default -> {
                     Menu menu = new Menu();
                     menu.Menu(u);
                 }

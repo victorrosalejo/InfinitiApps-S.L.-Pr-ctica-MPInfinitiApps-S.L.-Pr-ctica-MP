@@ -95,20 +95,17 @@ public class NewCharacter implements Serializable {
 
 
 
-
-
-
-
         return nuevoChar;
     }
 
 
     private List<Weapon> newWeapon () {
-        Weapon nuevoWeapon = new Weapon();
+
         List<Weapon> listaweapons = new ArrayList<>();
         String nombre;
         String[] nombresArmas = {"Espada", "Hacha", "Martillo", "Lanza", "Arco", "Ballesta", "Pistola", "Rifle", "Cuchillo", "Garra"};
         for (int a = 0 ; a < 3; a++) {
+            Weapon nuevoWeapon = new Weapon();
             Random randInt = new Random();
             nombre = nombresArmas[(randInt.nextInt(0, 10))];
             nuevoWeapon.setAttack(randInt.nextInt(1, 4));
@@ -123,17 +120,16 @@ public class NewCharacter implements Serializable {
     }
 
     private List<Armor> newArmor () {
-        Armor nuevoAr = new Armor();
+
         List<Armor> listaAr = new ArrayList<>();
+        Random randInt = new Random();
 
         String[] nombresAr = {"Armadura de placas", "Armadura de malla", "Armadura de cuero", "Armadura de escamas", "Armadura de cota de malla con capucha", "Armadura de brigandina", "Armadura de bandido", "Armadura de anillas", "Armadura de anillas", "Armadura de la Orden Sagrada"};
         for (int a = 0 ; a < 3; a++) {
-            Random randInt = new Random();
+            Armor nuevoAr = new Armor();
             String nombre = nombresAr[(randInt.nextInt(0, 10))];
-            Random randInt1 = new Random();
-            nuevoAr.setAttack(randInt1.nextInt(1, 4));
-            Random randInt2 = new Random();
-            nuevoAr.setDefense(randInt2.nextInt(0, 3));
+            nuevoAr.setAttack(randInt.nextInt(1, 4));
+            nuevoAr.setDefense(randInt.nextInt(0, 3));
             nuevoAr.setName(nombre);
             nuevoAr.setActive(false);
             listaAr.add(nuevoAr);
@@ -144,11 +140,9 @@ public class NewCharacter implements Serializable {
 
 
     private List<Minion> newMinions(boolean vamp){
-        Minion minion = new Minion();
         List<Minion> minionList= new ArrayList<>();
         Random randInt = new Random();
         String nombre ;
-        TMinion tipo = null;
 
 
         String[] nombresNombres = {"Kaneki", "Nishiki", "Touka", "Shuu", "Hinami", "MacMenú"};
@@ -160,6 +154,7 @@ public class NewCharacter implements Serializable {
         nombresTm.add(TMinion.DEMON);
 
         for (int a = 0 ; a < 3; a++) {
+            Minion minion = new Minion();
             nombre = nombresNombres[(randInt.nextInt(0, 6))];
 
             minion.setName(nombre);
@@ -220,14 +215,13 @@ public class NewCharacter implements Serializable {
         //modificar 1-5 dos tipos f o d
     private List<Modifiers> newModifiers(){
         List<Modifiers> nuevalista = new ArrayList<>();
-        Modifiers nuevoMod = new Modifiers();
         Random rand = new Random();
         int nuevobuff ;
         String nombre;
         String[] nombresBuffos = {"Potencia Arcana", "Agilidad Divina", "Tenacidad Colosal", "Fuerza del Dragón", "Percepción Celestial", "Vitalidad Mágica"};
 
         for (int a = 0 ; a < 3; a++) {
-
+            Modifiers nuevoMod = new Modifiers();
             nombre = nombresBuffos[rand.nextInt(0,6)];
             nuevoMod.setName(nombre);
             nuevoMod.setActive(false);

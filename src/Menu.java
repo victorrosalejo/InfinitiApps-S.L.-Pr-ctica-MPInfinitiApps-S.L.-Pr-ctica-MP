@@ -28,9 +28,12 @@ public class Menu implements Serializable {
             pendingResult = !combats.isEmpty();
         }
         databaseC = databaseManager.obtainDatabaseC();
-        if (databaseC.get(u.getRegisterNumber()) == null ){
-            System.out.println("\n <<Es obligatorio crear un persoanje si aún no tienes uno>> ");
 
+        if (databaseC == null){
+            System.out.println("\n <<Es obligatorio crear un persoanje si aún no tienes uno>> ");
+            characterMenu(u);
+        } else if (databaseC.get(u.getRegisterNumber()) == null ){
+            System.out.println("\n <<Es obligatorio crear un persoanje si aún no tienes uno>> ");
             characterMenu(u);
         }else{
 
@@ -91,19 +94,25 @@ public class Menu implements Serializable {
                     System.out.println("7. Normas");
                     System.out.print("--> ");
                     Scanner input = new Scanner(System.in);
-                    int option = input.nextInt();
+                    String option = input.nextLine();
                     // personaje, challenge, result
 
                     switch (option) {
-                        case 1 -> deleteAccount(u); // ok
-                        case 2 -> equipentMenu(u); // ok
-                        case 3 -> challengeMenu(u); // ok
-                        case 4 -> showhistory(u); // ok
-                        case 5 -> characterMenu(u); // ok
-                        case 6 -> ranking(); //ok
-                        case 7 -> rules(); //ok
-                        case 0 -> login();
-                        default -> System.out.println("<<Opción no válida, por favor intenta de nuevo>>");
+
+                        case "1" -> deleteAccount(u); // ok
+                        case "2" -> equipentMenu(u); // ok
+                        case "3" -> challengeMenu(u); // ok
+                        case "4" -> showhistory(u); // ok
+                        case "5" -> characterMenu(u); // ok
+                        case "6" -> ranking(); //ok
+                        case "7" -> rules(); //ok
+                        case "0" -> {
+                            exit = false;
+                            login();
+                        default -> System.out.println("Opción no válida, por favor intenta de nuevo.");
+                        }
+                        
+
                     }
                 }
             }

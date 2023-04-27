@@ -9,7 +9,6 @@ public class EquipmentMenu implements Serializable {
     private Map<String, List<Armor>> databaseA = new HashMap<>();
     private Map<String, List<Weapon>> databaseW = new HashMap<>();
     private Map<String,Character> databaseC = new HashMap<>();
-    private boolean duel = false;
 
 
     public Map<String, List<Armor>> getDatabaseA() {
@@ -36,13 +35,6 @@ public class EquipmentMenu implements Serializable {
         this.databaseC = databaseC;
     }
 
-    public Boolean getDuel() {
-        return duel;
-    }
-
-    public void setDuel(Boolean duel) {
-        this.duel = duel;
-    }
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
@@ -55,9 +47,6 @@ public class EquipmentMenu implements Serializable {
     public void EquipentMenu(User u){
         Scanner input = new Scanner(System.in);
         String selectedA, selectedW;
-
-        // falta comprobar duelo
-
 
         Map<String, List<Armor>> databaseA = databaseManager.obtainDatabaseA();
         List<Armor> ArmadurasInv = databaseA.get(u.getName());

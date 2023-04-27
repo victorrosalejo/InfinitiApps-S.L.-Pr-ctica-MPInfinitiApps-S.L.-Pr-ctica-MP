@@ -17,11 +17,18 @@ public class ChallengeMenu  implements Serializable {
         System.out.println("Este es el menú de desafíos");
         do {
             System.out.println("Escribe el nombre de usuario de la persona que quieras desafiar");
+            System.out.println("Escribe 'salir' para volver al menu");
             username = scanner.nextLine();
-            if (databaseU.get(username) == null) {
+            if (username.equalsIgnoreCase("salir")){
+                menu(defiant);
+            }else if (databaseU.get(username) == null) {
                 System.out.println("Usuario no encontrado");
+            }else if( databaseU.get(username).getName().startsWith("¬")) {
+                System.out.println("Usuario no encontrado");
+            }else if (Objects.equals(username, defiant.getName())) {
+                System.out.println("No es posible autodesafiarse");
             }
-        } while (databaseU.get(username) == null);
+        } while (databaseU.get(username) == null || Objects.equals(username, defiant.getName()) | databaseU.get(username).getName().startsWith("¬"));
         User defied = databaseU.get(username);
         String aux1 = defiant.getRegisterNumber();
         String aux2 = defied.getRegisterNumber();
@@ -58,13 +65,8 @@ public class ChallengeMenu  implements Serializable {
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
     }
-
-    public Map<String, List<Challenge>> getDatabaseP() {
-        return databaseP;
+    public void menu(User u){
+        Menu menu = new Menu();
+        menu.Menu(u);
     }
-
-    public void setDatabaseP(Map<String,List<Challenge>> databaseP) {
-        this.databaseP = databaseP;
-    }
-
 }

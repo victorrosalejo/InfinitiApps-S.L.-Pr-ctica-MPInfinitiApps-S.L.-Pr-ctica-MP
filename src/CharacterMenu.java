@@ -16,12 +16,16 @@ public class CharacterMenu  implements Serializable {
         Scanner input = new Scanner(System.in);
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
-        System.out.println("========== Menu del Personaje ==========");
-        System.out.println("(Se te redigira a la opcion optima)");
         System.out.println(" ");
 
-
-        if (databaseC.get(u.getRegisterNumber()) == null){
+        if (databaseC == null){
+            NewCharacter newCharacter = new NewCharacter();
+            Character c = newCharacter.NewCharacter(u);
+            databaseC.put(u.getRegisterNumber(), c);
+            databaseManager.saveDatabaseC(databaseC);
+            this.appenndInfo(c);
+            menu(u);
+        }else if (databaseC.get(u.getRegisterNumber()) == null){
             NewCharacter newCharacter = new NewCharacter();
             Character c = newCharacter.NewCharacter(u);
             databaseC.put(u.getRegisterNumber(), c);

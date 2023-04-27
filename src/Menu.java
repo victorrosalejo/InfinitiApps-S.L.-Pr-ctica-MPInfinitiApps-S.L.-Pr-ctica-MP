@@ -18,7 +18,7 @@ public class Menu implements Serializable {
         Character c;
 
 
-        int forcedoption;
+        String forcedoption;
         int gold;
         List<Combat> combats = u.getResultados();
         boolean pendingResult;
@@ -46,13 +46,14 @@ public class Menu implements Serializable {
                     int othergold = popup.getGold();
                     c = databaseC.get(u.getRegisterNumber());
                     d = !challengeList.isEmpty(); // si esta vacia True = False
-                    if (d) {
+                    while (d) {
                         System.out.println("========== Tienes un duelo pendiente ==========");
                         System.out.println("1. Aceptar");
                         System.out.println("2. Rechazar " + "(pierdes:" + String.format("%.2f", (othergold * 0.1)) + ")");
-                        forcedoption = scanner.nextInt();
+                        forcedoption = scanner.nextLine();
                         switch (forcedoption) {
-                            case 1 -> {
+                            case "1" -> {
+                                d = false;
                                 databaseP = databaseManager.obtainDatabaseP();
                                 challengeList = databaseP.remove(u.getRegisterNumber());
                                 Challenge challenge = challengeList.remove(0);
@@ -61,13 +62,13 @@ public class Menu implements Serializable {
                                 User udefiant = challenge.getDefiant();
                                 User udefied = challenge.getDefied();
                                 equipentMenu(u);
-                                fight(udefiant, udefied, othergold);
+                                fight(udefiant, udefied, othergold, 0);
                             }
-                            case 2 -> {
-                                float f = (float) 0.1;
-
+                            case "2" -> {
+                                d = false;
                                 updateGold(c, popup, u);
                             }
+                            default -> System.out.println("Opción no válida");
                         }
                     }
                 }
@@ -175,9 +176,9 @@ public class Menu implements Serializable {
     }
 
 
-    private void fight(User defiant, User defied, Integer gold){
+    private void fight(User defiant, User defied, int gold, int iterator){
         Fight fight = new Fight();
-        fight.Fight(defiant,defied,gold);                      // error en fight
+        fight.Fight(defiant,defied,gold, iterator);                      // error en fight
     }
 
     public DatabaseManager getDatabaseManager() {

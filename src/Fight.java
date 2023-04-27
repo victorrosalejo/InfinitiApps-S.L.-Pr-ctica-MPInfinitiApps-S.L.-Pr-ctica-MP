@@ -14,16 +14,50 @@ public class Fight implements Serializable {
 
 
     // Implementar luego
-    public void Fight(User udefiant, User udefied, Integer gold) {
+    public void Fight(User udefiant, User udefied, int gold, int iterator) {
         databaseC = databaseManager.obtainDatabaseC();
         Character pdefiant = databaseC.get(udefiant.getRegisterNumber());
         Character pdefied = databaseC.get(udefiant.getRegisterNumber());
 
-        Fighter defiant = (Fighter) pdefiant;
-        Fighter defied = (Fighter) pdefied;
+        Fighter defiant = new Fighter();
+        Fighter defied = new Fighter();
 
-        fighter(defiant);
-        fighter(defied);
+        defiant.setName(pdefiant.getName());
+        defiant.setType(pdefiant.getType());
+        defiant.setDescription(pdefiant.getDescription());
+        defiant.sethP(pdefiant.gethP());
+        defiant.setWeaponSet(pdefiant.getWeaponSet());
+        defiant.setArmorSet(pdefiant.getArmorSet());
+        defiant.setPower(pdefiant.getPower());
+        defiant.setMinionMap(pdefiant.getMinionMap());
+        defiant.setModifierList(pdefiant.getModifiersList());
+        defiant.setSpecialAbility(pdefiant.getSpecialAbility());
+        defiant.setWins(pdefied.getWins());
+        defiant.setGoldValue(pdefiant.getGoldValue());
+        defiant.setFighting(true);
+
+
+        defied.setName(pdefied.getName());
+        defied.setType(pdefied.getType());
+        defied.setDescription(pdefied.getDescription());
+        defied.sethP(pdefied.gethP());
+        defied.setWeaponSet(pdefied.getWeaponSet());
+        defied.setArmorSet(pdefied.getArmorSet());
+        defied.setPower(pdefied.getPower());
+        defied.setMinionMap(pdefied.getMinionMap());
+        defied.setModifierList(pdefied.getModifiersList());
+        defied.setSpecialAbility(pdefied.getSpecialAbility());
+        defied.setWins(pdefied.getWins());
+        defied.setGoldValue(pdefied.getGoldValue());
+        defied.setFighting(true);
+
+      
+
+
+        if (iterator == 0) {
+            fighter(defiant);
+            fighter(defied);
+        }
         Random random = new Random();
         List<Integer> resultado = new ArrayList<>(2);
         int attackAnt, attackEd, defAnt, defEd;
@@ -69,7 +103,8 @@ public class Fight implements Serializable {
         List<Round> listarondas = combat.getRoundList();
         listarondas.add(roundFight);
         combat.setGoldBet(gold);
-
+        defiant.setFighterHP(hpAnt);
+        defied.setFighterHP(hpEd);
 
         // Comprobacion de final de partida
 
@@ -100,8 +135,8 @@ public class Fight implements Serializable {
                 pdefied.setGoldValue(oroperd);
             }
         }
-
-        nextFight(roundFight, combat, udefiant, udefied);
+        iterator++;
+        nextFight(roundFight, combat, udefiant, udefied, iterator);
 
 
     }
@@ -130,9 +165,9 @@ public class Fight implements Serializable {
     }
 
 
-    private void nextFight(Round roundFight, Combat combat, User defiant, User defied) {
+    private void nextFight(Round roundFight, Combat combat, User defiant, User defied, int iterator) {
 
-        Fight(defiant, defied, combat.getGoldBet());
+        Fight(defiant, defied, combat.getGoldBet(), iterator);
 
     }
     private void endCombat(Combat combat, State state, User udefiant, User udefied){

@@ -27,17 +27,17 @@ public class ChallengeMenu  implements Serializable {
                     System.out.println("     ------------------------------------------------- ");}
             }}
         do {
-            System.out.println("Escribe el nombre de usuario de la persona que quieras desafiar");
             System.out.println("Escribe 'salir' para volver al menu");
+            System.out.print("Escribe el nombre de usuario de la persona que quieras desafiar: ");
             username = scanner.nextLine();
             if (username.equalsIgnoreCase("salir")){
                 menu(defiant);
             }else if (databaseU.get(username) == null) {
-                System.out.println("Usuario no encontrado");
+                System.out.println("<<Usuario no encontrado>>");
             }else if( databaseU.get(username).getName().startsWith("¬")) {
-                System.out.println("Usuario no encontrado");
+                System.out.println("<<Usuario no encontrado>>");
             }else if (Objects.equals(username, defiant.getName())) {
-                System.out.println("No es posible autodesafiarse");
+                System.out.println("<<No es posible autodesafiarse>>");
             }
         } while (databaseU.get(username) == null || Objects.equals(username, defiant.getName()) | databaseU.get(username).getName().startsWith("¬"));
         User defied = databaseU.get(username);
@@ -48,14 +48,14 @@ public class ChallengeMenu  implements Serializable {
         int maxBet = Math.min(c1.getGoldValue(), c2.getGoldValue());
         int gold;
         do {
-            System.out.println("Escribe cuanto oro quieres apostar. Máximo: " + maxBet);
+            System.out.println("¿Cuánto oro quieres apostar? Máximo: " + maxBet);
             goldBet = scanner.nextLine();
             gold = Integer.parseInt(goldBet);
         } while (gold > maxBet);
         challenge.setDefiant(defiant);
         challenge.setDefied(defied);
         challenge.setGold(gold);
-        challenge.setValid(false);
+        challenge.setValid(true);
         List<Challenge> challengeList = new ArrayList<>();
         if (databaseP.remove(aux2) != null) {
             challengeList = databaseP.remove(aux2);

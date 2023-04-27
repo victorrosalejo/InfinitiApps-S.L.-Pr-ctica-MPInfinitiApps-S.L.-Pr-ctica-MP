@@ -50,9 +50,10 @@ public class EquipmentMenu implements Serializable {
         Character c = databaseC.remove(u.getRegisterNumber());
         List<Armor> ArmadurasInv = databaseA.get(c.getName());
 
-        System.out.println("[------------------------------]");
-        System.out.println("      MENÚ DE EQUIPAMIENTO");
-        System.out.println("[------------------------------]\n");
+        System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
+        System.out.println("\n[-------------------------------------]");
+        System.out.println("                MENU DE EQUIPAMIENTO   ");
+        System.out.println("[-------------------------------------]\n");
 
         System.out.println("Se han desequipado todas las armas y armaduras");
         int i = 1;

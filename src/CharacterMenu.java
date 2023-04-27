@@ -16,7 +16,7 @@ public class CharacterMenu  implements Serializable {
         Scanner input = new Scanner(System.in);
         databaseManager = new DatabaseManager();
         databaseC = databaseManager.obtainDatabaseC();
-        System.out.println(" ");
+
 
         if (databaseC == null){
             NewCharacter newCharacter = new NewCharacter();

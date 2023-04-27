@@ -24,7 +24,7 @@ public class MenuAdmin {
                     deleteAdmin(u);//ok
                     break;
                 case 2:
-                    editCharacter();//ok
+                    editCharacter(u);//ok
                     break;
                 case 3:
                     validateChallenges();
@@ -51,9 +51,9 @@ public class MenuAdmin {
         deleteadmin.DeleteAdmin(u);
     }
 
-    private void editCharacter(){
+    private void editCharacter(User u){
         EditCharacter editCharacter = new EditCharacter();
-        editCharacter.EditCharacter();
+        editCharacter.EditCharacter(u);
     }
 
     private void validateChallenges(){

@@ -5,10 +5,10 @@ public class Type implements Serializable {
     public Character Type(Character c){
         System.out.println("El tipo actual de personaje es" + c.getType() );
         System.out.print("\n");
-        System.out.print("-- Seleccione un personaje --");
-        System.out.print("-> Vampiro");
-        System.out.print("-> Licántropo");
-        System.out.print("-> Cazador");
+        System.out.println("-- Seleccione un personaje --");
+        System.out.println("-> Vampiro");
+        System.out.println("-> Licántropo");
+        System.out.println("-> Cazador");
         Scanner scanner = new Scanner(System.in);
         String nuevoTipo = scanner.next();
 

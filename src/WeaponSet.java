@@ -1,8 +1,9 @@
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WeaponSet {
-
     public Character WeaponSet(Character c) {
         for (int i = 0; i < c.getWeaponSet().size(); i++) {
                 Weapon weapon = c.getWeaponSet().get(i);
@@ -69,6 +70,7 @@ public class WeaponSet {
         List<Weapon> weaponList = c.getWeaponSet();
         weaponList.set(weaponIndex-1,weapon);
         c.setWeaponSet(weaponList);
+
         return c;
     }
     System.out.println("Arma no encontrada");

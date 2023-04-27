@@ -45,7 +45,7 @@ public class Menu implements Serializable {
                     Challenge popup = challengeList.get(0);
                     int othergold = popup.getGold();
                     c = databaseC.get(u.getRegisterNumber());
-                    d = !challengeList.isEmpty(); // si esta vacia True = False
+                    d = !challengeList.isEmpty();  // si esta vacia True = False
                     while (d) {
                         System.out.println("========== Tienes un duelo pendiente ==========");
                         System.out.println("1. Aceptar");

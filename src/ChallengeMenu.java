@@ -15,6 +15,17 @@ public class ChallengeMenu  implements Serializable {
         String username, goldBet;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Este es el menú de desafíos");
+        System.out.println("     [---------------- LISTA DE USUARIOS -------------] ");
+        Set<String> keyset = databaseU.keySet();
+
+        for (String key : keyset) {
+            User user = databaseU.get(key);
+            if (user != null) {
+                if (!user.getName().startsWith("¬")){
+                    System.out.println("                 >Usuario: " + user.getName());
+                    System.out.println("                 >Numero de registro: " + user.getRegisterNumber());
+                    System.out.println("     ------------------------------------------------- ");}
+            }}
         do {
             System.out.println("Escribe el nombre de usuario de la persona que quieras desafiar");
             System.out.println("Escribe 'salir' para volver al menu");

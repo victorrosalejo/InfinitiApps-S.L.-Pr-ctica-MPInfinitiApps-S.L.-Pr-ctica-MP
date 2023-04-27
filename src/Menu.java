@@ -109,9 +109,9 @@ public class Menu implements Serializable {
                         case "0" -> {
                             exit = false;
                             login();
-                        default -> System.out.println("Opción no válida, por favor intenta de nuevo.");
+
                         }
-                        
+                        default -> System.out.println("Opción no válida, por favor intenta de nuevo.");
 
                     }
                 }
@@ -134,7 +134,7 @@ public class Menu implements Serializable {
 
     private void equipentMenu(User u){
         EquipmentMenu equipmentMenu = new EquipmentMenu();
-        equipmentMenu.EquipentMenu(u);
+        equipmentMenu.EquipmentMenu(u);
 
     }
 

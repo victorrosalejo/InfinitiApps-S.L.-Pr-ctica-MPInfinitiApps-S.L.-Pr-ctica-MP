@@ -52,7 +52,7 @@ public class EquipmentMenu implements Serializable {
 
         System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
         System.out.println("\n[-------------------------------------]");
-        System.out.println("                MENU DE EQUIPAMIENTO   ");
+        System.out.println(   "         MENU DE EQUIPAMIENTO         ");
         System.out.println("[-------------------------------------]\n");
 
         System.out.println("Se han desequipado todas las armas y armaduras");
@@ -60,7 +60,7 @@ public class EquipmentMenu implements Serializable {
         int a = -1;
         boolean valido = false;
 
-            System.out.print("\n-------------ARMADURAS-------- \n");
+        System.out.println("     [------------------- ARMADURA ------------------] ");
             for (Armor elemento : ArmadurasInv) {
                 elemento.setActive(false);
                 System.out.println(i + ". " + elemento.getName() + ", ataque: " + elemento.getAttack() + ", defensa: " + elemento.getDefense() + ", sin equipar");
@@ -68,7 +68,7 @@ public class EquipmentMenu implements Serializable {
             }
 
         do {
-            System.out.println("\n[-------------------------------------]");
+            System.out.println("     ------------------------------------------------- ");
             System.out.print("--> Introduce el numero de la armadura a equipar: ");
             selectedA = input.nextLine();
             try {
@@ -106,7 +106,7 @@ public class EquipmentMenu implements Serializable {
         int manosocupadas = 0;
         valido = false;
 
-        System.out.print("\n-------------ARMAS---------- \n");
+        System.out.println("     [--------------------- ARMAS -------------------] ");
         for (Weapon elemento1 : ArmasInv) {
             elemento1.setActive(false);
             System.out.println(i + ". " + elemento1.getName() + ", manos: " + elemento1.getHands() + ", ataque: " + elemento1.getAttack() + ", defensa: " + elemento1.getDefence() + ", sin equipar");
@@ -114,7 +114,7 @@ public class EquipmentMenu implements Serializable {
         }
 
         do {
-            System.out.println("\n[-------------------------------------]");
+            System.out.println("     [-----------------------------------------------] ");
             System.out.print("--> Introduce el numero del arma a equipar: ");
             selectedW = input.nextLine();
             try {

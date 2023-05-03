@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Combat implements Serializable {
-    private int rounds = 0;
+    private int rounds;
     private List<Round> roundList = new ArrayList<>();
     private State state;
     private int goldBet;

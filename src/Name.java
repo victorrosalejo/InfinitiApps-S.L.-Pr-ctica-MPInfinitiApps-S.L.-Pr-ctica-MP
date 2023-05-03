@@ -19,8 +19,10 @@ private String  name;
         if (nuevoNombre.equals(confirmacionNombre)) {
             c.setName(nuevoNombre);
             System.out.println("El nombre del personaje se ha cambiado correctamente a " + c.getName());
+            String a = scanner.nextLine();
         } else {
             System.out.println("Los nombres no coinciden. No se ha cambiado el nombre del personaje.");
+            String a = scanner.nextLine();
         }
     return c;
 

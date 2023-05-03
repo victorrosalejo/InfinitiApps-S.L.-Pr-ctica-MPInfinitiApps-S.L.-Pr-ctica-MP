@@ -3,26 +3,8 @@ import java.util.*;
 
 public class EquipmentMenu implements Serializable {
     private DatabaseManager databaseManager = new DatabaseManager();
-    private Map<String, List<Armor>> databaseA = new HashMap<>();
-    private Map<String, List<Weapon>> databaseW = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
-
-
-    public Map<String, List<Armor>> getDatabaseA() {
-        return databaseA;
-    }
-
-    public void setDatabaseA(Map<String, List<Armor>> databaseA) {
-        this.databaseA = databaseA;
-    }
-
-    public Map<String, List<Weapon>> getDatabaseW() {
-        return databaseW;
-    }
-
-    public void setDatabaseW(Map<String, List<Weapon>> databaseW) {
-        this.databaseW = databaseW;
-    }
+    private boolean duel;
 
     public Map<String, Character> getDatabaseC() {
         return databaseC;
@@ -41,18 +23,18 @@ public class EquipmentMenu implements Serializable {
         this.databaseManager = databaseManager;
     }
 
-    public void EquipmentMenu(User u) {
+    public void EquipmentMenu(User u,boolean duel) {
         Scanner input = new Scanner(System.in);
         String selectedA, selectedW;
 
-        Map<String, List<Armor>> databaseA = databaseManager.obtainDatabaseA();
+
         databaseC = databaseManager.obtainDatabaseC();
         Character c = databaseC.remove(u.getRegisterNumber());
-        List<Armor> ArmadurasInv = databaseA.get(c.getName());
+        List<Armor> ArmadurasInv = c.getArmorSet();
 
         System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
         System.out.println("\n[-------------------------------------]");
-        System.out.println(   "         MENU DE EQUIPAMIENTO         ");
+        System.out.println("                MENU DE EQUIPAMIENTO   ");
         System.out.println("[-------------------------------------]\n");
 
         System.out.println("Se han desequipado todas las armas y armaduras");
@@ -60,7 +42,7 @@ public class EquipmentMenu implements Serializable {
         int a = -1;
         boolean valido = false;
 
-        System.out.println("     [------------------- ARMADURA ------------------] ");
+            System.out.print("\n-------------ARMADURAS-------- \n");
             for (Armor elemento : ArmadurasInv) {
                 elemento.setActive(false);
                 System.out.println(i + ". " + elemento.getName() + ", ataque: " + elemento.getAttack() + ", defensa: " + elemento.getDefense() + ", sin equipar");
@@ -68,7 +50,7 @@ public class EquipmentMenu implements Serializable {
             }
 
         do {
-            System.out.println("     ------------------------------------------------- ");
+            System.out.println("\n[-------------------------------------]");
             System.out.print("--> Introduce el numero de la armadura a equipar: ");
             selectedA = input.nextLine();
             try {
@@ -95,18 +77,18 @@ public class EquipmentMenu implements Serializable {
 
         } while (!valido );
 
-        databaseManager.saveDatabaseA(databaseA);
+
         c.setArmorSet(ArmadurasInv);
 
-        Map<String, List<Weapon>> databaseW = databaseManager.obtainDatabaseW();
-        List<Weapon> ArmasInv = databaseW.get(c.getName());
+
+        List<Weapon> ArmasInv = c.getWeaponSet();
 
         i = 1;
         a = -1;
         int manosocupadas = 0;
         valido = false;
 
-        System.out.println("     [--------------------- ARMAS -------------------] ");
+        System.out.print("\n-------------ARMAS---------- \n");
         for (Weapon elemento1 : ArmasInv) {
             elemento1.setActive(false);
             System.out.println(i + ". " + elemento1.getName() + ", manos: " + elemento1.getHands() + ", ataque: " + elemento1.getAttack() + ", defensa: " + elemento1.getDefence() + ", sin equipar");
@@ -114,14 +96,12 @@ public class EquipmentMenu implements Serializable {
         }
 
         do {
-            System.out.println("     [-----------------------------------------------] ");
+            System.out.println("\n[-------------------------------------]");
             System.out.print("--> Introduce el numero del arma a equipar: ");
             selectedW = input.nextLine();
             try {
                 a = Integer.parseInt(selectedW);
                 a -= 1;
-
-                valido = true;
             } catch (NumberFormatException e) {
                 System.out.println("\nEl valor no es un número");
             }
@@ -138,6 +118,16 @@ public class EquipmentMenu implements Serializable {
                         System.out.print("\nArma "+ArmasInv.get(j).getName() + ", equipada");
                         System.out.print("\nArma correctamente equipada ");
                         selectedA = input.nextLine();
+                        int aux = 0;
+                        for (Weapon elemento1 : ArmasInv) {
+                            if(elemento1.getHands()==1){
+                                aux += 1;
+                            }
+                        }
+                        if (aux==1 && manosocupadas==1){
+                            valido = true;
+                            System.out.println("No hay más armas de una mano, manos ocupadas");
+                        }
                     }else{
                         System.out.println("No puedes superar el número de manos");
                         selectedA = input.nextLine();
@@ -145,14 +135,15 @@ public class EquipmentMenu implements Serializable {
                 }
             }
 
-        } while (!valido || manosocupadas != 2 );
+        } while (!valido && manosocupadas != 2 );
         System.out.println("Todas las manos ocupadas");
         selectedA = input.nextLine();
         c.setWeaponSet(ArmasInv);
         databaseC.put(u.getRegisterNumber(),c);
         databaseManager.saveDatabaseC(databaseC);
-        databaseManager.saveDatabaseW(databaseW);
-        menu(u);
+        if (!duel) {
+            menu(u);
+        }
     }
 
     private void menu(User u){

@@ -78,7 +78,7 @@ public class Register implements Serializable {
                 System.out.println("Apodo: " + nickname);
             }
             System.out.println();
-            System.out.println("<<Presione 'Enter' paracontinuar>>");
+            System.out.println("<<Presione 'Enter' para continuar>>");
             nickname = input.nextLine();
 
 

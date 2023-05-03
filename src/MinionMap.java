@@ -17,7 +17,7 @@ public class MinionMap {
         int minionIndex = scanner.nextInt() - 1;
         if (minionIndex == -1) {
             return c;
-        } else if (c.getMinionMap().remove(minionIndex) != null) {
+        } else if (c.getMinionMap().get(minionIndex) != null) {
             Minion minion = c.getMinionMap().remove(minionIndex);
             System.out.println("Modificando minon: " + minion.getName());
             System.out.println("Seleccione la característica que desea modificar: ");
@@ -95,7 +95,7 @@ public class MinionMap {
                             }
                             demon.setMinionList(minList);
                             demon.setPact(pacto);// falta la lista de minions( no se si deberiamos hacerl
-                            minionMap.set(minionIndex - 1, demon);
+                            minionMap.add(minionIndex, demon);
                             c.setMinionMap(minionMap);
                         }
                     }

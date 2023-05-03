@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Result implements Serializable {
 
     private Map<String, History> databaseH = new HashMap<>();
+
     private Map<String, Character> databaseC = new HashMap<>();
     private DatabaseManager databaseManager;
 
@@ -24,10 +25,13 @@ public class Result implements Serializable {
             List<Integer> dañoronda =  ronda.getDamageDealt();
 
             System.out.println("-----Ronda " + i + "--------");
-            System.out.println("Daño defiant" + dañoronda.get(0) );
-            System.out.println("Daño defier:" + dañoronda.get(1) );
-            System.out.println("Vida defiant:" + hpdefiant );
-            System.out.println("Vida defier:" + hpdefied  );
+            System.out.println("Vida del desafiante: " + hpdefiant );
+            System.out.println("Vida de los esbirros del desafiante: " + ronda.getDefiantInfo().getMinionHP() );
+            System.out.println("Daño del desafiante al desafiado: " + dañoronda.get(0) );
+            System.out.println("---------------------------------");
+            System.out.println("Vida del desafiado: " + hpdefied  );
+            System.out.println("Vida de los esbirros del desafiado: " + ronda.getDefiedInfo().getMinionHP() );
+            System.out.println("Daño del desafiado al desafiante: " + dañoronda.get(1) );
             System.out.println("---------------------------------");
             i += 1;
         }
@@ -58,16 +62,12 @@ public class Result implements Serializable {
             }
         }
 
-
-
-
-
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+
+
+        System.out.println("<<Presiona enter para continuar>>");
+        String aux = scanner.nextLine();
         menu(user);
-
-
-
 
     }
     private void menu(User u){

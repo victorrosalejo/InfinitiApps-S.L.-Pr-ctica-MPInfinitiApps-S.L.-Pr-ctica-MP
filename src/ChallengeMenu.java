@@ -46,26 +46,36 @@ public class ChallengeMenu  implements Serializable {
         Character c1 = databaseC.get(aux1);
         Character c2 = databaseC.get(aux2);
         int maxBet = Math.min(c1.getGoldValue(), c2.getGoldValue());
-        int gold;
+        int gold = maxBet+1;
         do {
             System.out.println("¿Cuánto oro quieres apostar? Máximo: " + maxBet);
             goldBet = scanner.nextLine();
-            gold = Integer.parseInt(goldBet);
-        } while (gold > maxBet);
+            try {
+                gold = Integer.parseInt(goldBet);
+                if (gold > maxBet && gold< 1){
+                    System.out.println("número no valido");
+                }
+            }catch (Exception e){
+                System.out.println("Caracter no numeral");
+            }
+        } while (gold > maxBet && gold< 1);
         challenge.setDefiant(defiant);
         challenge.setDefied(defied);
         challenge.setGold(gold);
-        challenge.setValid(true);
+        challenge.setValid(false);
         List<Challenge> challengeList = new ArrayList<>();
-        if (databaseP.remove(aux2) != null) {
+        if (databaseP.get(aux2) != null) {
             challengeList = databaseP.remove(aux2);
             challengeList.add(challenge);
             databaseP.put(aux2, challengeList);
             databaseManager.saveDatabaseP(databaseP);
+            System.out.println("Desafío correctamente enviado");
+            goldBet = scanner.nextLine();
         } else{
             challengeList.add(challenge);
             databaseP.put(aux2, challengeList);
             databaseManager.saveDatabaseP(databaseP);
+            System.out.println("Desafío correctamente enviado");
         }
     }
 

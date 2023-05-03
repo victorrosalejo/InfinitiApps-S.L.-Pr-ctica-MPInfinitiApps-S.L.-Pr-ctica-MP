@@ -1,55 +1,73 @@
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddFeature  implements Serializable {
 
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String,List<Minion>> databaseM = new HashMap<>();
+    private Map<String,User> databaseU = new HashMap<>();
 
 
     public void AddFeature(User u){
     Scanner scanner = new Scanner(System.in);
-    int option = 0;
     boolean exit = false;
     databaseC = databaseManager.obtainDatabaseC();
-    Character c = databaseC.remove(u.getRegisterNumber());
+    databaseU = databaseManager.obtainDatabaseU();
+    System.out.println("\n[-------------------------------------]");
+    System.out.println("             AÑADIR CARACTERÍSTICA");
+    System.out.println("[-------------------------------------]\n");
+    System.out.println("     [---------------- LISTA DE USUARIOS -------------] ");
+    Set<String> keyset = databaseU.keySet();
 
+        for (String key : keyset) {
+            User user = databaseU.get(key);
+            if (user != null) {
+                if (!user.getName().startsWith("¬")){
+                    System.out.println("                 >Usuario: " + user.getName());
+                    System.out.println("                 >Numero de registro: " + user.getRegisterNumber());
+                    System.out.println("     ------------------------------------------------- ");
+                }
+            }
+        }
+    System.out.println();
+    String player;
+    do {
+        System.out.print("Ingrese el numero de registro del jugador a editar:");
+        player = scanner.nextLine();
+        if (player.equalsIgnoreCase("salir")) {
+            menuAdmin(u);
+        }else if(databaseC.get(player) == null) {
+            System.out.println("El jugador no tiene personajes.");
+            player = scanner.nextLine();
+        }
+    }while (databaseC.get(player) == null);
+
+    String option ;
     while(!exit){
-        System.out.println("Seleccione una opción:");
+        Character c = databaseC.remove(player);
         System.out.println("1. Agregar modificador");
         System.out.println("2. Agregar arma");
         System.out.println("3. Agregar armadura");
         System.out.println("4. Agregar minions");
         System.out.println("5. Salir");
+        System.out.println("Seleccione una opción:");
+        option = scanner.nextLine();
 
-        option = scanner.nextInt();
 
-        switch(option){
-            case 1:
-                c = addModifier(c);
-                break;
-            case 2:
-                c = addWeapon(c);
-                break;
-            case 3:
-                c = addArmor(c);
-                break;
-            case 4:
-                c = addMinions(c);
-                break;
-            case 5:
-                exit = true;
-                break;
-            default:
-                System.out.println("Opción inválida. Intente de nuevo.");
-                break;
+        switch (option) {
+            case "1" -> c = addModifier(c);
+            case "2" -> c = addWeapon(c);
+            case "3" -> c = addArmor(c);
+            case "4" -> c = addMinions(c);
+            case "5" -> exit = true;
+            default -> System.out.println("Opción inválida. Intente de nuevo.");
         }
+        databaseC.put(player,c);
+        databaseManager.saveDatabaseC(databaseC);
+        menuAdmin(u);
     }
-    databaseC.put(u.getRegisterNumber(),c);
+
 
 }
 
@@ -82,12 +100,12 @@ public class AddFeature  implements Serializable {
     private Character addMinions(Character c){
         AddMinion addMinion = new AddMinion();
         c.setMinionMap(addMinion.AddMinion(c.getMinionMap()));
-        databaseM.remove(c.getName());
-        databaseM.put(c.getName(),c.getMinionMap());
-        databaseManager.saveDatabaseM(databaseM);
         return c;
 
     }
-
+    private void menuAdmin(User u){
+        MenuAdmin menuAdmin = new MenuAdmin();
+        menuAdmin.MenuAdmin(u);
+    }
 
 }

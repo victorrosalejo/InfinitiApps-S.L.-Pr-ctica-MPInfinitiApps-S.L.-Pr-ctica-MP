@@ -6,10 +6,7 @@ public class CharacterMenu  implements Serializable {
     private User user;
     private DatabaseManager databaseManager;
     private Map<String, Character> databaseC = new HashMap<>();
-    private Map<String, List<Armor>> databaseA = new HashMap<>();
-    private Map<String, List<Weapon>> databaseW = new HashMap<>();
-    private Map<String, List<Minion>> databaseM = new HashMap<>();
-    private Map<String, List<Modifiers>> databaseMo = new HashMap<>();
+
 
 
     public  void CharacterMenu (User u) {
@@ -23,14 +20,13 @@ public class CharacterMenu  implements Serializable {
             Character c = newCharacter.NewCharacter(u);
             databaseC.put(u.getRegisterNumber(), c);
             databaseManager.saveDatabaseC(databaseC);
-            this.appenndInfo(c);
+
             menu(u);
         }else if (databaseC.get(u.getRegisterNumber()) == null){
             NewCharacter newCharacter = new NewCharacter();
             Character c = newCharacter.NewCharacter(u);
             databaseC.put(u.getRegisterNumber(), c);
             databaseManager.saveDatabaseC(databaseC);
-            this.appenndInfo(c);
             menu(u);
         }
         else{
@@ -41,34 +37,13 @@ public class CharacterMenu  implements Serializable {
             Character c = newCharacter.NewCharacter(u);
             databaseC.put(u.getRegisterNumber(), c);
             databaseManager.saveDatabaseC(databaseC);
-            this.appenndInfo(c);
         }
 
 
 
 
     }
-    private void appenndInfo(Character c) {
 
-        databaseA = databaseManager.obtainDatabaseA();
-        databaseA.put(c.getName(),c.getArmorSet());
-        databaseManager.saveDatabaseA(databaseA);
-
-
-        databaseW = databaseManager.obtainDatabaseW();
-        databaseW.put(c.getName(),c.getWeaponSet());
-        databaseManager.saveDatabaseW(databaseW);
-
-
-        databaseM = databaseManager.obtainDatabaseM();
-        databaseM.put(c.getName(),c.getMinionMap());
-        databaseManager.saveDatabaseM(databaseM);
-
-
-        databaseMo = databaseManager.obtainDatabaseMo();
-        databaseMo.put(c.getName(),c.getModifiersList());
-        databaseManager.saveDatabaseMo(databaseMo);
-    }
     public User getUser() {
         return user;
     }

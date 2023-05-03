@@ -10,7 +10,9 @@ import java.util.function.ToLongFunction;
 
 public class Ranking {
     public List<Character> Ranking(List<Character> characters){
-        quickSort(characters, 0, characters.size()-1);
+        if(characters.size()>1) {
+            quickSort(characters, 0, characters.size() - 1);
+        }
         return characters;
     }
 

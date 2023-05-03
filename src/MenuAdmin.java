@@ -24,10 +24,10 @@ public class MenuAdmin {
                     deleteAdmin(u);//ok
                     break;
                 case 2:
-                    editCharacter();//ok
+                    editCharacter(u);//ok
                     break;
                 case 3:
-                    validateChallenges();
+                    validateChallenges(u);
                     break;
                 case 4:
                     addFeature(u);//ok
@@ -51,14 +51,14 @@ public class MenuAdmin {
         deleteadmin.DeleteAdmin(u);
     }
 
-    private void editCharacter(){
+    private void editCharacter(User u){
         EditCharacter editCharacter = new EditCharacter();
-        editCharacter.EditCharacter();
+        editCharacter.EditCharacter(u);
     }
 
-    private void validateChallenges(){
+    private void validateChallenges(User u){
         ValidateChallenges validateChallenges = new ValidateChallenges();
-        validateChallenges.ValidateChallenges();
+        validateChallenges.ValidateChallenges(u);
     }
     private void addFeature(User u){
         AddFeature addFeature = new AddFeature();

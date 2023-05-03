@@ -1,8 +1,9 @@
-import java.io.Serializable;
+import javax.swing.undo.CannotUndoException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Fight implements Serializable {
+public class Fight implements Serializable, Cloneable {
 
 
     private Round roundFight = new Round();
@@ -10,63 +11,24 @@ public class Fight implements Serializable {
     private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String, History> databaseH = new HashMap<>();
+    private Map<String, User> databaseU = new HashMap<>();
 
 
 
     // Implementar luego
-    public void Fight(User udefiant, User udefied, int gold, int iterator) {
-        databaseC = databaseManager.obtainDatabaseC();
-        Character pdefiant = databaseC.get(udefiant.getRegisterNumber());
-        Character pdefied = databaseC.get(udefiant.getRegisterNumber());
+    public void Fight(Fighter defiant, Fighter defied, int gold, User udefiant, User udefied) {
 
-        Fighter defiant = new Fighter();
-        Fighter defied = new Fighter();
-
-        defiant.setName(pdefiant.getName());
-        defiant.setType(pdefiant.getType());
-        defiant.setDescription(pdefiant.getDescription());
-        defiant.sethP(pdefiant.gethP());
-        defiant.setWeaponSet(pdefiant.getWeaponSet());
-        defiant.setArmorSet(pdefiant.getArmorSet());
-        defiant.setPower(pdefiant.getPower());
-        defiant.setMinionMap(pdefiant.getMinionMap());
-        defiant.setModifierList(pdefiant.getModifiersList());
-        defiant.setSpecialAbility(pdefiant.getSpecialAbility());
-        defiant.setWins(pdefied.getWins());
-        defiant.setGoldValue(pdefiant.getGoldValue());
-        defiant.setFighting(true);
-
-
-        defied.setName(pdefied.getName());
-        defied.setType(pdefied.getType());
-        defied.setDescription(pdefied.getDescription());
-        defied.sethP(pdefied.gethP());
-        defied.setWeaponSet(pdefied.getWeaponSet());
-        defied.setArmorSet(pdefied.getArmorSet());
-        defied.setPower(pdefied.getPower());
-        defied.setMinionMap(pdefied.getMinionMap());
-        defied.setModifierList(pdefied.getModifiersList());
-        defied.setSpecialAbility(pdefied.getSpecialAbility());
-        defied.setWins(pdefied.getWins());
-        defied.setGoldValue(pdefied.getGoldValue());
-        defied.setFighting(true);
-
-      
-
-
-        if (iterator == 0) {
-            fighter(defiant);
-            fighter(defied);
-        }
         Random random = new Random();
-        List<Integer> resultado = new ArrayList<>(2);
+        List<Integer> resultado = new ArrayList<>();
         int attackAnt, attackEd, defAnt, defEd;
         int hpAnt = defiant.getFighterHP();
         int hpEd = defied.getFighterHP();
         int rondas = combat.getRounds();
         rondas += 1;
         combat.setRounds(rondas);
+        Character pdefiant = databaseC.get(udefiant.getRegisterNumber());
 
+        Character pdefied = databaseC.get(udefied.getRegisterNumber());
 
         // Defiant
         resultado = RoundBalance(defiant, random);
@@ -82,29 +44,59 @@ public class Fight implements Serializable {
         attackEd = resultado.get(0);
         defEd = resultado.get(1);
 
-        List<Integer> list = new ArrayList<>();
-
+        List<Integer> list = new ArrayList<>(2);
         if (attackAnt >= defEd){
-            hpEd -= 1;
+            if (defied.getMinionHP() <= 0) {
+                hpEd -= 1;
+
+            }else{
+                defied.setMinionHP(defied.getMinionHP()-1);
+            }
             list.add(0,1);
-        }else {
+        }else{
             list.add(0,0);
         }
         if (attackEd >= defAnt){
-            hpAnt -= 1;
+            if (defiant.getMinionHP() <= 0) {
+                hpAnt -= 1;
+            }else{
+                defiant.setMinionHP(defiant.getMinionHP()-1);
+            }
             list.add(1,1);
-        }else{
-            list.add(1,0);
+        }else {
+            list.add(1, 0);
         }
-        roundFight.setDamageDealt(list);
 
-        roundFight.setDefiantInfo(defiant);
-        roundFight.setDefiedInfo(defied);
-        List<Round> listarondas = combat.getRoundList();
-        listarondas.add(roundFight);
-        combat.setGoldBet(gold);
+        Round rondaguardada = new Round();
+        Fighter antaux = new Fighter();
+        Fighter edaux = new Fighter();
+
+
         defiant.setFighterHP(hpAnt);
         defied.setFighterHP(hpEd);
+
+        antaux.setMinionHP(defiant.getMinionHP());
+        antaux.setFighterHP(defiant.getFighterHP());
+        antaux.setName(defiant.getName());
+
+        edaux.setMinionHP(defied.getMinionHP());
+        edaux.setFighterHP(defied.getFighterHP());
+        edaux.setName(defied.getName());
+
+
+
+
+
+        rondaguardada.setDamageDealt(list);
+        rondaguardada.setDefiantInfo(antaux);
+        rondaguardada.setDefiedInfo(edaux);
+        List<Round> listarondas = combat.getRoundList();
+        listarondas.add(rondaguardada);
+        combat.setRoundList(listarondas);
+        combat.setGoldBet(gold);
+
+
+
 
         // Comprobacion de final de partida
 
@@ -113,38 +105,80 @@ public class Fight implements Serializable {
                 endCombat(combat, State.DRAW, udefiant,udefied);
             }
             else if (hpAnt == 0){
-                endCombat(combat, State.VDEFIED, udefiant, udefied );
                 int oroperd = pdefiant.getGoldValue();
                 oroperd -= gold;
                 pdefiant.setGoldValue(oroperd);
                 int orogan = pdefied.getGoldValue();
                 orogan += gold;
                 pdefied.setGoldValue(orogan);
-
-
-
+                endCombat(combat, State.VDEFIED, udefiant, udefied );
 
             }
             else {
-                endCombat(combat, State.VDEFIANT, udefiant, udefied);
                 int orogan = pdefiant.getGoldValue();
                 orogan -= gold;
                 pdefiant.setGoldValue(orogan);
                 int oroperd = pdefied.getGoldValue();
                 oroperd += gold;
                 pdefied.setGoldValue(oroperd);
+                endCombat(combat, State.VDEFIANT, udefiant, udefied);
+
             }
         }
-        iterator++;
-        nextFight(roundFight, combat, udefiant, udefied, iterator);
 
+        nextFight(defiant, defied, gold, udefiant, udefied);
+
+
+    }
+
+    public void setFight(User udefiant, User udefied, int gold){
+        databaseC = databaseManager.obtainDatabaseC();
+        Character pdefiant = databaseC.get(udefiant.getRegisterNumber());
+        Character pdefied = databaseC.get(udefied.getRegisterNumber());
+
+        Fighter defiant = new Fighter();
+        Fighter defied = new Fighter();
+
+        defiant.setName(pdefiant.getName());
+        defiant.setType(pdefiant.getType());
+        defiant.setDescription(pdefiant.getDescription());
+        defiant.sethP(pdefiant.gethP());
+        defiant.setWeaponSet(pdefiant.getWeaponSet());
+        defiant.setArmorSet(pdefiant.getArmorSet());
+        defiant.setPower(pdefiant.getPower());
+        defiant.setMinionMap(pdefiant.getMinionMap());
+        defiant.setModifierList(pdefiant.getModifiersList());
+        defiant.setSpecialAbility(pdefiant.getSpecialAbility());
+        defiant.setWins(pdefiant.getWins());
+        defiant.setGoldValue(pdefiant.getGoldValue());
+        defiant.setFighting(true);
+        defiant.setFighterHP(defiant.gethP());
+
+        defied.setName(pdefied.getName());
+        defied.setType(pdefied.getType());
+        defied.setDescription(pdefied.getDescription());
+        defied.sethP(pdefied.gethP());
+        defied.setWeaponSet(pdefied.getWeaponSet());
+        defied.setArmorSet(pdefied.getArmorSet());
+        defied.setPower(pdefied.getPower());
+        defied.setMinionMap(pdefied.getMinionMap());
+        defied.setModifierList(pdefied.getModifiersList());
+        defied.setSpecialAbility(pdefied.getSpecialAbility());
+        defied.setWins(pdefied.getWins());
+        defied.setGoldValue(pdefied.getGoldValue());
+        defied.setFighting(true);
+        defied.setFighterHP(defied.gethP());
+
+        fighter(defiant);
+        fighter(defied);
+        Fight(defiant,defied,gold, udefiant, udefied);
 
     }
 
     private List<Integer> RoundBalance(Fighter f, Random random){
         int exitosA = 0;
         int exitosD = 0;
-        List<Integer> listaresult = new ArrayList<>(2);
+        List<Integer> listaresult = new ArrayList<>();
         for (int i = 0; i < f.getAttackPower(); i++) {
             if (random.nextInt(1, 7) >= 5) {
                 exitosA += 1;
@@ -154,32 +188,30 @@ public class Fight implements Serializable {
             if (random.nextInt(1, 7) >= 5) {
                 exitosD += 1;
             }
-
-
         }
         listaresult.add(exitosA);
         listaresult.add(exitosD);
 
-
-        return listaresult;
+       return listaresult;
     }
 
 
-    private void nextFight(Round roundFight, Combat combat, User defiant, User defied, int iterator) {
-
-        Fight(defiant, defied, combat.getGoldBet(), iterator);
-
+    private void nextFight(Fighter defiant, Fighter defied, int gold, User udefiant, User udefied) {
+        Fight(defiant, defied, gold, udefiant, udefied);
     }
     private void endCombat(Combat combat, State state, User udefiant, User udefied){
-
+         databaseH = databaseManager.obtainDatabaseH();
+         databaseU = databaseManager.obtainDatabaseU();
          History history = databaseH.remove(udefiant.getRegisterNumber());
          History history2 = databaseH.remove(udefied.getRegisterNumber());
          Match nuevapartida = new Match();
          Character perAnt = databaseC.get(udefiant.getRegisterNumber());
          Character perEd = databaseC.get(udefied.getRegisterNumber());
          State winner = state;
+         combat.setState(state);
          List<Round> rondas= combat.getRoundList();
          Round rondafinal = rondas.get(rondas.size()-1);
+         List<Combat> listacombates = new ArrayList<>();
 
 
          LocalDateTime date = LocalDateTime.now();
@@ -190,6 +222,10 @@ public class Fight implements Serializable {
          switch (winner){
              case VDEFIANT -> {
                  nuevapartida.setWinner(perAnt);
+                 perAnt.setGoldValue(perAnt.getGoldValue() + combat.getGoldBet());
+                 perEd.setGoldValue(perEd.getGoldValue() - combat.getGoldBet());
+
+
                  if ( rondafinal.getDefiantInfo().getFighterHP() - rondafinal.getDefiantInfo().getMinionHP() > 0 ) {
                      nuevapartida.setMinionsLeft(true);
 
@@ -201,6 +237,9 @@ public class Fight implements Serializable {
              }
              case VDEFIED -> {
                  nuevapartida.setWinner(perEd);
+                 perEd.setGoldValue(perEd.getGoldValue() + combat.getGoldBet());
+                 perAnt.setGoldValue(perAnt.getGoldValue() - combat.getGoldBet());
+
                  if ( (rondafinal.getDefiedInfo().getFighterHP() - rondafinal.getDefiedInfo().getMinionHP()) > 0 )
                      nuevapartida.setMinionsLeft(true);
                  else {
@@ -212,21 +251,35 @@ public class Fight implements Serializable {
                  nuevapartida.setMinionsLeft(false);
              }
          }
-
-
-
          nuevapartida.setGoldBet(combat.getGoldBet());
          nuevapartida.setDate(date);
-         history.appendMatch(nuevapartida, udefiant);
-         history2.appendMatch(nuevapartida, udefied);
+         if (history == null){
+             history = new History();
+         }
+         history.appendMatch(nuevapartida);
+        if (history2 == null){
+            history2 = new History();
+        }
+         history2.appendMatch(nuevapartida);
 
          databaseH.put(udefiant.getRegisterNumber() , history);
          databaseH.put(udefied.getRegisterNumber() , history2);
          databaseManager.saveDatabaseH(databaseH);
 
+         databaseC.put(udefiant.getRegisterNumber(),perAnt);
+         databaseC.put(udefied.getRegisterNumber(),perEd);
+         databaseManager.saveDatabaseC(databaseC);
 
-
+         Scanner scanner = new Scanner(System.in);
+         System.out.println("Combate terminado");
+         String aux = scanner.nextLine();
+         listacombates = udefiant.getResultados();
+         listacombates.add(combat);
+         udefiant.setResultados(listacombates);
+         databaseU.put(udefiant.getName(), udefiant);
+         databaseManager.saveDatabaseU(databaseU);
          result(combat, udefied);
+
 
 
 

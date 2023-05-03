@@ -1,4 +1,4 @@
-public class Fighter extends Character{
+public class Fighter extends Character implements Cloneable{
     private int fighterHP;
     private int minionHP;
     private boolean defiant;
@@ -11,7 +11,6 @@ public class Fighter extends Character{
         TCharacter tipo;
         tipo = f.getType();
         int attPot, defPot;
-        f.fighterHP = f.gethP();
         f.minionHP = 0;
             switch (tipo){
                 case VAMPIRE:
@@ -41,8 +40,8 @@ public class Fighter extends Character{
                             blood -= f.getSpecialAbility().getSpecialValue();
 
                         }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
+                    f.setDefensePower(defPot);
+                    f.setAttackPower(attPot);
                     break;
                 case WEREWOLF:
                     attPot = f.getPower() + f.getSpecialAbility().getAttack();
@@ -74,8 +73,8 @@ public class Fighter extends Character{
                         defPot += rage;
 
                     }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
+                    f.setDefensePower(defPot);
+                    f.setAttackPower(attPot);
                     break;
                 case HUNTER:
                     attPot = f.getPower() + f.getSpecialAbility().getAttack() + f.getTypeAttack();
@@ -99,8 +98,8 @@ public class Fighter extends Character{
 
                         }
                     }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
+                    f.setDefensePower(defPot);
+                    f.setAttackPower(attPot);
                     break;
             }
     //CALCULO DE SALUD
@@ -110,7 +109,7 @@ public class Fighter extends Character{
             checkDemonList(minion, f);
 
         }
-        f.fighterHP += f.minionHP;
+
 
     }
 

@@ -22,8 +22,6 @@ public class DeleteCharacter  implements Serializable {
                 case "1" -> {
                     Character c = databaseC.remove(u.getRegisterNumber());
                     databaseManager.saveDatabaseC(databaseC);
-                    DeleteEquipment delEquip = new DeleteEquipment();
-                    delEquip.DeleteEquipment(c);
                 }
                 default -> {
                     Menu menu = new Menu();
@@ -33,8 +31,6 @@ public class DeleteCharacter  implements Serializable {
         }else{
             Character c = databaseC.remove(u.getRegisterNumber());
             databaseManager.saveDatabaseC(databaseC);
-            DeleteEquipment delEquip = new DeleteEquipment();
-            delEquip.DeleteEquipment(c);
         }
     }
         public Map<String, Character> getDatabaseC () {

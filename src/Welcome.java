@@ -37,7 +37,7 @@ public class Welcome {
             }
         } while (b);  //Condiciona hasta que se meta un input valido
         scanner.close();
-        System.exit(03);
+        System.exit(33);
     }
     private void login(){
         Login login = new Login();

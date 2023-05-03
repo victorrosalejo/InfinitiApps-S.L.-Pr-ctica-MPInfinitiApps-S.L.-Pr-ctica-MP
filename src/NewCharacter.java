@@ -14,7 +14,7 @@ public class NewCharacter implements Serializable {
         int numero = 0;
 
         System.out.println("\n[-------------------------------------]");
-        System.out.println("          CREACION DE PERSOANJE");
+        System.out.println("          CREACION DE PERSONAJE");
         System.out.println(  "[-------------------------------------]\n");
         System.out.print("--> Introduce tu nombre de personaje:");
         nombre = input.nextLine();
@@ -49,13 +49,13 @@ public class NewCharacter implements Serializable {
             switch (tiponuevo) {
                 case "1" -> {
                     nuevoChar.setType("Cazador");
-                    System.out.println("<<Persoanje creado correctamente>>");
+                    System.out.println("<<Personaje creado correctamente>>");
                     b = false;
 
                 }
                 case "2" -> {
                     nuevoChar.setType("Licántropo");
-                    System.out.println("<<Persoanje creado correctamente>>");
+                    System.out.println("<<Personaje creado correctamente>>");
                     b = false;
 
                 }
@@ -63,7 +63,7 @@ public class NewCharacter implements Serializable {
                     nuevoChar.setType("Vampiro");
                     nuevoChar.setAge(rand.nextInt(20, 101));
                     isVamp = true;
-                    System.out.println("<<Persoanje creado correctamente>>");
+                    System.out.println("<<Personaje creado correctamente>>");
                     b = false;
 
                 }
@@ -104,7 +104,7 @@ public class NewCharacter implements Serializable {
         List<Weapon> listaweapons = new ArrayList<>();
         String nombre;
         String[] nombresArmas = {"Espada", "Hacha", "Martillo", "Lanza", "Arco", "Ballesta", "Pistola", "Rifle", "Cuchillo", "Garra"};
-        for (int a = 0 ; a < 3; a++) {
+        for (int a = 0 ; a < 5; a++) {
             Weapon nuevoWeapon = new Weapon();
             Random randInt = new Random();
             nombre = nombresArmas[(randInt.nextInt(0, 10))];
@@ -125,7 +125,7 @@ public class NewCharacter implements Serializable {
         Random randInt = new Random();
 
         String[] nombresAr = {"Armadura de placas", "Armadura de malla", "Armadura de cuero", "Armadura de escamas", "Armadura de cota de malla con capucha", "Armadura de brigandina", "Armadura de bandido", "Armadura de anillas", "Armadura de anillas", "Armadura de la Orden Sagrada"};
-        for (int a = 0 ; a < 3; a++) {
+        for (int a = 0 ; a < 5; a++) {
             Armor nuevoAr = new Armor();
             String nombre = nombresAr[(randInt.nextInt(0, 10))];
             nuevoAr.setAttack(randInt.nextInt(1, 4));

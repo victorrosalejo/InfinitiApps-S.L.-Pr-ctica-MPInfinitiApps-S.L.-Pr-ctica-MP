@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Wins implements Serializable{
+public class Wins{
 
     public Character Wins(Character c) {
         Scanner scanner = new Scanner(System.in);
@@ -19,9 +19,9 @@ public class Wins implements Serializable{
 
             try {
                 int value = Integer.parseInt(input);
-                    //asignamos el valor a la variable correspondiente
-                    c.setWins(value);
-                    break;
+                //asignamos el valor a la variable correspondiente
+                c.setWins(value);
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Debe introducir un número válido.");
             }

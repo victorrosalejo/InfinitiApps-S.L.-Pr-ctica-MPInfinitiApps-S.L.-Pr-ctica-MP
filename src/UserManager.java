@@ -18,64 +18,81 @@ private Map<String, User> databaseU = new HashMap<>();
            System.out.println("3. Desbanear un usuario");
            System.out.println("4. Salir");
            System.out.print("Ingrese la opción deseada: ");
-           int opcion = scanner.nextInt();
+           String opcion = scanner.nextLine();
            //numero de registro distitno de 0
            switch (opcion) {
-               case 1 -> {
+               case "1" -> {
                    // Mostrar todos los usuarios
                    System.out.println("\n--- Lista de Usuarios ---");
-                   for (int i = 1; i < databaseU.size(); i++) {
-                           System.out.println("--------------------------------");
-                           System.out.println("Nombre de usuario" + databaseU.get(i).getName() + " ---");
-                            if (databaseU.get(i).isBanned()) {
-                               System.out.println("--> Este usuario se encuentra banaeado");
+                   for (User u : databaseU.values()) {
+
+                       System.out.println("--------------------------------");
+                       System.out.println("Nombre de usuario: " + u.getName() + " ---");
+                       if (u.getName().startsWith("¬")) {
+                           System.out.println("Usuario administrador, no se puede banear");
+                       } else {
+                           if (u.isBanned()) {
+                               System.out.println("--> Este usuario se encuentra baneado");
                            } else {
-                               System.out.println("--> Este usuario se encuentra desbaneado");
+                               System.out.println("--> Este usuario no se encuentra baneado");
                            }
                        }
                    }
-               case 2 -> {
+               }
+
+               case "2" -> {
 
                    System.out.println("---  Banear usuario ---");
                    System.out.print("Introduce el nombre del usuario a banear--> ");
-                   String codeUser = scanner.next();
+                   String codeUser = scanner.nextLine();
                    if (!codeUser.startsWith("¬")) {
                         User u = databaseU.remove(codeUser);
                         if ( u != null) {
                                if (u.isBanned()) {
                                    System.out.println("El usuario ya está baneado");
+                                   databaseU.put(codeUser, u);
+
                                } else {
                                    u.setBanned(true);
                                    databaseU.put(codeUser, u);
+                                   System.out.println("Usuario baneado correctamente");
                                }
                            } else {
                                System.out.println("El usuario no existe");
                         }
+                   }else{
+                       System.out.println("Usuario administrador");
                    }
 
                }
-               case 3 -> {
+               case "3" -> {
                    System.out.println("---  Desbanear usuario ---");
                    System.out.print("Introduce el nombre del usuario a desbanear--> ");
-                   String codeUser = scanner.next();
+                   String codeUser = scanner.nextLine();
                    if (!codeUser.startsWith("¬")) {
                        User u = databaseU.remove(codeUser);
                        if ( u != null) {
                            if (!u.isBanned()) {
                                System.out.println("El usuario no está baneado");
+                               databaseU.put(codeUser, u);
+
                            } else {
                                u.setBanned(false);
                                databaseU.put(codeUser, u);
+                               System.out.println("Usuario desbaneado correctamente");
                            }
                        } else {
                            System.out.println("El usuario no existe");
                        }
-
+                   }else{
+                       System.out.println("Usuario administrador");
                    }
+
                }
-               case 4 -> salir = true;
+               case "4" -> salir = true;
+               default -> System.out.println("Número no válido");
            }
-           System.out.println("Usuarios modificados correctamente");
+
        }
        databaseManager.saveDatabaseU(databaseU);
    }

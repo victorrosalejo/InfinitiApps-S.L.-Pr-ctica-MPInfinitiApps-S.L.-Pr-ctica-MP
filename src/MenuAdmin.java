@@ -7,7 +7,9 @@ public class MenuAdmin {
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
         while (continuar) {
-            System.out.println("=== Menú de Administrador ===");
+            System.out.println("\n[-------------------------------------]");
+            System.out.println("           MENU ADMINISTRADOR");
+            System.out.println("[-------------------------------------]\n");
             System.out.println("1. Eliminar Administrador");
             System.out.println("2. Editar Personaje");
             System.out.println("3. Validar Desafío");
@@ -16,47 +18,42 @@ public class MenuAdmin {
             System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
+            String opcion = scanner.nextLine();
             switch (opcion) {
-                case 1:
-                    deleteAdmin(u);//ok
-                    break;
-                case 2:
-                    editCharacter();//ok
-                    break;
-                case 3:
-                    validateChallenges();
-                    break;
-                case 4:
-                    addFeature(u);//ok
-                    break;
-                case 5:
-                    banUser();
-                    break;
-                case 6:
+                case "1" -> {
+                    u = deleteAdmin(u);//ok
+                    if (u == null) {
+                        Welcome welcome = new Welcome();
+                        welcome.Welcome();
+                    }
+                }
+                case "2" -> editCharacter(u);//ok
+                case "3" -> validateChallenges(u);
+                case "4" -> addFeature(u);//ok
+                case "5" -> banUser();
+                case "6" -> {
                     continuar = false;  //WARNING LINE
                     backAdmin();
-                    break;
-                default:
-                    System.out.println("Opción inválida");
-                    break;
+                }
+                default -> System.out.println("Opción inválida");
             }
         }
     }
 
-    private void deleteAdmin(User u){
+    private User deleteAdmin(User u){
         DeleteAdmin deleteadmin = new DeleteAdmin();
-        deleteadmin.DeleteAdmin(u);
+        u = deleteadmin.DeleteAdmin(u);
+        return u;
     }
 
-    private void editCharacter(){
+    private void editCharacter(User u){
         EditCharacter editCharacter = new EditCharacter();
-        editCharacter.EditCharacter();
+        editCharacter.EditCharacter(u);
     }
 
-    private void validateChallenges(){
+    private void validateChallenges(User u){
         ValidateChallenges validateChallenges = new ValidateChallenges();
-        validateChallenges.ValidateChallenges();
+        validateChallenges.ValidateChallenges(u);
     }
     private void addFeature(User u){
         AddFeature addFeature = new AddFeature();

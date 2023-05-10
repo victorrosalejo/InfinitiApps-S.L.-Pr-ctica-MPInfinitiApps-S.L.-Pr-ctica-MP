@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
@@ -13,36 +14,51 @@ public class SpecialAbility implements Serializable {
         System.out.println(("Defensa") + " - " + ability.getDefense());
 
         Scanner scanner = new Scanner(System.in);
+        String option = scanner.nextLine();
+        do {
         System.out.println("Seleccione la característica que desea modificar o escriba 0 para salir: ");
         System.out.println("1. Ataque");
         System.out.println("2. Defensa");
-        int option = scanner.nextInt();
+
         switch (option) {
-            case 0:
+            case "0":
                 break;
-            case 1:
+            case "1":
                 int newAttack = 0;
                 while (newAttack < 1 || newAttack > 3) {
                     System.out.print("Ingrese el nuevo valor de ataque (entre 1 y 3): ");
-                    newAttack = scanner.nextInt();
-                }
+                    String aux = scanner.nextLine();
+                    try {
+                        newAttack = Integer.parseInt(aux) - 1;
+                        if (newAttack < 1 || newAttack > 3) {
+                            System.out.println("Número no válido");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Caracter no numeral");
+                    }                }
                 ability.setAttack(newAttack);
                 break;
-            case 2:
+            case "2":
                 int newDefense = 0;
                 while (newDefense < 1 || newDefense > 3) {
                     System.out.print("Ingrese el nuevo valor de defensa (entre 1 y 3): ");
-                    newDefense = scanner.nextInt();
-                }
+                    String aux = scanner.nextLine();
+                    try {
+                        newDefense = Integer.parseInt(aux) - 1;
+                        if (newDefense < 1 || newDefense > 3) {
+                            System.out.println("Número no válido");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Caracter no numeral");
+                    }                 }
                 ability.setDefense(newDefense);
                 break;
             default:
                 System.out.println("Opción inválida. Intente nuevamente.");
                 break;
         }
-        if (option == 1 || option == 2){
-            System.out.println("Característica modificada correctamente.");
-        }
+        }while (!option.equals("1") && !option.equals("2"));
+        System.out.println("Característica modificada correctamente.");
         c.setSpecialAbility(ability);
         return c;
     }

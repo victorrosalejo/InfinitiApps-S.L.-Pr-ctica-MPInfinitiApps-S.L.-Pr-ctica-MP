@@ -14,9 +14,11 @@ public class Register implements Serializable {
             String username, password, nickname = null;
             User user = new User();
 
-            System.out.println("\n<><><><><><><><><><><><><><><><><><><>\n");
+
+
+            System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
             System.out.println("\n[-------------------------------------]");
-            System.out.println("[-------------- REGISTRO -------------]");
+            System.out.println("               REGISTRO ");
             System.out.println("[-------------------------------------]\n");
             System.out.println("Si desea salir escriba 'salir' en el campo del nombre");
             do {
@@ -26,13 +28,13 @@ public class Register implements Serializable {
                     Welcome();
                     break;
                 } else if (databaseU.get(username) != null){
-                    System.out.println("Nombre de usuario ya usado");
+                    System.out.println("  <<Nombre de usuario ya usado>>");
                 }else {
                     do {
                         System.out.print("\n--> Introduce tu contraseña (entre 8 y 12 caracteres): ");
                         password = input.nextLine();
                         if(password.length() < 7 | password.length() > 13){
-                            System.out.println("Longitud incorrecta");
+                            System.out.println("                  <<Longitud incorrecta>>");
                         }
                     }while (password.length() < 7 | password.length() > 13);
                     if(!username.startsWith("¬")) {
@@ -75,9 +77,14 @@ public class Register implements Serializable {
             if(!Objects.equals(user.getRegisterNumber(), "0")) {
                 System.out.println("Apodo: " + nickname);
             }
+            System.out.println();
+            System.out.println("<<Presione 'Enter' para continuar>>");
             nickname = input.nextLine();
-            System.out.println("\n");
-            databaseManager.saveDatabaseU(databaseU);
+
+
+
+
+        databaseManager.saveDatabaseU(databaseU);
             Welcome();
 
 

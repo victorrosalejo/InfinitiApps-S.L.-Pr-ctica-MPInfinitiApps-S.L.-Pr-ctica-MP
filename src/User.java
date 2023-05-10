@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -8,8 +9,11 @@ public class User implements Serializable {
     private  String password;
     private TUser usertype;
     private  String registerNumber;
-    private List<Combat> resultados;
+    private List<Combat> resultados = new ArrayList<>();
     private boolean banned = false;
+
+    public User() {
+    }
 
 
     public String getName() {return name;}

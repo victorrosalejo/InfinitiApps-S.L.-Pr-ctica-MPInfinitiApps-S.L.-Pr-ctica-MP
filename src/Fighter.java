@@ -1,4 +1,4 @@
-public class Fighter extends Character{
+public class Fighter extends Character implements Cloneable{
     private int fighterHP;
     private int minionHP;
     private boolean defiant;
@@ -7,102 +7,180 @@ public class Fighter extends Character{
 
 
 
-    public void Figther(Fighter f){
+    public void Fighter(Fighter f){
         TCharacter tipo;
         tipo = f.getType();
         int attPot, defPot;
-        f.fighterHP = f.gethP();
         f.minionHP = 0;
-            switch (tipo){
-                case VAMPIRE:
-                    attPot = f.getPower() + f.getSpecialAbility().getAttack();
-                    defPot = f.getPower() + f.getSpecialAbility().getDefense();
+        switch (tipo) {
+            case VAMPIRE -> {
+                attPot = f.getPower() + f.getSpecialAbility().getAttack();
+                defPot = f.getPower() + f.getSpecialAbility().getDefense();
 
-                    //armadura
-                    for (Armor armor : f.getArmorSet()){
-                        if (armor.isActive() == true){
-                            defPot += armor.getDefense();
-                            attPot += armor.getAttack();
-                        }
+                //armadura
+                for (Armor armor : f.getArmorSet()) {
+                    if (armor.isActive()) {
+                        defPot += armor.getDefense();
+                        attPot += armor.getAttack();
                     }
+                }
 
-                    // armas
-                    for (Weapon weapon : f.getWeaponSet()){
-                        if (weapon.isActive() == true){
-                            attPot += weapon.getAttack();
-                            defPot += weapon.getDefence();
-                        }
+                // armas
+                for (Weapon weapon : f.getWeaponSet()) {
+                    if (weapon.isActive()) {
+                        attPot += weapon.getAttack();
+                        defPot += weapon.getDefence();
                     }
-                    // habilidad
-                    int blood = f.getTypeAttack();
-                        if (blood >= 5){
-                            attPot += 2;
-                            defPot += 2;
-                            blood -= f.getSpecialAbility().getSpecialValue();
+                }
 
-                        }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
-                    break;
-                case WEREWOLF:
-                    attPot = f.getPower() + f.getSpecialAbility().getAttack();
-                    defPot = f.getPower() + f.getSpecialAbility().getDefense();
-                    // armaduras
+                // Modificadoress
 
-                    for (Armor armor : f.getArmorSet()){
-                        if (armor.isActive() == true){
-                            defPot += armor.getDefense();
-                            attPot += armor.getAttack();
-                        }
-                    }
+                for (Modifiers modifiers : f.getModifiersList()){
+                    if (modifiers.isActive()) {
+                        if (modifiers.isBuff()) {
+                            attPot += modifiers.getValue();
 
 
+                        } else {
 
-                    // armas
-                    for (Weapon weapon : f.getWeaponSet()){
-                        if (weapon.isActive() == true){
-                            attPot += weapon.getAttack();
-                        }
-                    }
-
-
-
-                    // habilidad
-                    int rage = f.getTypeAttack();
-                    if (rage > f.getSpecialAbility().getSpecialValue()) {
-                        attPot += rage;
-                        defPot += rage;
-
-                    }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
-                    break;
-                case HUNTER:
-                    attPot = f.getPower() + f.getSpecialAbility().getAttack() + f.getTypeAttack();
-                    defPot = f.getPower() + f.getSpecialAbility().getDefense() + f.getTypeAttack();
-
-
-
-                    // armaduras
-                    for (Armor armor : f.getArmorSet()){
-                        if (armor.isActive() == true){
-                            defPot += armor.getDefense();
-                            attPot += armor.getAttack();
-                        }
-                    }
-
-                    // armas
-                    for (Weapon weapon : f.getWeaponSet()){
-                        if (weapon.isActive() == true){
-                            attPot += weapon.getAttack();
-                            defPot += weapon.getDefence();
+                            attPot -= modifiers.getValue();
 
                         }
                     }
-                    setDefensePower(defPot);
-                    setAttackPower(attPot);
-                    break;
+                }
+
+                // habilidad
+                int blood = f.getTypeAttack();
+                if (blood >= 5) {
+                    attPot += 2;
+                    defPot += 2;
+                }
+
+
+                if (blood >= f.getSpecialAbility().getSpecialValue()) {
+                    attPot += f.getSpecialAbility().getSpecialValue();
+                    defPot += f.getSpecialAbility().getSpecialValue();
+                    f.setTypeAttack(f.getSpecialAbility().getSpecialValue());
+                }
+
+                if (attPot < 0){
+                    attPot =0;
+                }
+                if (defPot < 0){
+                    defPot = 0;
+
+                }
+
+
+                f.setDefensePower(defPot);
+                f.setAttackPower(attPot);
             }
+            case WEREWOLF -> {
+                attPot = f.getPower() + f.getSpecialAbility().getAttack();
+                defPot = f.getPower() + f.getSpecialAbility().getDefense();
+                // armaduras
+
+                for (Armor armor : f.getArmorSet()) {
+                    if (armor.isActive()) {
+                        defPot += armor.getDefense();
+                        attPot += armor.getAttack();
+                    }
+                }
+
+                // armas
+                for (Weapon weapon : f.getWeaponSet()) {
+                    if (weapon.isActive()) {
+                        attPot += weapon.getAttack();
+                    }
+                }
+
+
+                for (Modifiers modifiers : f.getModifiersList()){
+                    if (modifiers.isActive()) {
+                        if (modifiers.isBuff()) {
+                            attPot += modifiers.getValue();
+
+
+                        } else {
+
+                            attPot -= modifiers.getValue();
+
+                        }
+                    }
+                }
+
+                // habilidad
+                int rage = f.getTypeAttack();
+                attPot += rage;
+                defPot += rage;
+
+                if (rage >= f.getSpecialAbility().getSpecialValue()) {
+                    attPot += f.getSpecialAbility().getSpecialValue();
+                    defPot += f.getSpecialAbility().getSpecialValue();
+                    f.setTypeAttack(f.getSpecialAbility().getSpecialValue());
+                }
+
+                if (attPot < 0){
+                    attPot =0;
+                }
+                if (defPot < 0){
+                    defPot = 0;
+
+                }
+
+
+                f.setDefensePower(defPot);
+                f.setAttackPower(attPot);
+            }
+            case HUNTER -> {
+                attPot = f.getPower() + f.getSpecialAbility().getAttack() + f.getTypeAttack();
+                defPot = f.getPower() + f.getSpecialAbility().getDefense() + f.getTypeAttack();
+
+
+                // armaduras
+                for (Armor armor : f.getArmorSet()) {
+                    if (armor.isActive()) {
+                        defPot += armor.getDefense();
+                        attPot += armor.getAttack();
+                    }
+                }
+
+                // armas
+                for (Weapon weapon : f.getWeaponSet()) {
+                    if (weapon.isActive()) {
+                        attPot += weapon.getAttack();
+                        defPot += weapon.getDefence();
+
+                    }
+                }
+
+                for (Modifiers modifiers : f.getModifiersList()){
+                    if (modifiers.isActive()) {
+                        if (modifiers.isBuff()) {
+                            attPot += modifiers.getValue();
+
+
+                        } else {
+
+                            attPot -= modifiers.getValue();
+
+                        }
+                    }
+                }
+
+                if (attPot < 0){
+                    attPot =0;
+                }
+                if (defPot < 0){
+                    defPot = 0;
+
+                }
+
+
+                f.setDefensePower(defPot);
+                f.setAttackPower(attPot);
+            }
+        }
     //CALCULO DE SALUD
 
         for (Minion minion : f.getMinionMap()){
@@ -110,7 +188,7 @@ public class Fighter extends Character{
             checkDemonList(minion, f);
 
         }
-        f.fighterHP += f.minionHP;
+
 
     }
 

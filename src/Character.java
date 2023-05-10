@@ -41,10 +41,10 @@ public class Character implements Serializable {
 
     public void setType(String type) {
 
-        if (type =="Vampiro"){
+        if (type.equalsIgnoreCase("Vampiro")){
             this.type = TCharacter.VAMPIRE;
             this.typeAttack = rand.nextInt(0, 11);
-        } else if (type == "Licántropo") {
+        } else if (type.equalsIgnoreCase("Licántropo")) {
             this.type = TCharacter.WEREWOLF;
             this.typeAttack = rand.nextInt(0, 4);
         }else {

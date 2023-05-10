@@ -10,35 +10,32 @@ import java.util.function.ToLongFunction;
 
 public class Ranking {
     public List<Character> Ranking(List<Character> characters){
-        quickSort(characters, 0, characters.size()-1);
+        if(characters.size()>1) {
+           quickSort(characters, 0, characters.size() - 1);
+        }
         return characters;
     }
 
-    public static void quickSort(List<Character> characters, int izq, int der) {
-
-        int pivote=characters.get(izq).getWins();
-        int i=izq +1;
-        int j=der;
-        Character aux;
-
-        while(i < j){
-            while(characters.get(i).getWins() <= pivote && i < j) i++;
-            while(characters.get(j).getWins() > pivote) j--;
-            if (i < j) {
-                aux= characters.get(i);
-                characters.add(i, characters.get(j));
-                characters.add(j,aux);
-            }
+    public static void quickSort(List<Character> list, int left, int right) {
+        if (left < right) {
+            int pivotIndex = partition(list, left, right);
+            quickSort(list, left, pivotIndex - 1);
+            quickSort(list, pivotIndex + 1, right);
         }
-        aux = characters.remove(izq);
-        characters.add(izq, characters.remove(j-1));
-        characters.add(j,aux);
-
-        if(izq < j-1)
-            quickSort(characters,izq,j-1);
-        if(j+1 < der)
-            quickSort(characters,j+1,der);
-
     }
 
+    private static int partition(List<Character> list, int left, int right) {
+        int pivotValue = list.get(right).getWins();
+        int i = left - 1;
+
+        for (int j = left; j < right; j++) {
+            if (list.get(j).getWins() >= pivotValue) {
+                i++;
+                Collections.swap(list, i, j);
+            }
+        }
+
+        Collections.swap(list, i + 1, right);
+        return i + 1;
+    }
 }

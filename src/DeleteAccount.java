@@ -5,50 +5,46 @@ import java.util.Scanner;
 
 public class DeleteAccount  implements Serializable {
 
-    private DatabaseManager databaseManager =new DatabaseManager();
+    private DatabaseManager databaseManager = new DatabaseManager();
     private Map<String, User> databaseU = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
-    private Map<String, History> databaseH = new HashMap<>();
+    private final Map<String, History> databaseH = new HashMap<>();
 
+    public User DeleteAccount(User u) {
 
-
-    public void DeleteAccount(User u){
-
-        System.out.println("Seguro que quiere eliminar la cuenta?");
-        System.out.println("Si es así introduzca 'sí'. En caso contrario introduzca cualquier otra cosa");
+        System.out.println("¿Seguro que quiere eliminar la cuenta? (S/N)");
         Scanner scan = new Scanner(System.in);
         String sure = scan.nextLine();
 
-        if (sure.equalsIgnoreCase("si") || sure.equalsIgnoreCase("sí")){
+        if (sure.equalsIgnoreCase("S")) {
             databaseU = databaseManager.obtainDatabaseU();
-        // Eliminar los personajes asociados al usuario de la base de datos C
+            // Eliminar los personajes asociados al usuario de la base de datos C
             DeleteCharacter delCh = new DeleteCharacter();
-            delCh.DeleteCharacter(u,false);
+            delCh.deleteCharacter2(u);
 
-        // Obtener el nombre de usuario del usuario que se va a eliminar
+            // Obtener el nombre de usuario del usuario que se va a eliminar
             String username = u.getName();
             String regnum = u.getRegisterNumber();
-        // Eliminar el usuario de la base de datos U
+            // Eliminar el usuario de la base de datos U
 
-            u = databaseU.remove(username);
-        // Eliminar el historial del usuario de la base de datos H
+            databaseU.remove(username);
+            u = databaseU.get(username);
+            // Eliminar el historial del usuario de la base de datos H
 
             History h = databaseH.remove(regnum);
-        // Guardar las bases de datos actualizadas
+            // Guardar las bases de datos actualizadas
 
             this.databaseManager.saveDatabaseU(databaseU);
             this.databaseManager.saveDatabaseH(databaseH);
 
-        // Volver al principio
-
-            this.welcome();
-        } else{
-            Menu menu = new Menu();
-            menu.Menu(u);
+            // Volver al principio
+            System.out.println("<<Cuenta eliminada correctamente>>");
+            return u;
+        } else {
+            return u;
         }
-
-
     }
+
 
 
     public DatabaseManager getDatabaseManager() {
@@ -60,9 +56,6 @@ public class DeleteAccount  implements Serializable {
     }
 
     public Map<String, User> getDatabaseU() {
-
-
-
         return databaseU;
     }
 
@@ -78,13 +71,6 @@ public class DeleteAccount  implements Serializable {
         this.databaseC = databaseC;
     }
 
-    public Map<String, History> getDatabaseH() {
-        return databaseH;
-    }
-
-    public void setDatabaseH(Map<String, History> databaseH) {
-        this.databaseH = databaseH;
-    }
 
     private  void welcome(){
         Welcome welcome = new Welcome();

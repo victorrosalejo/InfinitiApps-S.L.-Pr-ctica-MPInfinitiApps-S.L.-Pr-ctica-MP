@@ -34,7 +34,7 @@ public class WeaponSet {
         if (weaponIndex == -1) {
             return c;
         } else if (c.getWeaponSet().get(weaponIndex) != null) {
-        Weapon weapon = c.getWeaponSet().remove(weaponIndex);
+        Weapon weapon = c.getWeaponSet().get(weaponIndex);
         System.out.println("Modificando arma: " + weapon.getName());
         System.out.println("Seleccione la característica que desea modificar: ");
         System.out.println("1. Nombre");

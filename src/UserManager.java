@@ -46,15 +46,15 @@ private Map<String, User> databaseU = new HashMap<>();
                    System.out.print("Introduce el nombre del usuario a banear--> ");
                    String codeUser = scanner.nextLine();
                    if (!codeUser.startsWith("¬")) {
-                        User u = databaseU.remove(codeUser);
+                        User u = databaseU.get(codeUser);
                         if ( u != null) {
                                if (u.isBanned()) {
                                    System.out.println("El usuario ya está baneado");
-                                   databaseU.put(codeUser, u);
+                                   databaseU.replace(codeUser, u);
 
                                } else {
                                    u.setBanned(true);
-                                   databaseU.put(codeUser, u);
+                                   databaseU.replace(codeUser, u);
                                    System.out.println("Usuario baneado correctamente");
                                }
                            } else {
@@ -70,15 +70,15 @@ private Map<String, User> databaseU = new HashMap<>();
                    System.out.print("Introduce el nombre del usuario a desbanear--> ");
                    String codeUser = scanner.nextLine();
                    if (!codeUser.startsWith("¬")) {
-                       User u = databaseU.remove(codeUser);
+                       User u = databaseU.get(codeUser);
                        if ( u != null) {
                            if (!u.isBanned()) {
                                System.out.println("El usuario no está baneado");
-                               databaseU.put(codeUser, u);
+                               databaseU.replace(codeUser, u);
 
                            } else {
                                u.setBanned(false);
-                               databaseU.put(codeUser, u);
+                               databaseU.replace(codeUser, u);
                                System.out.println("Usuario desbaneado correctamente");
                            }
                        } else {

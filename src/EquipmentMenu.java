@@ -29,7 +29,7 @@ public class EquipmentMenu implements Serializable {
 
 
         databaseC = databaseManager.obtainDatabaseC();
-        Character c = databaseC.remove(u.getRegisterNumber());
+        Character c = databaseC.get(u.getRegisterNumber());
         List<Armor> ArmadurasInv = c.getArmorSet();
 
         System.out.print("\n<><><><><><><><><><><><><><><><><><><>\n");
@@ -70,8 +70,8 @@ public class EquipmentMenu implements Serializable {
                 if (a == j) {
                     ArmadurasInv.get(j).setActive(true);
                     System.out.println("\nArmadura correctamente equipada");
-                    System.out.print("Armadura "+ArmadurasInv.get(j).getName() + ", equipada");
-                    selectedA = input.nextLine();
+                    System.out.print("Armadura "+ ArmadurasInv.get(j).getName() + ", equipada");
+
                 }
             }
 
@@ -99,6 +99,7 @@ public class EquipmentMenu implements Serializable {
             System.out.println("\n[-------------------------------------]");
             System.out.print("--> Introduce el numero del arma a equipar: ");
             selectedW = input.nextLine();
+
             try {
                 a = Integer.parseInt(selectedW);
                 a -= 1;
@@ -117,7 +118,7 @@ public class EquipmentMenu implements Serializable {
                         manosocupadas += ArmasInv.get(j).getHands();
                         System.out.print("\nArma "+ArmasInv.get(j).getName() + ", equipada");
                         System.out.print("\nArma correctamente equipada ");
-                        selectedA = input.nextLine();
+
                         int aux = 0;
                         for (Weapon elemento1 : ArmasInv) {
                             if(elemento1.getHands()==1){
@@ -130,16 +131,16 @@ public class EquipmentMenu implements Serializable {
                         }
                     }else{
                         System.out.println("No puedes superar el número de manos");
-                        selectedA = input.nextLine();
+
                     }
                 }
             }
 
         } while (!valido && manosocupadas != 2 );
         System.out.println("Todas las manos ocupadas");
-        selectedA = input.nextLine();
+
         c.setWeaponSet(ArmasInv);
-        databaseC.put(u.getRegisterNumber(),c);
+        databaseC.replace(u.getRegisterNumber(),c);
         databaseManager.saveDatabaseC(databaseC);
         if (!duel) {
             menu(u);

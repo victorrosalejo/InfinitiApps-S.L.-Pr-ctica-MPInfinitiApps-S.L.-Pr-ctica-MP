@@ -38,7 +38,7 @@ public class ModifierList {
         if (modiIndex == -1) {
             return c;
         } else if (c.getModifiersList().get(modiIndex) != null) {
-        Modifiers modi = c.getModifiersList().remove(modiIndex);
+        Modifiers modi = c.getModifiersList().get(modiIndex);
         System.out.println("Modificando modificador: " + modi.getName());
         System.out.println("Seleccione la característica que desea modificar: ");
         System.out.println("1. Nombre");
@@ -82,7 +82,7 @@ public class ModifierList {
              System.out.println("Característica modificada correctamente.");
          }
         List<Modifiers> modifiers = c.getModifiersList();
-        modifiers.add(modiIndex,modi);
+        modifiers.set(modiIndex,modi);
         c.setModifierList(modifiers);
         return c;
     }

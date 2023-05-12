@@ -60,8 +60,8 @@ public class Menu implements Serializable {
                                     case "1" -> {
                                         d = false;
                                         databaseP = databaseManager.obtainDatabaseP();
-                                        challengeList = databaseP.remove(u.getRegisterNumber());
-                                        Challenge challenge = challengeList.remove(xx);
+                                        challengeList = databaseP.get(u.getRegisterNumber());
+                                        Challenge challenge = challengeList.get(xx);
                                         databaseP.put(u.getRegisterNumber(), challengeList);
                                         databaseManager.saveDatabaseP(databaseP);
                                         User udefiant = databaseU.get(challenge.getDefiant().getName());
@@ -72,8 +72,8 @@ public class Menu implements Serializable {
                                     case "2" -> {
                                         //probar el rechazar
                                         databaseP = databaseManager.obtainDatabaseP();
-                                        challengeList = databaseP.remove(u.getRegisterNumber());
-                                        Challenge challenge = challengeList.remove(xx);
+                                        challengeList = databaseP.get(u.getRegisterNumber());
+                                        Challenge challenge = challengeList.get(xx);
                                         databaseP.put(u.getRegisterNumber(), challengeList);
                                         databaseManager.saveDatabaseP(databaseP);
                                         updateGold(c, popup, u,redondeado);
@@ -88,7 +88,7 @@ public class Menu implements Serializable {
             }
             if (pendingResult) {
                 while (pendingResult){
-                    Combat c2 = combats.remove(0);
+                    Combat c2 = combats.get(0);
                     System.out.println("Tienes resultados pendientes");
                     String aux = scanner.nextLine();
                     pendingResult = !combats.isEmpty();
@@ -182,7 +182,7 @@ public class Menu implements Serializable {
     }
     private void updateGold(Character c, Challenge ch,User u,double redondeado){
         c.setGoldValue(c.getGoldValue() - (int) redondeado);
-        databaseC.remove(u.getRegisterNumber());
+        databaseC.get(u.getRegisterNumber());
         databaseC.put(u.getRegisterNumber(), c);
         databaseManager.saveDatabaseC(databaseC);
         Menu(u);

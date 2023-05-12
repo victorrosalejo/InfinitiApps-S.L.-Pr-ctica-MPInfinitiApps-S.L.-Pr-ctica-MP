@@ -222,8 +222,8 @@ public class Fight implements Serializable, Cloneable {
     private void endCombat(Combat combat, State state, User udefiant, User udefied){
          databaseH = databaseManager.obtainDatabaseH();
          databaseU = databaseManager.obtainDatabaseU();
-         History history = databaseH.remove(udefiant.getRegisterNumber());
-         History history2 = databaseH.remove(udefied.getRegisterNumber());
+         History history = databaseH.get(udefiant.getRegisterNumber());
+         History history2 = databaseH.get(udefied.getRegisterNumber());
          Match nuevapartida = new Match();
          Character perAnt = databaseC.get(udefiant.getRegisterNumber());
          Character perEd = databaseC.get(udefied.getRegisterNumber());
@@ -273,12 +273,12 @@ public class Fight implements Serializable, Cloneable {
         }
          history2.appendMatch(nuevapartida);
 
-         databaseH.put(udefiant.getRegisterNumber() , history);
-         databaseH.put(udefied.getRegisterNumber() , history2);
+         databaseH.replace(udefiant.getRegisterNumber() , history);
+         databaseH.replace(udefied.getRegisterNumber() , history2);
          databaseManager.saveDatabaseH(databaseH);
 
-         databaseC.put(udefiant.getRegisterNumber(),perAnt);
-         databaseC.put(udefied.getRegisterNumber(),perEd);
+         databaseC.replace(udefiant.getRegisterNumber(),perAnt);
+         databaseC.replace(udefied.getRegisterNumber(),perEd);
          databaseManager.saveDatabaseC(databaseC);
 
          Scanner scanner = new Scanner(System.in);
@@ -287,7 +287,7 @@ public class Fight implements Serializable, Cloneable {
          listacombates = udefiant.getResultados();
          listacombates.add(combat);
          udefiant.setResultados(listacombates);
-         databaseU.put(udefiant.getName(), udefiant);
+         databaseU.replace(udefiant.getName(), udefiant);
          databaseManager.saveDatabaseU(databaseU);
          result(combat, udefied);
 

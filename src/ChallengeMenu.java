@@ -7,7 +7,7 @@ public class ChallengeMenu  implements Serializable {
     private Map<String, Character> databaseC = new HashMap<>();
     private Map<String, User> databaseU = new HashMap<>();
 
-    public void ChallengeMenu(User defiant) {
+    public User ChallengeMenu(User defiant) {
         Challenge challenge = new Challenge();
         databaseP = databaseManager.obtainDatabaseP();
         databaseU = databaseManager.obtainDatabaseU();
@@ -33,7 +33,7 @@ public class ChallengeMenu  implements Serializable {
             System.out.print("Escribe el nombre de usuario de la persona que quieras desafiar: ");
             username = scanner.nextLine();
             if (username.equalsIgnoreCase("salir")){
-                menu(defiant);
+                return defiant;
             }else if (databaseU.get(username) == null) {
                 System.out.println("<<Usuario no encontrado>>");
             }else if( databaseU.get(username).getName().startsWith("¬")) {
@@ -54,42 +54,32 @@ public class ChallengeMenu  implements Serializable {
             goldBet = scanner.nextLine();
             try {
                 gold = Integer.parseInt(goldBet);
-                if (gold > maxBet && gold< 1){
+                if (gold > maxBet || gold < 1){
                     System.out.println("número no valido");
                 }
             }catch (Exception e){
                 System.out.println("Caracter no numeral");
             }
-        } while (gold > maxBet && gold< 1);
+        } while (gold > maxBet || gold< 1);
         challenge.setDefiant(defiant);
         challenge.setDefied(defied);
         challenge.setGold(gold);
         challenge.setValid(false);
         List<Challenge> challengeList = new ArrayList<>();
         if (databaseP.get(aux2) != null) {
-            challengeList = databaseP.remove(aux2);
-            challengeList.add(challenge);
+            challengeList = databaseP.get(aux2);
+            challengeList.add(0, challenge);
             databaseP.put(aux2, challengeList);
             databaseManager.saveDatabaseP(databaseP);
             System.out.println("Desafío correctamente enviado");
             goldBet = scanner.nextLine();
         } else{
-            challengeList.add(challenge);
+            challengeList.add(0,challenge);
             databaseP.put(aux2, challengeList);
             databaseManager.saveDatabaseP(databaseP);
             System.out.println("Desafío correctamente enviado");
+            goldBet = scanner.nextLine();
         }
-    }
-
-    public DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
-
-    public void setDatabaseManager(DatabaseManager databaseManager) {
-        this.databaseManager = databaseManager;
-    }
-    private void menu(User u){
-        Menu menu = new Menu();
-        menu.Menu(u);
+        return defiant;
     }
 }

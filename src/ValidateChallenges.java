@@ -9,7 +9,7 @@ public class  ValidateChallenges implements Serializable {
     private DatabaseManager databaseManager;
     private Map<String, List<Challenge>> databaseP = new HashMap<>();
     private Map<String, Character> databaseC = new HashMap<>();
-    private Map<String, User> databaseU = new HashMap<>();
+
 
     public void ValidateChallenges(User u) {
         databaseManager = new DatabaseManager();
@@ -28,7 +28,7 @@ public class  ValidateChallenges implements Serializable {
             if (ch.isEmpty()) {
                 System.out.println("                 >El usuario no tiene desafíos pendientes");
                 System.out.println("     ------------------------------------------------- ");
-            } else if (!ch.isEmpty()) {
+            } else{
                 for (int k = 0; k < ch.size(); k++) {
                     if(!ch.get(k).isValid()) {
                         System.out.println("                 -Numero de desafío: " + k);
@@ -57,7 +57,7 @@ public class  ValidateChallenges implements Serializable {
             if (numReg.equalsIgnoreCase("salir")) {
                 menuAdmin(u);
             }else if (databaseP.get(numReg)== null || databaseP.get(numReg).isEmpty()){
-               System.out.println("Número de registro erroneo\n");
+               System.out.println("Número de registro erroneo");
             }
         }
         String aux;
@@ -91,13 +91,12 @@ public class  ValidateChallenges implements Serializable {
                     System.out.println("El desafío " + chIndex + "ha sido validado correctamente.");
                     cc.get(chIndex).setValid(true);
                     System.out.println("Ahora debe escoger las modificaciones");
-                    databaseU = databaseManager.obtainDatabaseU();
 
                     User u1 = cc.get(chIndex).getDefied();
                     User u2 = cc.get(chIndex).getDefiant();
 
-                    Character char1 = databaseC.remove(u1.getRegisterNumber());
-                    Character char2 = databaseC.remove(u2.getRegisterNumber());
+                    Character char1 = databaseC.get(u1.getRegisterNumber());
+                    Character char2 = databaseC.get(u2.getRegisterNumber());
 
                     List<Modifiers> listmod = char1.getModifiersList();
                     List<Modifiers> listmod2 = char2.getModifiersList();
@@ -123,7 +122,7 @@ public class  ValidateChallenges implements Serializable {
                         System.out.println("[-------------------------------------]");
                         while (opcion < 0 || opcion >= j) {
                             System.out.println("Por favor, introduzca el número de modificador");
-                            System.out.println("Escriba 'salir' para ir a los modificadores del desafiante");
+                            System.out.println("Escriba 'salir' para ir a los modificadores del desafiado");
                             try {
                                 opt = scanner.nextLine();
                                 if (opt.equalsIgnoreCase("salir")) {
@@ -136,10 +135,10 @@ public class  ValidateChallenges implements Serializable {
                                 } else {
                                     if (listmod.get(opcion).isActive()) {
                                         listmod.get(opcion).setActive(false);
-                                        System.out.println("El modificador " + listmod.get(opcion).getName() + "ahora está activado");
+                                        System.out.println("El modificador " + listmod.get(opcion).getName() + " ahora está desactivado");
                                     }else{
                                         listmod.get(opcion).setActive(true);
-                                        System.out.println("El modificador " + listmod.get(opcion).getName() + "ahora está desactivado");
+                                        System.out.println("El modificador " + listmod.get(opcion).getName() + " ahora está activado");
                                     }
                                 }
                             } catch (Exception e) {
@@ -149,7 +148,7 @@ public class  ValidateChallenges implements Serializable {
                     } while (!end);
                     System.out.println("Aqui se muestran los modificadores del desafiante");
 
-                    opt = "a";
+
                     end = false;
                     do {
                         opcion = -1;
@@ -194,6 +193,8 @@ public class  ValidateChallenges implements Serializable {
                     System.out.println("Modificadores activados correctamente");
                     char1.setModifierList(listmod);
                     char2.setModifierList(listmod2);
+
+
                     databaseC.put(u1.getRegisterNumber(), char1);
                     databaseC.put(u2.getRegisterNumber(), char2);
                     databaseManager.saveDatabaseC(databaseC);
@@ -201,6 +202,7 @@ public class  ValidateChallenges implements Serializable {
                 case "2" -> {
                     System.out.println("El desafío " + chIndex + " ha sido eliminado correctamente.");
                     cc.remove(chIndex);
+
 
                 }
                 default -> System.out.println("Opción inválida");

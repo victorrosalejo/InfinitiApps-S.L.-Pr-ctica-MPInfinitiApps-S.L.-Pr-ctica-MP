@@ -45,7 +45,7 @@ public class AddFeature  implements Serializable {
 
     String option ;
     while(!exit){
-        Character c = databaseC.remove(player);
+        Character c = databaseC.get(player);
         System.out.println("1. Agregar modificador");
         System.out.println("2. Agregar arma");
         System.out.println("3. Agregar armadura");
@@ -67,7 +67,6 @@ public class AddFeature  implements Serializable {
         databaseManager.saveDatabaseC(databaseC);
         menuAdmin(u);
     }
-
 
 }
 

@@ -44,7 +44,7 @@ public class EditCharacter implements Serializable {
             }
         } while (databaseC.get(player) == null);
 
-        Character c = databaseC.remove(player);
+        Character c = databaseC.get(player);
         scanner = new Scanner(System.in);
         boolean exit = false;
         while (!exit) {

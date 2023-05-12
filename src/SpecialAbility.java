@@ -14,12 +14,12 @@ public class SpecialAbility implements Serializable {
         System.out.println(("Defensa") + " - " + ability.getDefense());
 
         Scanner scanner = new Scanner(System.in);
-        String option = scanner.nextLine();
+        String option;
         do {
         System.out.println("Seleccione la característica que desea modificar o escriba 0 para salir: ");
         System.out.println("1. Ataque");
         System.out.println("2. Defensa");
-
+        option = scanner.nextLine();
         switch (option) {
             case "0":
                 break;
@@ -29,7 +29,7 @@ public class SpecialAbility implements Serializable {
                     System.out.print("Ingrese el nuevo valor de ataque (entre 1 y 3): ");
                     String aux = scanner.nextLine();
                     try {
-                        newAttack = Integer.parseInt(aux) - 1;
+                        newAttack = Integer.parseInt(aux) ;
                         if (newAttack < 1 || newAttack > 3) {
                             System.out.println("Número no válido");
                         }
@@ -44,7 +44,7 @@ public class SpecialAbility implements Serializable {
                     System.out.print("Ingrese el nuevo valor de defensa (entre 1 y 3): ");
                     String aux = scanner.nextLine();
                     try {
-                        newDefense = Integer.parseInt(aux) - 1;
+                        newDefense = Integer.parseInt(aux);
                         if (newDefense < 1 || newDefense > 3) {
                             System.out.println("Número no válido");
                         }
@@ -55,6 +55,7 @@ public class SpecialAbility implements Serializable {
                 break;
             default:
                 System.out.println("Opción inválida. Intente nuevamente.");
+                System.out.println("Magia");
                 break;
         }
         }while (!option.equals("1") && !option.equals("2"));

@@ -114,7 +114,7 @@ class ArmorSetTest {
 
         assertEquals(3 , character.getArmorSet().get(0).getDefense() );
 
-        String[] entradas10 = {"3"};
+        String[] entradas10 = {"3", ""};
         ch = String.join(System.lineSeparator(), entradas10) + System.lineSeparator();
 
         in = new ByteArrayInputStream(ch.getBytes());

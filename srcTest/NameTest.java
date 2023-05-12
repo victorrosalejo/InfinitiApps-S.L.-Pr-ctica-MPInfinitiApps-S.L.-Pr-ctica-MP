@@ -28,5 +28,6 @@ class NameTest {
         nuevoper.setName("Juan");
         nuevoper = name.Name(character);
         assertEquals("Juan",nuevoper.getName());
+
     }
 }

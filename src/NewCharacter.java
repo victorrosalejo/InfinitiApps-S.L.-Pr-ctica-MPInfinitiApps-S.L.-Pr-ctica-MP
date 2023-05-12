@@ -41,9 +41,7 @@ public class NewCharacter implements Serializable {
             }
             catch (NumberFormatException e){
 
-
                 System.out.println("Ese caracter es erróneo");
-
 
             }
             switch (tiponuevo) {
@@ -69,8 +67,8 @@ public class NewCharacter implements Serializable {
                 }
 
                 default -> System.out.println("No has introducido un entero válido.");
-
             }
+
         } while (b);
         nuevoChar.setDescription(desc);
         nuevoChar.setGoldValue(300);

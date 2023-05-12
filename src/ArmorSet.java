@@ -32,7 +32,7 @@ public class ArmorSet implements Serializable {
         if (armorIndex == -1){
             return c;
         } else if (c.getArmorSet().get(armorIndex) != null) {
-            Armor armor = c.getArmorSet().remove(armorIndex);
+            Armor armor = c.getArmorSet().get(armorIndex);
             System.out.println("Modificando armadura: " + armor.getName());
             System.out.println("Seleccione la característica que desea modificar: ");
             System.out.println("1. Nombre");

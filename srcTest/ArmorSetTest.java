@@ -125,15 +125,5 @@ class ArmorSetTest {
         assertEquals(3 , character.getArmorSet().get(0).getDefense() );
 
 
-
-
-
-
-
-
-
-
-
-
     }
 }
